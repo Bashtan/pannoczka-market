@@ -4,7 +4,7 @@
 Single-page landing website for **Pannoczka market** — a Ukrainian grocery store in Żory, Poland.
 - Live domain: **pannoczka.pl** (and www.pannoczka.pl)
 - Cloudflare Pages project: **pannoczka-market**
-- GitHub: to be connected (git init done, push pending)
+- GitHub: [Bashtan/pannoczka-market](https://github.com/Bashtan/pannoczka-market) (connected, pushed)
 - Owner email: dimabashtan@gmail.com
 
 ## Tech stack
@@ -86,4 +86,5 @@ Run `python3` with the generation script if any favicon needs regenerating.
 - [x] Email added to Contact + Footer
 - [x] "Products from Ukraine and the East" copy update (both languages)
 - [x] Instagram + Facebook added to Contact + Footer with brand SVG icons
-- [x] .gitignore created, ready for `git init` + `gh repo create`
+- [x] .gitignore created
+- [x] Git repo initialized, pushed to GitHub (`Bashtan/pannoczka-market`)
