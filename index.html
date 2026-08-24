@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Pannoczka Market – sklep spożywczy z produktami ukraińskimi i lokalnymi. Żory, ul. Folwarecka 2. Pon–Pt 9–20, Sb–Nd 10–20." />
+  <title>Pannoczka Market – Sklep Spożywczy | Żory</title>
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/x-icon"       href="/images/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+  <link rel="apple-touch-icon" sizes="180x180"    href="/images/apple-touch-icon.png" />
+  <meta name="theme-color" content="#1a5c2a" />
+
+  <!-- Open Graph — Facebook · Telegram · Viber · WhatsApp · Messenger -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://pannoczka.pl/" />
+  <meta property="og:site_name"   content="Pannoczka Market" />
+  <meta property="og:locale"      content="pl_PL" />
+  <meta property="og:title"       content="Pannoczka Market – Sklep Spożywczy | Żory" />
+  <meta property="og:description" content="Świeże produkty z Ukrainy i nie tylko – ryby, mięso, sało, napoje, słodycze i przetwory domowe. Żory, ul. Folwarecka 2. Pon–Pt 9–20, Sb–Nd 10–20." />
+  <meta property="og:image"       content="https://pannoczka.pl/images/og-image.jpg" />
+  <meta property="og:image:width"  content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt"   content="Pannoczka Market – sklep spożywczy z ukraińskimi produktami, Żory" />
+
+  <!-- Twitter / X card (also used by some bots) -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="Pannoczka Market – Sklep Spożywczy | Żory" />
+  <meta name="twitter:description" content="Świeże produkty z Ukrainy i nie tylko. Żory, ul. Folwarecka 2." />
+  <meta name="twitter:image"       content="https://pannoczka.pl/images/og-image.jpg" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --green-dark: #1a5c2a;
+      --green:      #2d7a3e;
+      --red:        #9b1c1c;
+      --wood:       #c4934a;
+      --cream:      #fdf8f0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body { font-family: Georgia, 'Times New Roman', serif; color: #1a1a1a; }
+
+    /* ── hero overlay ── */
+    .hero-overlay {
+      background: linear-gradient(
+        to bottom,
+        rgba(26,92,42,.78) 0%,
+        rgba(26,92,42,.38) 55%,
+        rgba(26,92,42,.82) 100%
+      );
+    }
+
+    /* ── section title underline ── */
+    .title-rule::after {
+      content: '';
+      display: block;
+      width: 56px;
+      height: 3px;
+      background: var(--wood);
+      margin: 12px auto 0;
+      border-radius: 2px;
+    }
+
+    /* ── category card ── */
+    .cat-card {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 3px 14px rgba(0,0,0,.08);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .cat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,.14);
+    }
+
+    /* ── gallery ── */
+    .gal-img {
+      transition: transform .3s, box-shadow .3s;
+      cursor: pointer;
+    }
+    .gal-img:hover {
+      transform: scale(1.03);
+      box-shadow: 0 12px 28px rgba(0,0,0,.25);
+    }
+
+    /* ── lang toggle active state ── */
+    .lang-btn.active {
+      background: #fff;
+      color: var(--green-dark);
+      font-weight: 700;
+    }
+
+    /* ── mobile menu slide ── */
+    #mob-nav {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height .3s ease, opacity .3s ease;
+    }
+    #mob-nav.open {
+      max-height: 280px;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="bg-[#fdf8f0]">
+
+<!-- ═══════════════════════════════ HEADER ══════════════════════════════════ -->
+<header class="bg-[#1a5c2a] text-white sticky top-0 z-50 shadow-lg">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+
+    <!-- Logo -->
+    <a href="#hero" class="flex-shrink-0">
+      <img
+        src="RAW/Favicon Pannochka_new.png"
+        alt="Pannoczka Market – Sklep Spożywczy"
+        class="h-14 w-auto rounded-xl bg-white px-2 py-1 shadow-sm"
+      />
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="hidden md:flex items-center gap-6 text-sm font-semibold">
+      <a href="#about"      class="hover:text-yellow-300 transition-colors" id="n-about">O nas</a>
+      <a href="#assortment" class="hover:text-yellow-300 transition-colors" id="n-assort">Asortyment</a>
+      <a href="#gallery"    class="hover:text-yellow-300 transition-colors" id="n-gallery">Galeria</a>
+      <a href="#contact"    class="hover:text-yellow-300 transition-colors" id="n-contact">Kontakt</a>
+      <div class="flex bg-[#0f3d1c] rounded-full p-0.5 ml-1">
+        <button onclick="setLang('pl')" id="btn-pl" class="lang-btn active px-3 py-1 rounded-full text-xs transition-all">PL</button>
+        <button onclick="setLang('ua')" id="btn-ua" class="lang-btn       px-3 py-1 rounded-full text-xs transition-all">UA</button>
+      </div>
+    </nav>
+
+    <!-- Mobile controls -->
+    <div class="flex md:hidden items-center gap-3">
+      <div class="flex bg-[#0f3d1c] rounded-full p-0.5">
+        <button onclick="setLang('pl')" id="btn-pl-m" class="lang-btn active px-2.5 py-0.5 rounded-full text-xs transition-all">PL</button>
+        <button onclick="setLang('ua')" id="btn-ua-m" class="lang-btn       px-2.5 py-0.5 rounded-full text-xs transition-all">UA</button>
+      </div>
+      <button onclick="toggleMobMenu()" aria-label="Menu" class="p-1">
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile dropdown -->
+  <div id="mob-nav" class="md:hidden bg-[#0f3d1c]">
+    <nav class="flex flex-col px-5 py-4 gap-4 text-sm font-semibold">
+      <a href="#about"      onclick="closeMobMenu()" id="mn-about">O nas</a>
+      <a href="#assortment" onclick="closeMobMenu()" id="mn-assort">Asortyment</a>
+      <a href="#gallery"    onclick="closeMobMenu()" id="mn-gallery">Galeria</a>
+      <a href="#contact"    onclick="closeMobMenu()" id="mn-contact">Kontakt</a>
+    </nav>
+  </div>
+</header>
+
+
+<!-- ═══════════════════════════════ HERO ════════════════════════════════════ -->
+<section id="hero" class="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+  <img
+    src="RAW/viber_image_2026-08-16_16-58-06-361.jpg"
+    alt="Pannoczka Market – exterior, Żory"
+    class="absolute inset-0 w-full h-full object-cover object-center"
+  />
+  <div class="hero-overlay absolute inset-0"></div>
+
+  <div class="relative z-10 text-center text-white px-4 max-w-3xl mx-auto">
+
+    <div class="flex items-center justify-center gap-3 mb-4">
+      <div class="h-px w-14 bg-yellow-300/70"></div>
+      <span class="text-yellow-300 text-xs tracking-widest uppercase" id="h-tagline">Sklep Spożywczy</span>
+      <div class="h-px w-14 bg-yellow-300/70"></div>
+    </div>
+
+    <h1 class="text-5xl md:text-7xl font-bold mb-4 leading-tight drop-shadow-lg" id="h-title">
+      Pannoczka<br/><span class="text-yellow-300">market</span>
+    </h1>
+    <p class="text-lg md:text-xl text-green-100 mb-8 leading-relaxed" id="h-sub">
+      Twój sklep z najlepszymi produktami z Ukrainy i nie tylko!<br/>
+      Świeże, smaczne, dostępne każdego dnia.
+    </p>
+
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="https://maps.google.com/maps?q=Folwarecka+2,+Zory,+Poland"
+         target="_blank" rel="noopener"
+         class="inline-flex items-center justify-center gap-2 bg-[#9b1c1c] hover:bg-[#7f1414] font-bold px-7 py-3.5 rounded-full shadow-lg transition-all text-sm"
+         id="h-cta">
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        Sprawdź dojazd
+      </a>
+      <a href="#about"
+         class="inline-flex items-center justify-center gap-2 bg-white/15 hover:bg-white/25 backdrop-blur font-bold px-7 py-3.5 rounded-full border border-white/40 transition-all text-sm"
+         id="h-more">
+        Dowiedz się więcej
+      </a>
+    </div>
+
+    <!-- Info chips -->
+    <div class="flex flex-wrap justify-center gap-3 mt-10">
+      <div class="flex items-center gap-2 bg-black/25 backdrop-blur rounded-full px-4 py-2 text-xs">
+        <svg class="h-4 w-4 text-yellow-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        <span id="h-hours">Pn–Pt: 9:00–20:00 &nbsp;|&nbsp; Sb–Nd: 10:00–20:00</span>
+      </div>
+      <div class="flex items-center gap-2 bg-black/25 backdrop-blur rounded-full px-4 py-2 text-xs">
+        <svg class="h-4 w-4 text-yellow-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+        </svg>
+        <span>ul. Folwarecka 2, Żory</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════ ABOUT ═══════════════════════════════════ -->
+<section id="about" class="py-20 bg-white">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+
+      <div>
+        <p class="text-[#2d7a3e] text-xs font-bold tracking-widest uppercase mb-2" id="a-label">O nas</p>
+        <h2 class="text-3xl md:text-4xl font-bold text-[#1a5c2a] mb-5 leading-tight" id="a-title">
+          Smaki Ukrainy blisko Ciebie
+        </h2>
+        <p class="text-gray-600 leading-relaxed mb-4" id="a-p1">
+          Pannoczka market to wyjątkowe miejsce w Żorach, gdzie spotkasz autentyczne produkty
+          z Ukrainy i Wschodu – tradycyjne wędliny, świeże ryby, domowe przetwory i wiele więcej.
+        </p>
+        <p class="text-gray-600 leading-relaxed mb-7" id="a-p2">
+          Nasz asortyment stale się rozszerza o produkty z Ukrainy, krajów wschodnich i lokalnych
+          dostawców, bo chcemy, żebyś zawsze znalazł coś wyjątkowego dla siebie i swojej rodziny.
+          Zapraszamy wszystkich, którzy cenią jakość i autentyczność.
+        </p>
+        <div class="flex flex-wrap gap-2.5">
+          <span class="inline-flex items-center gap-1.5 bg-[#f0f9f2] text-[#1a5c2a] text-xs font-semibold px-3 py-1.5 rounded-full border border-[#c3e6cb]" id="b-qual">✓ Jakość i świeżość</span>
+          <span class="inline-flex items-center gap-1.5 bg-[#f0f9f2] text-[#1a5c2a] text-xs font-semibold px-3 py-1.5 rounded-full border border-[#c3e6cb]" id="b-range">✓ Szeroki asortyment</span>
+          <span class="inline-flex items-center gap-1.5 bg-[#f0f9f2] text-[#1a5c2a] text-xs font-semibold px-3 py-1.5 rounded-full border border-[#c3e6cb]" id="b-price">✓ Dostępne ceny</span>
+          <span class="inline-flex items-center gap-1.5 bg-[#f0f9f2] text-[#1a5c2a] text-xs font-semibold px-3 py-1.5 rounded-full border border-[#c3e6cb]" id="b-atm">✓ Przyjazna atmosfera</span>
+        </div>
+      </div>
+
+      <div class="relative">
+        <div class="absolute -top-4 -left-4 w-full h-full bg-[#e8f5e9] rounded-2xl -z-0"></div>
+        <img
+          src="RAW/viber_image_2026-08-16_12.jpg"
+          alt="Otwarcie Pannoczka Market – plakat"
+          class="relative z-10 rounded-2xl shadow-2xl w-full object-cover"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════ ASSORTMENT ══════════════════════════════ -->
+<section id="assortment" class="py-20 bg-[#fdf8f0]">
+  <div class="max-w-6xl mx-auto px-4">
+
+    <div class="text-center mb-14">
+      <p class="text-[#2d7a3e] text-xs font-bold tracking-widest uppercase mb-2" id="as-label">Asortyment</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-[#1a5c2a] title-rule" id="as-title">
+        Co znajdziesz w naszym sklepie?
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-10 items-center">
+
+      <!-- Category cards -->
+      <div class="space-y-4">
+        <div class="cat-card flex items-start gap-4 p-5">
+          <span class="text-3xl">🐟</span>
+          <div>
+            <h3 class="font-bold text-[#1a5c2a] mb-1" id="c-fish-t">Ryby i owoce morza</h3>
+            <p class="text-gray-500 text-sm" id="c-fish-d">Świeże i mrożone ryby, łosoś, śledź, owoce morza – prosto z Ukrainy i nie tylko.</p>
+          </div>
+        </div>
+        <div class="cat-card flex items-start gap-4 p-5">
+          <span class="text-3xl">🥩</span>
+          <div>
+            <h3 class="font-bold text-[#1a5c2a] mb-1" id="c-meat-t">Mięso, wędliny i słonina</h3>
+            <p class="text-gray-500 text-sm" id="c-meat-d">Tradycyjne wędliny, sało (słonina wieprzowa), kiełbasy i inne wyroby mięsne.</p>
+          </div>
+        </div>
+        <div class="cat-card flex items-start gap-4 p-5">
+          <span class="text-3xl">🥤</span>
+          <div>
+            <h3 class="font-bold text-[#1a5c2a] mb-1" id="c-drink-t">Napoje</h3>
+            <p class="text-gray-500 text-sm" id="c-drink-d">Szeroki wybór napojów: wody, soki, napoje gazowane, piwo i inne.</p>
+          </div>
+        </div>
+        <div class="cat-card flex items-start gap-4 p-5">
+          <span class="text-3xl">🍬</span>
+          <div>
+            <h3 class="font-bold text-[#1a5c2a] mb-1" id="c-sweet-t">Słodycze i mrożonki</h3>
+            <p class="text-gray-500 text-sm" id="c-sweet-d">Cukierki, czekolady, ptasie mleczko, lody i bogaty wybór mrożonek.</p>
+          </div>
+        </div>
+        <div class="cat-card flex items-start gap-4 p-5">
+          <span class="text-3xl">🫙</span>
+          <div>
+            <h3 class="font-bold text-[#1a5c2a] mb-1" id="c-pres-t">Przetwory domowe</h3>
+            <p class="text-gray-500 text-sm" id="c-pres-d">Ogórki kiszone, konfitury, ikra bakłażanowa, kapusta kiszona i inne domowe przetwory.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Illustrated menu -->
+      <div class="flex justify-center">
+        <div class="relative max-w-sm w-full">
+          <div class="absolute -bottom-4 -right-4 w-full h-full bg-[#c4934a]/20 rounded-2xl"></div>
+          <img
+            src="RAW/Gemini_Generated_Image_l0txpll0txpll0tx (1).jpeg"
+            alt="Menu Pannoczka Market – ilustracja asortymentu"
+            class="relative z-10 rounded-2xl shadow-2xl w-full object-contain"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════ GALLERY ═════════════════════════════════ -->
+<section id="gallery" class="py-20 bg-white">
+  <div class="max-w-6xl mx-auto px-4">
+
+    <div class="text-center mb-12">
+      <p class="text-[#2d7a3e] text-xs font-bold tracking-widest uppercase mb-2" id="g-label">Galeria</p>
+      <h2 class="text-3xl md:text-4xl font-bold text-[#1a5c2a] title-rule" id="g-title">Przekonaj się sam</h2>
+      <p class="text-gray-500 mt-6 max-w-md mx-auto text-sm" id="g-desc">
+        Nasza przestrzeń, nasi klienci, nasze produkty – zaglądnij do środka zanim odwiedzisz nas osobiście.
+      </p>
+    </div>
+
+    <!-- Masonry-style grid -->
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+
+      <!-- Exterior – tall left cell -->
+      <div class="row-span-2 col-span-1">
+        <img
+          src="RAW/viber_image_2026-08-16_16-58-06-361.jpg"
+          alt="Zewnątrz Pannoczka Market – otwarcie z balonami"
+          class="gal-img w-full h-full object-cover rounded-xl"
+          style="min-height:280px;"
+          onclick="openLb(this.src)"
+        />
+      </div>
+
+      <!-- Interior 1 -->
+      <div class="col-span-1">
+        <img
+          src="RAW/viber_image_2026-08-16_16-15-06-686.jpg"
+          alt="Wnętrze – klienci przy ladzie"
+          class="gal-img w-full object-cover rounded-xl"
+          style="height:200px;"
+          onclick="openLb(this.src)"
+        />
+      </div>
+
+      <!-- Interior 2 -->
+      <div class="col-span-1">
+        <img
+          src="RAW/viber_image_2026-08-16_16-15-11-515.jpg"
+          alt="Wnętrze – pełny sklep podczas otwarcia"
+          class="gal-img w-full object-cover rounded-xl"
+          style="height:200px;"
+          onclick="openLb(this.src)"
+        />
+      </div>
+
+      <!-- Food closeup – wide bottom cell -->
+      <div class="col-span-2">
+        <img
+          src="RAW/viber_image_2026-08-16_16-15-13-981.jpg"
+          alt="Sało i ogórki kiszone – ukraińskie specjały"
+          class="gal-img w-full object-cover rounded-xl"
+          style="height:220px;"
+          onclick="openLb(this.src)"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════ CONTACT ═════════════════════════════════ -->
+<section id="contact" class="bg-[#1a5c2a] text-white py-20">
+  <div class="max-w-6xl mx-auto px-4">
+
+    <div class="text-center mb-12">
+      <p class="text-green-300 text-xs font-bold tracking-widest uppercase mb-2" id="ct-label">Kontakt</p>
+      <h2 class="text-3xl md:text-4xl font-bold" id="ct-title">Znajdź nas</h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-10 items-start">
+
+      <!-- Info -->
+      <div class="space-y-8">
+
+        <div class="flex items-start gap-4">
+          <div class="bg-white/10 rounded-full p-3 flex-shrink-0">
+            <svg class="h-5 w-5 text-yellow-300" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+            </svg>
+          </div>
+          <div>
+            <p class="font-bold text-lg" id="ct-addr-l">Adres</p>
+            <p class="text-green-200 mt-1 leading-relaxed">ul. Folwarecka 2<br/>44-240 Żory, Polska</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4">
+          <div class="bg-white/10 rounded-full p-3 flex-shrink-0">
+            <svg class="h-5 w-5 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+          </div>
+          <div>
+            <p class="font-bold text-lg" id="ct-email-l">E-mail</p>
+            <a href="mailto:pannoczkamarket@gmail.com"
+               class="text-green-200 hover:text-yellow-300 transition-colors mt-1 block break-all">
+              pannoczkamarket@gmail.com
+            </a>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4">
+          <div class="bg-white/10 rounded-full p-3 flex-shrink-0">
+            <svg class="h-5 w-5 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/>
+            </svg>
+          </div>
+          <div>
+            <p class="font-bold text-lg" id="ct-social-l">Obserwuj nas</p>
+            <div class="flex flex-wrap items-center gap-3 mt-3">
+              <a href="https://www.facebook.com/people/Pannoczka-Market/61593312664059/"
+                 target="_blank" rel="noopener" aria-label="Facebook"
+                 class="inline-flex items-center gap-2 bg-[#1877F2] hover:bg-[#0d65d9] text-white text-xs font-bold px-4 py-2 rounded-full shadow transition-all">
+                <svg class="h-4 w-4 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+                Facebook
+              </a>
+              <a href="https://www.instagram.com/pannoczkamarket/"
+                 target="_blank" rel="noopener" aria-label="Instagram"
+                 class="inline-flex items-center gap-2 text-white text-xs font-bold px-4 py-2 rounded-full shadow transition-all"
+                 style="background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);">
+                <svg class="h-4 w-4 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                </svg>
+                Instagram
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4">
+          <div class="bg-white/10 rounded-full p-3 flex-shrink-0">
+            <svg class="h-5 w-5 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <div>
+            <p class="font-bold text-lg" id="ct-hours-l">Godziny otwarcia</p>
+            <div class="text-green-200 mt-2 space-y-1.5 text-sm">
+              <div class="flex justify-between gap-6">
+                <span id="ct-wdays">Poniedziałek – Piątek</span>
+                <span class="font-mono font-bold">9:00 – 20:00</span>
+              </div>
+              <div class="flex justify-between gap-6">
+                <span id="ct-wend">Sobota – Niedziela</span>
+                <span class="font-mono font-bold">10:00 – 20:00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a href="https://maps.google.com/maps?q=Folwarecka+2,+Zory,+Poland"
+           target="_blank" rel="noopener"
+           class="inline-flex items-center gap-2 bg-[#9b1c1c] hover:bg-[#7f1414] text-white font-bold px-6 py-3 rounded-full shadow-lg transition-all text-sm"
+           id="ct-cta">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+          </svg>
+          Sprawdź dojazd w Google Maps
+        </a>
+      </div>
+
+      <!-- Map embed -->
+      <div class="rounded-2xl overflow-hidden shadow-2xl h-72 md:h-80">
+        <iframe
+          src="https://maps.google.com/maps?q=Folwarecka+2,+44-240+Zory,+Poland&output=embed"
+          width="100%"
+          height="100%"
+          style="border:0;"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Pannoczka Market – mapa"
+        ></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════ FOOTER ══════════════════════════════════ -->
+<footer class="bg-[#0f3d1c] text-green-400 text-center text-xs py-5 px-4 space-y-2">
+  <p id="ft-copy">© 2026 Pannoczka Market – Sklep Spożywczy. Żory, ul. Folwarecka 2.</p>
+  <p>
+    <a href="mailto:pannoczkamarket@gmail.com"
+       class="hover:text-yellow-300 transition-colors">
+      pannoczkamarket@gmail.com
+    </a>
+  </p>
+  <div class="flex justify-center gap-3 pt-1">
+    <a href="https://www.facebook.com/people/Pannoczka-Market/61593312664059/"
+       target="_blank" rel="noopener" aria-label="Facebook"
+       class="bg-[#1877F2] hover:bg-[#0d65d9] text-white rounded-full p-1.5 transition-all">
+      <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+      </svg>
+    </a>
+    <a href="https://www.instagram.com/pannoczkamarket/"
+       target="_blank" rel="noopener" aria-label="Instagram"
+       class="text-white rounded-full p-1.5 transition-all"
+       style="background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);">
+      <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+      </svg>
+    </a>
+  </div>
+</footer>
+
+
+<!-- ════════════════════════ LIGHTBOX ══════════════════════════════════════ -->
+<div id="lightbox"
+     class="fixed inset-0 bg-black/90 z-[100] hidden items-center justify-center p-4"
+     onclick="closeLb()">
+  <button class="absolute top-4 right-6 text-white text-4xl leading-none font-light" onclick="closeLb()">&times;</button>
+  <img id="lb-img" src="" alt="" class="max-w-full max-h-[90vh] rounded-lg shadow-2xl object-contain"
+       onclick="event.stopPropagation()" />
+</div>
+
+
+<!-- ═════════════════════════════ SCRIPTS ═══════════════════════════════════ -->
+<script>
+// ── Translations ────────────────────────────────────────────────────────────
+const T = {
+  pl: {
+    nav:   { about:'O nas', assort:'Asortyment', gallery:'Galeria', contact:'Kontakt' },
+    hero:  {
+      tagline: 'Sklep Spożywczy',
+      sub:     'Twój sklep z najlepszymi produktami z Ukrainy i nie tylko!<br/>Świeże, smaczne, dostępne każdego dnia.',
+      cta:     'Sprawdź dojazd',
+      more:    'Dowiedz się więcej',
+      hours:   'Pn–Pt: 9:00–20:00 &nbsp;|&nbsp; Sb–Nd: 10:00–20:00',
+    },
+    about: {
+      label: 'O nas',
+      title: 'Smaki Ukrainy blisko Ciebie',
+      p1: 'Pannoczka market to wyjątkowe miejsce w Żorach, gdzie spotkasz autentyczne produkty z Ukrainy i Wschodu – tradycyjne wędliny, świeże ryby, domowe przetwory i wiele więcej.',
+      p2: 'Nasz asortyment stale się rozszerza o produkty z Ukrainy, krajów wschodnich i lokalnych dostawców, bo chcemy, żebyś zawsze znalazł coś wyjątkowego dla siebie i swojej rodziny. Zapraszamy wszystkich, którzy cenią jakość i autentyczność.',
+      bQual: '✓ Jakość i świeżość', bRange: '✓ Szeroki asortyment',
+      bPrice: '✓ Dostępne ceny',   bAtm:   '✓ Przyjazna atmosfera',
+    },
+    assort: {
+      label: 'Asortyment', title: 'Co znajdziesz w naszym sklepie?',
+      fish:  { t:'Ryby i owoce morza',       d:'Świeże i mrożone ryby, łosoś, śledź, owoce morza – prosto z Ukrainy i nie tylko.' },
+      meat:  { t:'Mięso, wędliny i słonina', d:'Tradycyjne wędliny, sało (słonina wieprzowa), kiełbasy i inne wyroby mięsne.' },
+      drink: { t:'Napoje',                   d:'Szeroki wybór napojów: wody, soki, napoje gazowane, piwo i inne.' },
+      sweet: { t:'Słodycze i mrożonki',      d:'Cukierki, czekolady, ptasie mleczko, lody i bogaty wybór mrożonek.' },
+      pres:  { t:'Przetwory domowe',         d:'Ogórki kiszone, konfitury, ikra bakłażanowa, kapusta kiszona i inne domowe przetwory.' },
+    },
+    gallery: {
+      label: 'Galeria', title: 'Przekonaj się sam',
+      desc: 'Nasza przestrzeń, nasi klienci, nasze produkty – zaglądnij do środka zanim odwiedzisz nas osobiście.',
+    },
+    contact: {
+      label: 'Kontakt', title: 'Znajdź nas',
+      addrL: 'Adres', emailL: 'E-mail', socialL: 'Obserwuj nas', hoursL: 'Godziny otwarcia',
+      wdays: 'Poniedziałek – Piątek', wend: 'Sobota – Niedziela',
+      cta: 'Sprawdź dojazd w Google Maps',
+    },
+    footer: '© 2026 Pannoczka Market – Sklep Spożywczy. Żory, ul. Folwarecka 2.',
+  },
+  ua: {
+    nav:   { about:'Про нас', assort:'Асортимент', gallery:'Галерея', contact:'Контакти' },
+    hero:  {
+      tagline: 'Продуктовий магазин',
+      sub:     'Твій магазин найкращих продуктів з України та не тільки!<br/>Свіже, смачне, доступне щодня.',
+      cta:     'Прокласти маршрут',
+      more:    'Дізнатися більше',
+      hours:   'Пн–Пт: 9:00–20:00 &nbsp;|&nbsp; Сб–Нд: 10:00–20:00',
+    },
+    about: {
+      label: 'Про нас',
+      title: 'Смаки України поруч',
+      p1: 'Pannoczka market – це особливе місце в Жорах, де ти знайдеш справжні продукти з України та Сходу – традиційні ковбаси, свіжу рибу, домашні консерви та багато іншого.',
+      p2: 'Наш асортимент постійно розширюється товарами з України, східних країн та від місцевих постачальників, адже ми хочемо, щоб ти завжди знаходив щось особливе для себе і своєї родини.',
+      bQual: '✓ Якість і свіжість', bRange: '✓ Широкий асортимент',
+      bPrice: '✓ Доступні ціни',    bAtm:   '✓ Дружня атмосфера',
+    },
+    assort: {
+      label: 'Асортимент', title: 'Що знайдеш у нашому магазині?',
+      fish:  { t:'Риба і морепродукти',       d:'Свіжа і морожена риба, лосось, оселедець, морепродукти – прямо з України та не тільки.' },
+      meat:  { t:'М\'ясо, ковбаси та сало',   d:'Традиційні ковбаси, сало, шинка та інші м\'ясні вироби.' },
+      drink: { t:'Напої',                     d:'Широкий вибір напоїв: вода, соки, газовані напої, пиво та інше.' },
+      sweet: { t:'Солодощі та заморозка',     d:'Цукерки, шоколад, пташине молоко, морозиво і великий вибір заморожених продуктів.' },
+      pres:  { t:'Домашні консерви',          d:'Мариновані огірки, варення, баклажанна ікра, квашена капуста та інші домашні консерви.' },
+    },
+    gallery: {
+      label: 'Галерея', title: 'Переконайся сам',
+      desc: 'Наш простір, наші клієнти, наші продукти – зазирни всередину перед тим, як відвідати нас особисто.',
+    },
+    contact: {
+      label: 'Контакти', title: 'Знайди нас',
+      addrL: 'Адреса', emailL: 'E-mail', socialL: 'Стежте за нами', hoursL: 'Години роботи',
+      wdays: 'Понеділок – П\'ятниця', wend: 'Субота – Неділя',
+      cta: 'Прокласти маршрут у Google Maps',
+    },
+    footer: '© 2026 Pannoczka Market – Продуктовий магазин. Жори, вул. Фольварецька 2.',
+  },
+};
+
+// ── Apply translations ──────────────────────────────────────────────────────
+function setLang(lang) {
+  const t = T[lang];
+
+  // Nav
+  setText('n-about',   t.nav.about);
+  setText('n-assort',  t.nav.assort);
+  setText('n-gallery', t.nav.gallery);
+  setText('n-contact', t.nav.contact);
+  setText('mn-about',  t.nav.about);
+  setText('mn-assort', t.nav.assort);
+  setText('mn-gallery',t.nav.gallery);
+  setText('mn-contact',t.nav.contact);
+
+  // Hero
+  setText('h-tagline', t.hero.tagline);
+  setHTML('h-sub',     t.hero.sub);
+  setHTML('h-hours',   t.hero.hours);
+  setBtn('h-cta', pinIcon() + ' ' + t.hero.cta);
+  setText('h-more', t.hero.more);
+
+  // About
+  setText('a-label', t.about.label);
+  setText('a-title', t.about.title);
+  setText('a-p1',    t.about.p1);
+  setText('a-p2',    t.about.p2);
+  setText('b-qual',  t.about.bQual);
+  setText('b-range', t.about.bRange);
+  setText('b-price', t.about.bPrice);
+  setText('b-atm',   t.about.bAtm);
+
+  // Assortment
+  setText('as-label',  t.assort.label);
+  setText('as-title',  t.assort.title);
+  setText('c-fish-t',  t.assort.fish.t);  setText('c-fish-d',  t.assort.fish.d);
+  setText('c-meat-t',  t.assort.meat.t);  setText('c-meat-d',  t.assort.meat.d);
+  setText('c-drink-t', t.assort.drink.t); setText('c-drink-d', t.assort.drink.d);
+  setText('c-sweet-t', t.assort.sweet.t); setText('c-sweet-d', t.assort.sweet.d);
+  setText('c-pres-t',  t.assort.pres.t);  setText('c-pres-d',  t.assort.pres.d);
+
+  // Gallery
+  setText('g-label', t.gallery.label);
+  setText('g-title', t.gallery.title);
+  setText('g-desc',  t.gallery.desc);
+
+  // Contact
+  setText('ct-label',   t.contact.label);
+  setText('ct-title',   t.contact.title);
+  setText('ct-addr-l',   t.contact.addrL);
+  setText('ct-email-l',  t.contact.emailL);
+  setText('ct-social-l', t.contact.socialL);
+  setText('ct-hours-l',  t.contact.hoursL);
+  setText('ct-wdays',   t.contact.wdays);
+  setText('ct-wend',    t.contact.wend);
+  setBtn('ct-cta', pinIcon() + ' ' + t.contact.cta);
+
+  // Footer
+  setText('ft-copy', t.footer);
+
+  // Lang button highlight
+  ['pl','ua'].forEach(l => {
+    ['btn-' + l, 'btn-' + l + '-m'].forEach(id => {
+      document.getElementById(id).classList.toggle('active', l === lang);
+    });
+  });
+
+  document.documentElement.lang = lang === 'ua' ? 'uk' : 'pl';
+}
+
+function setText(id, val) { document.getElementById(id).textContent = val; }
+function setHTML(id, val) { document.getElementById(id).innerHTML = val; }
+function setBtn(id, html) { document.getElementById(id).innerHTML = html; }
+function pinIcon() {
+  return '<svg class="h-4 w-4 inline-block mr-1 -mt-0.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>';
+}
+
+// ── Mobile menu ─────────────────────────────────────────────────────────────
+function toggleMobMenu() { document.getElementById('mob-nav').classList.toggle('open'); }
+function closeMobMenu()  { document.getElementById('mob-nav').classList.remove('open'); }
+
+// ── Lightbox ─────────────────────────────────────────────────────────────────
+function openLb(src) {
+  document.getElementById('lb-img').src = src;
+  const lb = document.getElementById('lightbox');
+  lb.classList.remove('hidden');
+  lb.classList.add('flex');
+  document.body.style.overflow = 'hidden';
+}
+function closeLb() {
+  const lb = document.getElementById('lightbox');
+  lb.classList.add('hidden');
+  lb.classList.remove('flex');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
+</script>
+
+</body>
+</html>

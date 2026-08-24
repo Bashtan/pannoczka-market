@@ -1,0 +1,17 @@
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Wrangler / Cloudflare CLI cache
+.wrangler/
+
+# Claude Code settings
+.claude/
+
+# Editor folders
+.vscode/
+.idea/
+
+# Node (if you ever add build tools)
+node_modules/
