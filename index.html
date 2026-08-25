@@ -88,6 +88,22 @@
       box-shadow: 0 12px 28px rgba(0,0,0,.25);
     }
 
+    /* ── product/brand gallery (Assortment) ── */
+    .prod-card {
+      transition: transform .3s, box-shadow .3s;
+      cursor: pointer;
+    }
+    .prod-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 32px rgba(0,0,0,.22);
+    }
+    .prod-card img {
+      transition: transform .35s;
+    }
+    .prod-card:hover img {
+      transform: scale(1.06);
+    }
+
     /* ── lang toggle active state ── */
     .lang-btn.active {
       background: #fff;
@@ -325,6 +341,81 @@
         </div>
       </div>
     </div>
+
+    <!-- Brand / product gallery -->
+    <div class="mt-16">
+      <div class="text-center mb-8">
+        <h3 class="text-xl md:text-2xl font-bold text-[#1a5c2a]" id="as-brands-title">Marki, które u nas znajdziesz</h3>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-5">
+
+        <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+          <img src="images/Asortyment/Pannoczka19.jpg" alt="Sosy Torchin" class="w-full aspect-[4/3] object-cover" />
+          <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
+            <p class="text-white text-xs md:text-sm font-bold leading-tight" id="pg-sauces">Sosy Torchin</p>
+          </div>
+        </div>
+
+        <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+          <img src="images/Asortyment/Pannozcka18.jpg" alt="Herbaty Lovare" class="w-full aspect-[4/3] object-cover" />
+          <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
+            <p class="text-white text-xs md:text-sm font-bold leading-tight" id="pg-tea">Herbaty Lovare</p>
+          </div>
+        </div>
+
+        <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+          <img src="images/Asortyment/Pannoczka17.jpg" alt="Słodycze i przekąski dla dzieci" class="w-full aspect-[4/3] object-cover" />
+          <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
+            <p class="text-white text-xs md:text-sm font-bold leading-tight" id="pg-kids">Słodycze i przekąski dla dzieci</p>
+          </div>
+        </div>
+
+        <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+          <img src="images/Asortyment/Pannoczka16.jpg" alt="Lemoniada Natakhtari cytrynowo-limonkowa" class="w-full aspect-[4/3] object-cover" />
+          <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
+            <p class="text-white text-xs md:text-sm font-bold leading-tight" id="pg-lemonade1">Lemoniada Natakhtari – cytrynowo-limonkowa</p>
+          </div>
+        </div>
+
+        <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+          <img src="images/Asortyment/Pannoczka15.jpg" alt="Lemoniada Natakhtari – 6 smaków" class="w-full aspect-[4/3] object-cover" />
+          <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
+            <p class="text-white text-xs md:text-sm font-bold leading-tight" id="pg-lemonade2">Lemoniada Natakhtari – 6 smaków do wyboru</p>
+          </div>
+        </div>
+
+        <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+          <img src="images/Asortyment/Pannoczka14.jpg" alt="Czekolady Roshen" class="w-full aspect-[4/3] object-cover" />
+          <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
+            <p class="text-white text-xs md:text-sm font-bold leading-tight" id="pg-chocolate">Czekolady Roshen</p>
+          </div>
+        </div>
+
+        <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+          <img src="images/Asortyment/Pannozcka13.jpg" alt="Zupy błyskawiczne Mivina" class="w-full aspect-[4/3] object-cover" />
+          <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
+            <p class="text-white text-xs md:text-sm font-bold leading-tight" id="pg-noodles">Zupy błyskawiczne Mivina</p>
+          </div>
+        </div>
+
+        <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+          <img src="images/Asortyment/Pannoczka12.jpg" alt="Chałwa słonecznikowa Zolotoy Vek" class="w-full aspect-[4/3] object-cover" />
+          <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
+            <p class="text-white text-xs md:text-sm font-bold leading-tight" id="pg-halva">Chałwa słonecznikowa Zolotoy Vek</p>
+          </div>
+        </div>
+
+        <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+          <img src="images/Asortyment/Pannoczka11.jpg" alt="Chrupki kukurydziane Salut" class="w-full aspect-[4/3] object-cover" />
+          <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
+            <p class="text-white text-xs md:text-sm font-bold leading-tight" id="pg-cornsticks">Chrupki kukurydziane Salut – salami, bekon, grzyby</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -580,6 +671,18 @@ const T = {
       drink: { t:'Napoje',                   d:'Szeroki wybór napojów: wody, soki, napoje gazowane, piwo i inne.' },
       sweet: { t:'Słodycze i mrożonki',      d:'Cukierki, czekolady, ptasie mleczko, lody i bogaty wybór mrożonek.' },
       pres:  { t:'Przetwory domowe',         d:'Ogórki kiszone, konfitury, ikra bakłażanowa, kapusta kiszona i inne domowe przetwory.' },
+      brands: {
+        title: 'Marki, które u nas znajdziesz',
+        sauces:    'Sosy Torchin',
+        tea:       'Herbaty Lovare',
+        kids:      'Słodycze i przekąski dla dzieci',
+        lemonade1: 'Lemoniada Natakhtari – cytrynowo-limonkowa',
+        lemonade2: 'Lemoniada Natakhtari – 6 smaków do wyboru',
+        chocolate: 'Czekolady Roshen',
+        noodles:   'Zupy błyskawiczne Mivina',
+        halva:     'Chałwa słonecznikowa Zolotoy Vek',
+        cornsticks:'Chrupki kukurydziane Salut – salami, bekon, grzyby',
+      },
     },
     gallery: {
       label: 'Galeria', title: 'Przekonaj się sam',
@@ -617,6 +720,18 @@ const T = {
       drink: { t:'Напої',                     d:'Широкий вибір напоїв: вода, соки, газовані напої, пиво та інше.' },
       sweet: { t:'Солодощі та заморозка',     d:'Цукерки, шоколад, пташине молоко, морозиво і великий вибір заморожених продуктів.' },
       pres:  { t:'Домашні консерви',          d:'Мариновані огірки, варення, баклажанна ікра, квашена капуста та інші домашні консерви.' },
+      brands: {
+        title: 'Бренди, які ти знайдеш у нас',
+        sauces:    'Соуси Торчин',
+        tea:       'Чай Lovare',
+        kids:      'Солодощі та перекуси для дітей',
+        lemonade1: 'Лимонад Natakhtari – лимонно-лаймовий',
+        lemonade2: 'Лимонад Natakhtari – 6 смаків на вибір',
+        chocolate: 'Шоколад Roshen',
+        noodles:   'Локшина швидкого приготування Мівіна',
+        halva:     'Соняшникова халва «Золотий Вік»',
+        cornsticks:'Кукурудзяні палички Salut – салямі, бекон, гриби',
+      },
     },
     gallery: {
       label: 'Галерея', title: 'Переконайся сам',
@@ -671,6 +786,16 @@ function setLang(lang) {
   setText('c-drink-t', t.assort.drink.t); setText('c-drink-d', t.assort.drink.d);
   setText('c-sweet-t', t.assort.sweet.t); setText('c-sweet-d', t.assort.sweet.d);
   setText('c-pres-t',  t.assort.pres.t);  setText('c-pres-d',  t.assort.pres.d);
+  setText('as-brands-title', t.assort.brands.title);
+  setText('pg-sauces',    t.assort.brands.sauces);
+  setText('pg-tea',       t.assort.brands.tea);
+  setText('pg-kids',      t.assort.brands.kids);
+  setText('pg-lemonade1', t.assort.brands.lemonade1);
+  setText('pg-lemonade2', t.assort.brands.lemonade2);
+  setText('pg-chocolate', t.assort.brands.chocolate);
+  setText('pg-noodles',   t.assort.brands.noodles);
+  setText('pg-halva',     t.assort.brands.halva);
+  setText('pg-cornsticks',t.assort.brands.cornsticks);
 
   // Gallery
   setText('g-label', t.gallery.label);

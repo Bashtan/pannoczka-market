@@ -25,6 +25,17 @@ images/
   apple-touch-icon.png      — 180×180, white background
   og-image.jpg              — 1200×630, dark green bg + logo + address line
   twitter-card.jpg          — 1200×600
+Asortyment/                — brand/product gallery source photos (promo banner images, client-supplied)
+  Pannoczka19.jpg           — Torchin sauces
+  Pannozcka18.jpg           — Lovare tea (note: file has "Pannozcka" typo, not "Pannoczka")
+  Pannoczka17.jpg           — kids' snacks selection
+  Pannoczka16.jpg           — Natakhtari lemonade (single bottle)
+  Pannoczka15.jpg           — Natakhtari lemonade (6-flavor lineup)
+  Pannoczka14.jpg           — Roshen chocolate
+  Pannozcka13.jpg           — Mivina instant noodles (note: "Pannozcka" typo)
+  Pannoczka12.jpg           — sunflower halva
+  Pannoczka11.jpg           — Salut corn sticks (salami/bacon/mushroom)
+  ⚠️ filenames are sequential (11–19) but do NOT map to brands in that order — see index.html assortment gallery for the actual src per card if these ever need reordering
 RAW/
   Favicon Pannochka_new.png — current logo (used in navbar + favicons)
   Favicon Pannochka.jpeg    — old logo (do not use)
@@ -60,7 +71,7 @@ RAW/
 1. **Header** — sticky, logo image (`RAW/Favicon Pannochka_new.png`), nav links, PL/UA toggle, mobile hamburger
 2. **Hero** — full-screen exterior photo, headline, two CTA buttons, hours + address chips
 3. **About** (`#about`) — store description mentioning "produkty z Ukrainy i Wschodu", opening poster image
-4. **Assortment** (`#assortment`) — 5 category cards (fish, meat, drinks, sweets, preserves) + illustrated menu image
+4. **Assortment** (`#assortment`) — 5 category cards (fish, meat, drinks, sweets, preserves) + illustrated menu image + 9-card brand/product gallery grid (`.prod-card`, lightbox-enabled via `openLb()`, captions translated via `T.*.assort.brands`)
 5. **Gallery** (`#gallery`) — masonry grid of 4 photos, lightbox on click
 6. **Contact** (`#contact`) — address, email, social links (FB + IG), hours, Google Maps iframe
 7. **Footer** — copyright, email, FB + IG icon buttons
