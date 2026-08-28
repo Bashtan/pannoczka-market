@@ -48,6 +48,15 @@ images/
     2026-08-28 11.14.17.jpg — frozen dumplings / nuggets / ice cream
     2026-08-28 11.13.45.jpg — deli counter, hams and sausages
     2026-08-28 11.13.57.jpg — full fridge, wide shot (wide closing banner)
+    viber_image_2026-08-28_14-33-18-656.jpg — chips/snacks shelf (Nasze wnętrze section)
+    viber_image_2026-08-28_14-33-19-028.jpg — frozen seafood (shrimp / surimi sticks)
+    viber_image_2026-08-28_14-33-19-299.jpg — frozen dumplings / nuggets / ice cream
+    viber_image_2026-08-28_14-33-20-474.jpg — deli counter, fish pastes and caviar spreads
+    viber_image_2026-08-28_14-33-21-152.jpg — Sofia roladki cake box, fresh delivery
+    viber_image_2026-08-28_14-33-21-454.jpg — dried fish rack
+    viber_image_2026-08-28_14-33-21-931.jpg — smoked fish counter, close-up
+    viber_image_2026-08-28_14-33-22-786.jpg — Eskimos ice cream rolls in freezer
+    ⚠️ these 8 are a separate later batch from the 10 above (added same folder, different day/session) — used exclusively by the `#interior` section, not `#gallery`; check filenames/timestamps before assuming a photo belongs to one section or the other
 RAW/
   Favicon Pannochka_new.png — current logo (used in navbar + favicons)
   Favicon Pannochka.jpeg    — old logo (do not use)
@@ -88,8 +97,9 @@ RAW/
 3. **About** (`#about`) — store description mentioning "produkty z Ukrainy i Wschodu", opening poster image
 4. **Assortment** (`#assortment`) — 5 category cards (fish, meat, drinks, sweets, preserves) + illustrated menu image + 9-card brand/product gallery grid (`.prod-card`, lightbox-enabled via `openLb()`, captions translated via `T.*.assort.brands`)
 5. **Gallery** (`#gallery`) — masonry grid: original 4 curated photos (exterior/customers/closeup, `RAW/`) + a wide "shelf aisle" establishing banner + 8 real product/case-closeup photos + a wide "full fridge" closing banner (`images/Interior/`, 14 photos total), all lightbox-enabled via `openLb()`
-6. **Contact** (`#contact`) — address, email, social links (FB + IG), hours, Google Maps iframe, "Get Directions" CTA, and a "Leave a Review" glass card (gold `.btn-sheen` button + QR code, `images/qr-review.png`, `id="ct-review-*"`)
-7. **Footer** — copyright, email, FB + IG icon buttons
+6. **Interior** (`#interior`, "Nasze wnętrze") — separate section below Gallery; true CSS-column masonry (`columns-2 md:columns-3`, `break-inside-avoid`, no forced crop) of 8 more real photos (`images/Interior/viber_image_2026-08-28_14-33-*.jpg`), reusing Gallery's `.gal-wrap`/`.gal-img`/`.gal-zoom-icon` hover + `.reveal` scroll-animation, lightbox-enabled
+7. **Contact** (`#contact`) — address, email, social links (FB + IG), hours, Google Maps iframe, "Get Directions" CTA, and a "Leave a Review" glass card (gold `.btn-sheen` button + QR code, `images/qr-review.png`, `id="ct-review-*"`)
+8. **Footer** — copyright, email, FB + IG icon buttons
 
 ## Cloudflare deployment
 - Account ID: e8eeb644ca96a2d4cb2a9674ea599e79
