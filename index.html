@@ -239,6 +239,10 @@
     }
     .gal-wrap:hover .gal-zoom-icon { opacity: 1; transform: scale(1); }
 
+    /* ── gallery "coming soon" teaser card (fills the trailing grid gap) ── */
+    .gal-teaser { transition: transform .3s ease, box-shadow .3s ease; }
+    .gal-teaser:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0,0,0,.15); }
+
     /* ── product/brand gallery (Assortment) ── */
     .prod-card {
       box-shadow: 0 3px 14px rgba(0,0,0,.10);
@@ -860,6 +864,15 @@
         <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
       </div>
 
+      <!-- Coming soon teaser – fills the trailing grid gap -->
+      <div class="col-span-2 gal-teaser rounded-xl reveal flex flex-col items-center justify-center text-center gap-3 px-6"
+           style="height:200px; transition-delay:60ms; background:linear-gradient(135deg, var(--green-pale) 0%, var(--cream) 55%, var(--gold-light) 140%); border:1px solid rgba(196,147,74,.3);">
+        <svg class="h-7 w-7 text-[#c4934a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        <p class="text-[#1a5c2a] font-semibold text-sm md:text-base leading-snug max-w-xs" id="g-teaser">Wkrótce nowe dostawy, bądźcie czujni!</p>
+      </div>
+
       <!-- Full fridge – wide closing shot -->
       <div class="col-span-2 md:col-span-3 gal-wrap rounded-xl reveal" style="transition-delay:0ms">
         <img
@@ -1109,6 +1122,7 @@ const T = {
     gallery: {
       label: 'Galeria', title: 'Przekonaj się sam',
       desc: 'Nasza przestrzeń, nasi klienci, nasze produkty – zaglądnij do środka zanim odwiedzisz nas osobiście.',
+      teaser: 'Wkrótce nowe dostawy, bądźcie czujni!',
     },
     contact: {
       label: 'Kontakt', title: 'Znajdź nas',
@@ -1163,6 +1177,7 @@ const T = {
     gallery: {
       label: 'Галерея', title: 'Переконайся сам',
       desc: 'Наш простір, наші клієнти, наші продукти – зазирни всередину перед тим, як відвідати нас особисто.',
+      teaser: 'Скоро будуть нові надходження, чекайте!',
     },
     contact: {
       label: 'Контакти', title: 'Знайди нас',
@@ -1233,6 +1248,7 @@ function setLang(lang) {
   setText('g-label', t.gallery.label);
   setText('g-title', t.gallery.title);
   setText('g-desc',  t.gallery.desc);
+  setText('g-teaser',t.gallery.teaser);
 
   // Contact
   setText('ct-label',   t.contact.label);
