@@ -25,6 +25,7 @@ images/
   apple-touch-icon.png      — 180×180, white background
   og-image.jpg              — 1200×630, dark green bg + logo + address line
   twitter-card.jpg          — 1200×600
+  qr-review.png             — 3000×3000, QR code (branded with logo) for the Google review link, in the Contact section's review card (`id="ct-review-cta"` block). Decodes to a qrco.de short link that redirects → g.page review link → Google's write-review page for this business, verified with zbarimg.
   Asortyment/               — brand/product gallery source photos (promo banner images, client-supplied)
     Pannoczka19.jpg         — Torchin sauces
     Pannozcka18.jpg         — Lovare tea (note: file has "Pannozcka" typo, not "Pannoczka")
@@ -71,6 +72,8 @@ RAW/
 - **Email:** pannoczkamarket@gmail.com
 - **Instagram:** https://www.instagram.com/pannoczkamarket/
 - **Facebook:** https://www.facebook.com/people/Pannoczka-Market/61593312664059/
+- **Google Business Profile (directions link):** https://maps.app.goo.gl/mvTXyahW8R6XbUsF8 — used on both "Get Directions" CTAs (hero `#h-cta` + Contact `#ct-cta`). Resolves to "Pannoczka Market" at 50.0433809, 18.6890681 (used to rebuild the Contact section's embeddable map iframe, since Google short links can't be framed directly — see git log for `index.html` around "Point Google Maps links to the new Business Profile").
+- **Google review link:** https://g.page/r/CZn7h-8vIObLEBM/review — used on the Contact section's "Zostaw opinię" / "Залишити відгук" button (`#ct-review-cta`)
 
 ## Design tokens
 - Dark green: `#1a5c2a` (header, contact section, hero overlay)
@@ -85,7 +88,7 @@ RAW/
 3. **About** (`#about`) — store description mentioning "produkty z Ukrainy i Wschodu", opening poster image
 4. **Assortment** (`#assortment`) — 5 category cards (fish, meat, drinks, sweets, preserves) + illustrated menu image + 9-card brand/product gallery grid (`.prod-card`, lightbox-enabled via `openLb()`, captions translated via `T.*.assort.brands`)
 5. **Gallery** (`#gallery`) — masonry grid: original 4 curated photos (exterior/customers/closeup, `RAW/`) + a wide "shelf aisle" establishing banner + 8 real product/case-closeup photos + a wide "full fridge" closing banner (`images/Interior/`, 14 photos total), all lightbox-enabled via `openLb()`
-6. **Contact** (`#contact`) — address, email, social links (FB + IG), hours, Google Maps iframe
+6. **Contact** (`#contact`) — address, email, social links (FB + IG), hours, Google Maps iframe, "Get Directions" CTA, and a "Leave a Review" glass card (gold `.btn-sheen` button + QR code, `images/qr-review.png`, `id="ct-review-*"`)
 7. **Footer** — copyright, email, FB + IG icon buttons
 
 ## Cloudflare deployment

@@ -900,6 +900,32 @@
         ></iframe>
       </div>
     </div>
+
+    <!-- Leave a Review -->
+    <div class="mt-10 reveal" style="transition-delay:200ms">
+      <div class="bg-white/10 backdrop-blur rounded-2xl border border-[#c4934a]/30 p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
+        <div>
+          <p class="text-yellow-300 text-xs font-bold tracking-widest uppercase mb-2" id="ct-review-l">Twoja opinia się liczy</p>
+          <h3 class="font-display text-2xl md:text-3xl font-bold gold-foil mb-3" id="ct-review-t">Podobało Ci się u nas?</h3>
+          <p class="text-green-200 text-sm max-w-sm mb-5" id="ct-review-d">
+            Zostaw nam opinię w Google – zajmie to tylko chwilę i naprawdę nam pomaga.
+          </p>
+          <a href="https://g.page/r/CZn7h-8vIObLEBM/review"
+             target="_blank" rel="noopener"
+             class="btn-sheen inline-flex items-center gap-2 bg-[#c4934a] hover:bg-[#b17f3a] text-[#1a5c2a] font-bold px-6 py-3 rounded-full shadow-lg transition-all text-sm"
+             id="ct-review-cta">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 19.771l-7.416 3.642 1.48-8.279L0 9.306l8.332-1.151z"/></svg>
+            Zostaw opinię
+          </a>
+        </div>
+        <div class="flex flex-col items-center gap-2 flex-shrink-0">
+          <div class="bg-white p-2.5 rounded-2xl shadow-xl">
+            <img src="images/qr-review.png" alt="Kod QR – zostaw opinię w Google" class="w-28 h-28 md:w-32 md:h-32 object-contain rounded" />
+          </div>
+          <p class="text-green-200/80 text-xs" id="ct-review-qr">Zeskanuj telefonem</p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -993,6 +1019,11 @@ const T = {
       addrL: 'Adres', emailL: 'E-mail', socialL: 'Obserwuj nas', hoursL: 'Godziny otwarcia',
       wdays: 'Poniedziałek – Piątek', wend: 'Sobota – Niedziela',
       cta: 'Sprawdź dojazd w Google Maps',
+      reviewL: 'Twoja opinia się liczy',
+      reviewT: 'Podobało Ci się u nas?',
+      reviewD: 'Zostaw nam opinię w Google – zajmie to tylko chwilę i naprawdę nam pomaga.',
+      reviewCta: 'Zostaw opinię',
+      reviewQr: 'Zeskanuj telefonem',
     },
     footer: '© 2026 Pannoczka Market – Sklep Spożywczy. Żory, ul. Folwarecka 2.',
   },
@@ -1042,6 +1073,11 @@ const T = {
       addrL: 'Адреса', emailL: 'E-mail', socialL: 'Стежте за нами', hoursL: 'Години роботи',
       wdays: 'Понеділок – П\'ятниця', wend: 'Субота – Неділя',
       cta: 'Прокласти маршрут у Google Maps',
+      reviewL: 'Твоя думка важлива для нас',
+      reviewT: 'Сподобалось у нас?',
+      reviewD: 'Залиш нам відгук у Google – це займе лише хвилину і дуже нам допомагає.',
+      reviewCta: 'Залишити відгук',
+      reviewQr: 'Заскануй телефоном',
     },
     footer: '© 2026 Pannoczka Market – Продуктовий магазин. Жори, вул. Фольварецька 2.',
   },
@@ -1112,6 +1148,11 @@ function setLang(lang) {
   setText('ct-wdays',   t.contact.wdays);
   setText('ct-wend',    t.contact.wend);
   setBtn('ct-cta', pinIcon() + ' ' + t.contact.cta);
+  setText('ct-review-l',  t.contact.reviewL);
+  setText('ct-review-t',  t.contact.reviewT);
+  setText('ct-review-d',  t.contact.reviewD);
+  setBtn('ct-review-cta', starIcon() + ' ' + t.contact.reviewCta);
+  setText('ct-review-qr', t.contact.reviewQr);
 
   // Footer
   setText('ft-copy', t.footer);
@@ -1131,6 +1172,9 @@ function setHTML(id, val) { document.getElementById(id).innerHTML = val; }
 function setBtn(id, html) { document.getElementById(id).innerHTML = html; }
 function pinIcon() {
   return '<svg class="h-4 w-4 inline-block mr-1 -mt-0.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>';
+}
+function starIcon() {
+  return '<svg class="h-4 w-4 inline-block mr-1 -mt-0.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 19.771l-7.416 3.642 1.48-8.279L0 9.306l8.332-1.151z"/></svg>';
 }
 
 // ── Mobile menu ─────────────────────────────────────────────────────────────
