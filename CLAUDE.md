@@ -56,7 +56,7 @@ images/
     viber_image_2026-08-28_14-33-21-454.jpg — dried fish rack
     viber_image_2026-08-28_14-33-21-931.jpg — smoked fish counter, close-up
     viber_image_2026-08-28_14-33-22-786.jpg — Eskimos ice cream rolls in freezer
-    ⚠️ these 8 are a separate later batch from the 10 above (added same folder, different day/session) — used exclusively by the `#interior` section, not `#gallery`; check filenames/timestamps before assuming a photo belongs to one section or the other
+    ⚠️ these 8 are a separate later batch from the 10 above (added same folder, different day/session), but as of the "merge galleries" edit both batches are used together inside `#gallery` — there is no separate `#interior` section anymore (it was tried, then folded back in per client request)
 RAW/
   Favicon Pannochka_new.png — current logo (used in navbar + favicons)
   Favicon Pannochka.jpeg    — old logo (do not use)
@@ -96,10 +96,9 @@ RAW/
 2. **Hero** — full-screen exterior photo, headline, two CTA buttons, hours + address chips
 3. **About** (`#about`) — store description mentioning "produkty z Ukrainy i Wschodu", opening poster image
 4. **Assortment** (`#assortment`) — 5 category cards (fish, meat, drinks, sweets, preserves) + illustrated menu image + 9-card brand/product gallery grid (`.prod-card`, lightbox-enabled via `openLb()`, captions translated via `T.*.assort.brands`)
-5. **Gallery** (`#gallery`) — masonry grid: original 4 curated photos (exterior/customers/closeup, `RAW/`) + a wide "shelf aisle" establishing banner + 8 real product/case-closeup photos + a wide "full fridge" closing banner (`images/Interior/`, 14 photos total), all lightbox-enabled via `openLb()`
-6. **Interior** (`#interior`, "Nasze wnętrze") — separate section below Gallery; true CSS-column masonry (`columns-2 md:columns-3`, `break-inside-avoid`, no forced crop) of 8 more real photos (`images/Interior/viber_image_2026-08-28_14-33-*.jpg`), reusing Gallery's `.gal-wrap`/`.gal-img`/`.gal-zoom-icon` hover + `.reveal` scroll-animation, lightbox-enabled
-7. **Contact** (`#contact`) — address, email, social links (FB + IG), hours, Google Maps iframe, "Get Directions" CTA, and a "Leave a Review" glass card (gold `.btn-sheen` button + QR code, `images/qr-review.png`, `id="ct-review-*"`)
-8. **Footer** — copyright, email, FB + IG icon buttons
+5. **Gallery** (`#gallery`) — one unified masonry grid, `grid grid-cols-2 md:grid-cols-3`: original 4 curated photos (exterior/customers/closeup, `RAW/`) + a wide "shelf aisle" establishing banner + 16 real product/case-closeup photos (both `images/Interior/` batches merged together) + a wide "full fridge" closing banner (22 photos total), all using `.gal-wrap`/`.gal-img`/`.gal-zoom-icon` hover + `.reveal` scroll-animation, lightbox-enabled via `openLb()`. (A separate "Nasze wnętrze" section briefly existed for the second photo batch; client asked to merge it back into Gallery, so there is currently only one gallery section on the page.)
+6. **Contact** (`#contact`) — address, email, social links (FB + IG), hours, Google Maps iframe, "Get Directions" CTA, and a "Leave a Review" glass card (gold `.btn-sheen` button + QR code, `images/qr-review.png`, `id="ct-review-*"`)
+7. **Footer** — copyright, email, FB + IG icon buttons
 
 ## Cloudflare deployment
 - Account ID: e8eeb644ca96a2d4cb2a9674ea599e79
