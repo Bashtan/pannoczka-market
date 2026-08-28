@@ -25,17 +25,28 @@ images/
   apple-touch-icon.png      — 180×180, white background
   og-image.jpg              — 1200×630, dark green bg + logo + address line
   twitter-card.jpg          — 1200×600
-Asortyment/                — brand/product gallery source photos (promo banner images, client-supplied)
-  Pannoczka19.jpg           — Torchin sauces
-  Pannozcka18.jpg           — Lovare tea (note: file has "Pannozcka" typo, not "Pannoczka")
-  Pannoczka17.jpg           — kids' snacks selection
-  Pannoczka16.jpg           — Natakhtari lemonade (single bottle)
-  Pannoczka15.jpg           — Natakhtari lemonade (6-flavor lineup)
-  Pannoczka14.jpg           — Roshen chocolate
-  Pannozcka13.jpg           — Mivina instant noodles (note: "Pannozcka" typo)
-  Pannoczka12.jpg           — sunflower halva
-  Pannoczka11.jpg           — Salut corn sticks (salami/bacon/mushroom)
-  ⚠️ filenames are sequential (11–19) but do NOT map to brands in that order — see index.html assortment gallery for the actual src per card if these ever need reordering
+  Asortyment/               — brand/product gallery source photos (promo banner images, client-supplied)
+    Pannoczka19.jpg         — Torchin sauces
+    Pannozcka18.jpg         — Lovare tea (note: file has "Pannozcka" typo, not "Pannoczka")
+    Pannoczka17.jpg         — kids' snacks selection
+    Pannoczka16.jpg         — Natakhtari lemonade (single bottle)
+    Pannoczka15.jpg         — Natakhtari lemonade (6-flavor lineup)
+    Pannoczka14.jpg         — Roshen chocolate
+    Pannozcka13.jpg         — Mivina instant noodles (note: "Pannozcka" typo)
+    Pannoczka12.jpg         — sunflower halva
+    Pannoczka11.jpg         — Salut corn sticks (salami/bacon/mushroom)
+    ⚠️ filenames are sequential (11–19) but do NOT map to brands in that order — see index.html assortment gallery for the actual src per card if these ever need reordering
+  Interior/                 — real store/product photos (client-supplied), used in the expanded Gallery section
+    2026-08-28 11.13.02.jpg — shelf aisle (wide "establishing" banner, top of the new grid)
+    2026-08-28 11.12.37.jpg — cakes/desserts display case
+    2026-08-28 11.12.54.jpg — smoked fish counter
+    2026-08-28 11.14.03.jpg — sunflower seeds shelf
+    2026-08-28 11.13.23.jpg — sausages (Saltowski) deli case
+    2026-08-28 11.14.09.jpg — frozen seafood (shrimp / crab sticks)
+    2026-08-28 11.13.35.jpg — sausage close-up ("Лікарська")
+    2026-08-28 11.14.17.jpg — frozen dumplings / nuggets / ice cream
+    2026-08-28 11.13.45.jpg — deli counter, hams and sausages
+    2026-08-28 11.13.57.jpg — full fridge, wide shot (wide closing banner)
 RAW/
   Favicon Pannochka_new.png — current logo (used in navbar + favicons)
   Favicon Pannochka.jpeg    — old logo (do not use)
@@ -52,6 +63,7 @@ RAW/
 - Language toggle calls `setLang('pl')` / `setLang('ua')` which updates all `id`-tagged elements
 - Every text element that changes on language switch has a unique `id` (e.g. `ct-addr-l`, `a-title`, etc.)
 - To add new translatable text: add the string to both `T.pl` and `T.ua`, add the element with an `id`, call `setText('id', t.key)` inside `setLang()`
+- Scroll-reveal: any element with class `.reveal` fades/slides in via a vanilla-JS `IntersectionObserver` (adds `.is-visible`); respects `prefers-reduced-motion` and has a no-JS/no-IO fallback. Stagger multiple items in the same row with inline `style="transition-delay:Nms"`. Fonts: Playfair Display (headings, via one Google Fonts `<link>`) + the original Georgia stack (body).
 
 ## Store details (never change without client confirmation)
 - **Address:** ul. Folwarecka 2, 44-240 Żory, Polska
@@ -72,7 +84,7 @@ RAW/
 2. **Hero** — full-screen exterior photo, headline, two CTA buttons, hours + address chips
 3. **About** (`#about`) — store description mentioning "produkty z Ukrainy i Wschodu", opening poster image
 4. **Assortment** (`#assortment`) — 5 category cards (fish, meat, drinks, sweets, preserves) + illustrated menu image + 9-card brand/product gallery grid (`.prod-card`, lightbox-enabled via `openLb()`, captions translated via `T.*.assort.brands`)
-5. **Gallery** (`#gallery`) — masonry grid of 4 photos, lightbox on click
+5. **Gallery** (`#gallery`) — masonry grid: original 4 curated photos (exterior/customers/closeup, `RAW/`) + a wide "shelf aisle" establishing banner + 8 real product/case-closeup photos + a wide "full fridge" closing banner (`images/Interior/`, 14 photos total), all lightbox-enabled via `openLb()`
 6. **Contact** (`#contact`) — address, email, social links (FB + IG), hours, Google Maps iframe
 7. **Footer** — copyright, email, FB + IG icon buttons
 
