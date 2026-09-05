@@ -15,7 +15,22 @@ Single-page landing website for **Pannoczka market** — a Ukrainian grocery sto
 
 ## File structure
 ```
-index.html                  — entire site (single file)
+index.html                  — entire site (single file) — the LIVE production page
+test-video.html             — ⚠️ SANDBOX ONLY, not linked from the live site. A duplicate of
+                               index.html used to try out video ideas without touching the
+                               real page. Client reviews it at pannoczka.pl/test-video.html
+                               (Cloudflare Pages serves it at the clean URL /test-video too).
+                               Currently: Hero is back to the plain original photo (no video,
+                               no .hero-overlay — client asked for both to be removed after the
+                               first hero-background-video experiment); the "ВІДКРИТТЯ! 16
+                               СЕРПНЯ" grand-opening poster in the About section
+                               (RAW/viber_image_2026-08-16_12.jpg) is replaced by an inline
+                               <video controls autoplay muted playsinline> of
+                               images/Videos/store-video.mp4, boxed in an aspect-[3/2] +
+                               object-cover container to match the poster's shape/rounded
+                               corners/shadow. Only fold any of this into index.html once the
+                               client explicitly confirms — keep the two files in sync
+                               deliberately, not by habit.
 CLAUDE.md                   — this file
 .gitignore                  — excludes .DS_Store, .wrangler/, .claude/
 images/
@@ -26,6 +41,9 @@ images/
   og-image.jpg              — 1200×630, dark green bg + logo + address line
   twitter-card.jpg          — 1200×600
   qr-review.png             — 3000×3000, QR code (branded with logo) for the Google review link, in the Contact section's review card (`id="ct-review-cta"` block). Decodes to a qrco.de short link that redirects → g.page review link → Google's write-review page for this business, verified with zbarimg.
+  Videos/
+    store-video.mp4         — client-supplied store tour clip, h264/aac, 320×568 (portrait), 18.8s, ~1.7MB.
+                               Used ONLY in test-video.html (see above) — not yet in the live index.html.
   Asortyment/               — brand/product gallery source photos (promo banner images, client-supplied)
     Pannoczka19.jpg         — Torchin sauces
     Pannozcka18.jpg         — Lovare tea (note: file has "Pannozcka" typo, not "Pannoczka")
