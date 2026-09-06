@@ -15,23 +15,24 @@ Single-page landing website for **Pannoczka market** — a Ukrainian grocery sto
 
 ## File structure
 ```
-index.html                  — entire site (single file) — the LIVE production page
-test-video.html             — ⚠️ SANDBOX ONLY, not linked from the live site. A duplicate of
-                               index.html used to try out video ideas without touching the
-                               real page. Client reviews it at pannoczka.pl/test-video.html
-                               (Cloudflare Pages serves it at the clean URL /test-video too).
-                               Currently: Hero is back to the plain original photo (no video,
-                               no .hero-overlay — client asked for both to be removed after the
-                               first hero-background-video experiment); the "ВІДКРИТТЯ! 16
-                               СЕРПНЯ" grand-opening poster in the About section
-                               (RAW/viber_image_2026-08-16_12.jpg) is replaced by an inline
+index.html                  — entire site (single file) — the LIVE production page. The About
+                               section's "ВІДКРИТТЯ! 16 СЕРПНЯ" grand-opening poster
+                               (RAW/viber_image_2026-08-16_12.jpg, still used nowhere else) has
+                               been PROMOTED from the test page to production: it's now an inline
                                <video id="about-video" controls autoplay muted loop playsinline>
                                of images/Videos/video.mp4, boxed in an aspect-[3/2] + object-cover
-                               container to match the poster's shape/rounded corners/shadow. A
-                               small inline <script> right after the tag sets playbackRate = 0.9
-                               (and re-asserts it on loadedmetadata) so the clip plays 10% slower.
-                               Only fold any of this into index.html once the client explicitly
-                               confirms — keep the two files in sync deliberately, not by habit.
+                               container matching the poster's old shape/rounded corners/shadow,
+                               with a small inline <script> right after the tag setting
+                               playbackRate = 0.9 (re-asserted on loadedmetadata) so it plays 10%
+                               slower. Hero is unchanged (still the original photo + .hero-overlay).
+test-video.html             — ⚠️ SANDBOX, not linked from the live site. Still reachable at
+                               pannoczka.pl/test-video.html (clean URL /test-video too) for trying
+                               future video ideas. Only differs from index.html by the Hero's
+                               .hero-overlay div, which was removed here during an earlier,
+                               abandoned hero-background-video experiment and was deliberately
+                               NOT carried over when the About-section video was promoted above —
+                               don't blind-diff this file into index.html; check what's actually
+                               being promoted first.
 CLAUDE.md                   — this file
 .gitignore                  — excludes .DS_Store, .wrangler/, .claude/
 images/
@@ -114,7 +115,7 @@ RAW/
 ## Site sections (in order)
 1. **Header** — sticky, logo image (`RAW/Favicon Pannochka_new.png`), nav links, PL/UA toggle, mobile hamburger
 2. **Hero** — full-screen exterior photo, headline, two CTA buttons, hours + address chips
-3. **About** (`#about`) — store description mentioning "produkty z Ukrainy i Wschodu", opening poster image
+3. **About** (`#about`) — store description mentioning "produkty z Ukrainy i Wschodu", grand-opening video (`#about-video`, `images/Videos/video.mp4`, autoplay/muted/loop/playsinline/controls, 0.9x playbackRate) in place of the old static poster image
 4. **Assortment** (`#assortment`) — 5 category cards (fish, meat, drinks, sweets, preserves) + illustrated menu image + 9-card brand/product gallery grid (`.prod-card`, lightbox-enabled via `openLb()`, captions translated via `T.*.assort.brands`)
 5. **Gallery** (`#gallery`) — one unified masonry grid, `grid grid-cols-2 md:grid-cols-3`: original 4 curated photos (exterior/customers/closeup, `RAW/`) + a wide "shelf aisle" establishing banner + 16 real product/case-closeup photos (both `images/Interior/` batches merged together) + a `col-span-2` "coming soon" teaser card (`.gal-teaser`, soft green→cream→gold gradient, clock icon, `id="g-teaser"`, translated via `T.*.gallery.teaser`) that exactly fills the trailing grid gap after the last photo + a wide "full fridge" closing banner (22 photos total). Everything but the teaser card uses `.gal-wrap`/`.gal-img`/`.gal-zoom-icon` hover + `.reveal` scroll-animation, lightbox-enabled via `openLb()`; the teaser card is deliberately not clickable (no `onclick`/lightbox — it's not a photo) and uses its own `.gal-teaser:hover` lift instead. ⚠️ If the photo count in this grid ever changes, recheck whether the teaser's `col-span-2` still exactly closes the gap before the closing banner — the span was hand-calculated for a specific item count/order, not automatic. (A separate "Nasze wnętrze" section briefly existed for the second photo batch; client asked to merge it back into Gallery, so there is currently only one gallery section on the page.)
 6. **Contact** (`#contact`) — address, email, social links (FB + IG), hours, Google Maps iframe, "Get Directions" CTA, and a "Leave a Review" glass card (gold `.btn-sheen` button + QR code, `images/qr-review.png`, `id="ct-review-*"`)
