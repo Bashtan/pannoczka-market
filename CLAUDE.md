@@ -25,12 +25,13 @@ test-video.html             — ⚠️ SANDBOX ONLY, not linked from the live si
                                first hero-background-video experiment); the "ВІДКРИТТЯ! 16
                                СЕРПНЯ" grand-opening poster in the About section
                                (RAW/viber_image_2026-08-16_12.jpg) is replaced by an inline
-                               <video controls autoplay muted playsinline> of
-                               images/Videos/store-video.mp4, boxed in an aspect-[3/2] +
-                               object-cover container to match the poster's shape/rounded
-                               corners/shadow. Only fold any of this into index.html once the
-                               client explicitly confirms — keep the two files in sync
-                               deliberately, not by habit.
+                               <video id="about-video" controls autoplay muted loop playsinline>
+                               of images/Videos/video.mp4, boxed in an aspect-[3/2] + object-cover
+                               container to match the poster's shape/rounded corners/shadow. A
+                               small inline <script> right after the tag sets playbackRate = 0.9
+                               (and re-asserts it on loadedmetadata) so the clip plays 10% slower.
+                               Only fold any of this into index.html once the client explicitly
+                               confirms — keep the two files in sync deliberately, not by habit.
 CLAUDE.md                   — this file
 .gitignore                  — excludes .DS_Store, .wrangler/, .claude/
 images/
@@ -42,7 +43,8 @@ images/
   twitter-card.jpg          — 1200×600
   qr-review.png             — 3000×3000, QR code (branded with logo) for the Google review link, in the Contact section's review card (`id="ct-review-cta"` block). Decodes to a qrco.de short link that redirects → g.page review link → Google's write-review page for this business, verified with zbarimg.
   Videos/
-    store-video.mp4         — client-supplied store tour clip, h264/aac, 320×568 (portrait), 18.8s, ~1.7MB.
+    video.mp4               — client-supplied store tour clip (higher-quality re-export, replaced the
+                               original store-video.mp4), h264/aac, 720×1280 (portrait), 18.7s, ~6.3MB.
                                Used ONLY in test-video.html (see above) — not yet in the live index.html.
   Asortyment/               — brand/product gallery source photos (promo banner images, client-supplied)
     Pannoczka19.jpg         — Torchin sauces
