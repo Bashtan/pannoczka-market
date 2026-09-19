@@ -496,7 +496,7 @@
           <span class="text-3xl cat-icon">🥤</span>
           <div>
             <h3 class="font-bold text-[#1a5c2a] mb-1" id="c-drink-t">Napoje</h3>
-            <p class="text-gray-500 text-sm" id="c-drink-d">Szeroki wybór napojów: wody, soki, napoje gazowane i inne.</p>
+            <p class="text-gray-500 text-sm" id="c-drink-d">Szeroki wybór napojów: wody, soki, napoje gazowane, różne napoje energetyczne i alkohol.</p>
           </div>
         </div>
         <div class="cat-card flex items-start gap-4 p-5 reveal" style="transition-delay:180ms">
@@ -875,9 +875,21 @@
         <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
       </div>
 
-      <!-- Coming soon teaser – fills the trailing grid gap -->
-      <div class="col-span-2 gal-teaser rounded-xl reveal flex flex-col items-center justify-center text-center gap-3 px-6"
-           style="height:200px; transition-delay:60ms; background:linear-gradient(135deg, var(--green-pale) 0%, var(--cream) 55%, var(--gold-light) 140%); border:1px solid rgba(196,147,74,.3);">
+      <!-- Alcohol & energy drinks – new assortment -->
+      <div class="col-span-1 gal-wrap rounded-xl reveal" style="transition-delay:60ms">
+        <img
+          src="images/Asortyment/Alkohol1.jpg"
+          alt="Alkohol i napoje energetyczne w ofercie"
+          class="gal-img w-full object-cover rounded-xl"
+          style="height:200px;"
+          onclick="openLb(this.src)"
+        />
+        <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
+      </div>
+
+      <!-- Coming soon teaser – fills the trailing grid gap (⚠️ col-span-1, hand-calculated for 17 single-cell photos above it — recheck if the count changes again) -->
+      <div class="col-span-1 gal-teaser rounded-xl reveal flex flex-col items-center justify-center text-center gap-3 px-6"
+           style="height:200px; transition-delay:120ms; background:linear-gradient(135deg, var(--green-pale) 0%, var(--cream) 55%, var(--gold-light) 140%); border:1px solid rgba(196,147,74,.3);">
         <svg class="h-7 w-7 text-[#c4934a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
         </svg>
@@ -1114,7 +1126,7 @@ const T = {
       label: 'Asortyment', title: 'Co znajdziesz w naszym sklepie?',
       fish:  { t:'Ryby i owoce morza',       d:'Świeże i mrożone ryby, łosoś, śledź, owoce morza – prosto z Ukrainy i nie tylko.' },
       meat:  { t:'Mięso, wędliny i słonina', d:'Tradycyjne wędliny, sało (słonina wieprzowa), kiełbasy i inne wyroby mięsne.' },
-      drink: { t:'Napoje',                   d:'Szeroki wybór napojów: wody, soki, napoje gazowane i inne.' },
+      drink: { t:'Napoje',                   d:'Szeroki wybór napojów: wody, soki, napoje gazowane, różne napoje energetyczne i alkohol.' },
       sweet: { t:'Słodycze i mrożonki',      d:'Cukierki, czekolady, ptasie mleczko, lody i bogaty wybór mrożonek.' },
       pres:  { t:'Przetwory domowe',         d:'Ogórki kiszone, konfitury, ikra bakłażanowa, kapusta kiszona i inne domowe przetwory.' },
       brands: {
@@ -1169,7 +1181,7 @@ const T = {
       label: 'Асортимент', title: 'Що знайдеш у нашому магазині?',
       fish:  { t:'Риба і морепродукти',       d:'Свіжа і морожена риба, лосось, оселедець, морепродукти – прямо з України та не тільки.' },
       meat:  { t:'М\'ясо, ковбаси та сало',   d:'Традиційні ковбаси, сало, шинка та інші м\'ясні вироби.' },
-      drink: { t:'Напої',                     d:'Широкий вибір напоїв: вода, соки, газовані напої та інше.' },
+      drink: { t:'Напої',                     d:'Широкий вибір напоїв: вода, соки, газовані напої, різноманітні енергетики та алкоголь.' },
       sweet: { t:'Солодощі та заморозка',     d:'Цукерки, шоколад, пташине молоко, морозиво і великий вибір заморожених продуктів.' },
       pres:  { t:'Домашні консерви',          d:'Мариновані огірки, варення, баклажанна ікра, квашена капуста та інші домашні консерви.' },
       brands: {
