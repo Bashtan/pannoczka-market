@@ -260,6 +260,36 @@
       transform: scale(1.08);
     }
 
+    /* ── alcohol & energy drinks slider (Assortment) ── */
+    .alc-track {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .alc-track::-webkit-scrollbar { display: none; }
+    .alc-slide { scroll-snap-align: start; }
+    .alc-nav-btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 42px; height: 42px; border-radius: 9999px;
+      display: flex; align-items: center; justify-content: center;
+      background: #fff; color: var(--green-dark);
+      box-shadow: 0 4px 16px rgba(0,0,0,.2);
+      transition: background .25s ease, color .25s ease, transform .25s ease, opacity .25s ease;
+      z-index: 10;
+    }
+    .alc-nav-btn:hover { background: var(--green-dark); color: #fff; transform: translateY(-50%) scale(1.08); }
+    .alc-nav-btn:disabled { opacity: .35; pointer-events: none; }
+    .alc-nav-prev { left: -6px; }
+    .alc-nav-next { right: -6px; }
+    @media (min-width: 768px) { .alc-nav-prev { left: -20px; } .alc-nav-next { right: -20px; } }
+    .alc-dot { width: 8px; height: 8px; border-radius: 9999px; background: rgba(196,147,74,.35); transition: all .25s ease; }
+    .alc-dot.is-active { width: 22px; background: var(--wood); }
+
     /* ── lang toggle active state ── */
     .lang-btn.active {
       background: #fff;
@@ -602,6 +632,82 @@
       </div>
     </div>
 
+    <!-- Alcohol & energy drinks slider -->
+    <div class="mt-16">
+      <div class="text-center mb-8 reveal">
+        <h3 class="font-display text-xl md:text-2xl font-bold text-[#1a5c2a]" id="as-alc-title">Wysokiej jakości wódka, różne wina i napoje energetyczne</h3>
+      </div>
+
+      <div class="relative reveal px-8 md:px-10">
+        <button type="button" class="alc-nav-btn alc-nav-prev" onclick="alcSliderMove(-1)" aria-label="Poprzedni produkt">
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        </button>
+        <button type="button" class="alc-nav-btn alc-nav-next" onclick="alcSliderMove(1)" aria-label="Następny produkt">
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </button>
+
+        <div class="alc-track" id="alc-track">
+
+          <div class="alc-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
+            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+              <img src="images/Asortyment/Alkohol/A1.jpg" alt="Nalewka Wiśniówka Morosha" class="w-full aspect-square object-cover" />
+              <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
+                <p class="text-white text-xs md:text-sm font-bold leading-tight" id="as-alc-1">Nalewka Wiśniówka Morosha</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="alc-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
+            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+              <img src="images/Asortyment/Alkohol/A2.jpg" alt="Wódka Khortytsa Platinum" class="w-full aspect-square object-cover" />
+              <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
+                <p class="text-white text-xs md:text-sm font-bold leading-tight" id="as-alc-2">Wódka Khortytsa Platinum</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="alc-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
+            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+              <img src="images/Asortyment/Alkohol/A3.jpg" alt="Wódka Morosha Carpathian" class="w-full aspect-square object-cover" />
+              <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
+                <p class="text-white text-xs md:text-sm font-bold leading-tight" id="as-alc-3">Wódka Morosha Carpathian</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="alc-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
+            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+              <img src="images/Asortyment/Alkohol/A4.jpg" alt="Wódka Sinevir Morosha" class="w-full aspect-square object-cover" />
+              <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
+                <p class="text-white text-xs md:text-sm font-bold leading-tight" id="as-alc-4">Wódka Sinevir Morosha</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="alc-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
+            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+              <img src="images/Asortyment/Alkohol/A5.jpg" alt="Wódka Morosha Carpathian 1L" class="w-full aspect-square object-cover" />
+              <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
+                <p class="text-white text-xs md:text-sm font-bold leading-tight" id="as-alc-5">Wódka Morosha Carpathian 1L</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="alc-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
+            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+              <img src="images/Asortyment/Alkohol/A6.jpg" alt="Wódka Khortytsa Premium" class="w-full aspect-square object-cover" />
+              <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
+                <p class="text-white text-xs md:text-sm font-bold leading-tight" id="as-alc-6">Wódka Khortytsa Premium</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="flex justify-center gap-2 mt-6" id="alc-dots"></div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -875,11 +981,11 @@
         <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
       </div>
 
-      <!-- Alcohol & energy drinks – new assortment -->
+      <!-- Alcohol & energy drinks – soft drinks / beer / energy fridge -->
       <div class="col-span-1 gal-wrap rounded-xl reveal" style="transition-delay:60ms">
         <img
-          src="images/Asortyment/Alkohol1.jpg"
-          alt="Alkohol i napoje energetyczne w ofercie"
+          src="images/Asortyment/Alkohol/Alcohol2.jpg"
+          alt="Chłodnia z napojami, piwem i napojami energetycznymi REVO"
           class="gal-img w-full object-cover rounded-xl"
           style="height:200px;"
           onclick="openLb(this.src)"
@@ -887,8 +993,44 @@
         <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
       </div>
 
-      <!-- Coming soon teaser – fills the trailing grid gap (⚠️ col-span-1, hand-calculated for 17 single-cell photos above it — recheck if the count changes again) -->
-      <div class="col-span-1 gal-teaser rounded-xl reveal flex flex-col items-center justify-center text-center gap-3 px-6"
+      <!-- Alcohol & energy drinks – wine & prosecco shelf -->
+      <div class="col-span-1 gal-wrap rounded-xl reveal" style="transition-delay:120ms">
+        <img
+          src="images/Asortyment/Alkohol/Alkohol3.jpg"
+          alt="Regał z winami i winem musującym"
+          class="gal-img w-full object-cover rounded-xl"
+          style="height:200px;"
+          onclick="openLb(this.src)"
+        />
+        <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
+      </div>
+
+      <!-- Alcohol & energy drinks – wine & prosecco shelf, continued -->
+      <div class="col-span-1 gal-wrap rounded-xl reveal" style="transition-delay:0ms">
+        <img
+          src="images/Asortyment/Alkohol/Alkohol4.jpg"
+          alt="Regał z winem musującym Fragolino i Lambrusco"
+          class="gal-img w-full object-cover rounded-xl"
+          style="height:200px;"
+          onclick="openLb(this.src)"
+        />
+        <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
+      </div>
+
+      <!-- Alcohol & energy drinks – vodka shelf -->
+      <div class="col-span-1 gal-wrap rounded-xl reveal" style="transition-delay:60ms">
+        <img
+          src="images/Asortyment/Alkohol/Alkohol5.jpg"
+          alt="Regał z wódką – Khortytsa, Morosha, Sinevir"
+          class="gal-img w-full object-cover rounded-xl"
+          style="height:200px;"
+          onclick="openLb(this.src)"
+        />
+        <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
+      </div>
+
+      <!-- Coming soon teaser – fills the trailing grid gap (⚠️ col-span-2 md:col-span-1, hand-calculated for 20 single-cell photos above it — recheck if the count changes again) -->
+      <div class="col-span-2 md:col-span-1 gal-teaser rounded-xl reveal flex flex-col items-center justify-center text-center gap-3 px-6"
            style="height:200px; transition-delay:120ms; background:linear-gradient(135deg, var(--green-pale) 0%, var(--cream) 55%, var(--gold-light) 140%); border:1px solid rgba(196,147,74,.3);">
         <svg class="h-7 w-7 text-[#c4934a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -1141,6 +1283,15 @@ const T = {
         halva:     'Chałwa słonecznikowa Zolotoy Vek',
         cornsticks:'Chrupki kukurydziane Salut – salami, bekon, grzyby',
       },
+      alcohol: {
+        title: 'Wysokiej jakości wódka, różne wina i napoje energetyczne',
+        c1: 'Nalewka Wiśniówka Morosha',
+        c2: 'Wódka Khortytsa Platinum',
+        c3: 'Wódka Morosha Carpathian',
+        c4: 'Wódka Sinevir Morosha',
+        c5: 'Wódka Morosha Carpathian 1L',
+        c6: 'Wódka Khortytsa Premium',
+      },
     },
     gallery: {
       label: 'Galeria', title: 'Przekonaj się sam',
@@ -1195,6 +1346,15 @@ const T = {
         noodles:   'Локшина швидкого приготування Мівіна',
         halva:     'Соняшникова халва «Золотий Вік»',
         cornsticks:'Кукурудзяні палички Salut – салямі, бекон, гриби',
+      },
+      alcohol: {
+        title: 'Якісна горілка, різноманітне вино та енергетики',
+        c1: 'Настоянка Вишнівка Морошка',
+        c2: 'Горілка Khortytsa Platinum',
+        c3: 'Горілка Morosha Carpathian',
+        c4: 'Горілка Sinevir Morosha',
+        c5: 'Горілка Morosha Carpathian 1Л',
+        c6: 'Горілка Khortytsa Premium',
       },
     },
     gallery: {
@@ -1266,6 +1426,13 @@ function setLang(lang) {
   setText('pg-noodles',   t.assort.brands.noodles);
   setText('pg-halva',     t.assort.brands.halva);
   setText('pg-cornsticks',t.assort.brands.cornsticks);
+  setText('as-alc-title', t.assort.alcohol.title);
+  setText('as-alc-1', t.assort.alcohol.c1);
+  setText('as-alc-2', t.assort.alcohol.c2);
+  setText('as-alc-3', t.assort.alcohol.c3);
+  setText('as-alc-4', t.assort.alcohol.c4);
+  setText('as-alc-5', t.assort.alcohol.c5);
+  setText('as-alc-6', t.assort.alcohol.c6);
 
   // Gallery
   setText('g-label', t.gallery.label);
@@ -1331,6 +1498,62 @@ function closeLb() {
   document.body.style.overflow = '';
 }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
+
+// ── Alcohol & energy drinks slider ────────────────────────────────────────────
+(function () {
+  const track = document.getElementById('alc-track');
+  if (!track) return;
+  const slides = [...track.querySelectorAll('.alc-slide')];
+  const dotsWrap = document.getElementById('alc-dots');
+  const prevBtn = document.querySelector('.alc-nav-prev');
+  const nextBtn = document.querySelector('.alc-nav-next');
+
+  const dots = slides.map((_, i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'alc-dot';
+    b.setAttribute('aria-label', 'Zdjęcie ' + (i + 1));
+    b.addEventListener('click', () => {
+      track.scrollTo({ left: slides[i].offsetLeft - track.offsetLeft, behavior: 'smooth' });
+    });
+    dotsWrap.appendChild(b);
+    return b;
+  });
+
+  function step() {
+    const gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || 16);
+    return slides[0].getBoundingClientRect().width + gap;
+  }
+
+  function setActive(i) {
+    dots.forEach((d, j) => d.classList.toggle('is-active', j === i));
+  }
+
+  let ticking = false;
+  function onScroll() {
+    const max = track.scrollWidth - track.clientWidth;
+    // Near the right edge the last slide(s) often can't scroll fully flush
+    // (not enough remaining scroll room), so plain division under-counts —
+    // snap to the last dot whenever we've hit the scrollable end.
+    const i = track.scrollLeft >= max - 4
+      ? slides.length - 1
+      : Math.min(slides.length - 1, Math.max(0, Math.round(track.scrollLeft / step())));
+    setActive(i);
+    if (prevBtn) prevBtn.disabled = track.scrollLeft <= 4;
+    if (nextBtn) nextBtn.disabled = track.scrollLeft >= max - 4;
+    ticking = false;
+  }
+  track.addEventListener('scroll', () => {
+    if (!ticking) { requestAnimationFrame(onScroll); ticking = true; }
+  }, { passive: true });
+
+  setActive(0);
+  onScroll();
+
+  window.alcSliderMove = function (dir) {
+    track.scrollBy({ left: dir * step(), behavior: 'smooth' });
+  };
+})();
 
 // ── Scroll reveal (fade + slide-up) ────────────────────────────────────────
 // Runs once at load; setLang() only swaps textContent/innerHTML on the ids
