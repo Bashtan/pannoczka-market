@@ -47,64 +47,81 @@ images/
     video.mp4               — client-supplied store tour clip (higher-quality re-export, replaced the
                                original store-video.mp4), h264/aac, 720×1280 (portrait), 18.7s, ~6.3MB.
                                Used ONLY in test-video.html (see above) — not yet in the live index.html.
-  Asortyment/               — brand/product gallery source photos (promo banner images, client-supplied)
-    Pannoczka19.jpg         — Torchin sauces
-    Pannozcka18.jpg         — Lovare tea (note: file has "Pannozcka" typo, not "Pannoczka")
-    Pannoczka17.jpg         — kids' snacks selection
-    Pannoczka16.jpg         — Natakhtari lemonade (single bottle)
-    Pannoczka15.jpg         — Natakhtari lemonade (6-flavor lineup)
-    Pannoczka14.jpg         — Roshen chocolate
-    Pannozcka13.jpg         — Mivina instant noodles (note: "Pannozcka" typo)
-    Pannoczka12.jpg         — sunflower halva
-    Pannoczka11.jpg         — Salut corn sticks (salami/bacon/mushroom)
-    ⚠️ filenames are sequential (11–19) but do NOT map to brands in that order — see index.html assortment gallery for the actual src per card if these ever need reordering
-    Alkohol/                — alcohol & energy drinks assortment photos (client-supplied), all
-                               square 1280×1280. Replaces the original single Alkohol1.jpg (now
-                               deleted — do not re-add references to it).
-      A1.jpg .. A6.jpg      — individual bottle "hero shot" product photos (blurred shelf
-                               background), used in the Assortment section's alcohol slider
-                               (#alc-track): A1 Morosha Wiśniówka, A2 Khortytsa Platinum,
-                               A3 Morosha Carpathian 350ml, A4 Sinevir Morosha, A5 Morosha
-                               Carpathian 1L, A6 Khortytsa Premium. Captions live in
-                               T.*.assort.alcohol.c1..c6.
-      Alcohol2.jpg          — soft drinks/beer/energy (REVO) fridge shelf, wide candid shot.
-                               ⚠️ spelled with "c" (not "Alkohol2") — inconsistent with its 3
-                               siblings below; verified on disk, don't "fix" the spelling without
-                               renaming the actual file first.
-      Alkohol3.jpg          — wine & prosecco shelf (Koblevo, Kazbek Peak, Mikado), near sweets.
-      Alkohol4.jpg          — wine & prosecco shelf, continued (Fragolino, Lambrusco, Oreanda).
-      Alkohol5.jpg          — vodka shelf with price tags + "ALKOHOL SZKODZI ZDROWIU" sign.
-      ⚠️ Alcohol2/Alkohol3/Alkohol4/Alkohol5 are used in the Gallery grid (#gallery), NOT the
-      Assortment slider — despite living in this folder alongside A1-A6.
-  Interior/                 — real store/product photos (client-supplied), used in the expanded Gallery section
-    2026-08-28 11.13.02.jpg — shelf aisle (wide "establishing" banner, top of the new grid)
-    2026-08-28 11.12.37.jpg — cakes/desserts display case
-    2026-08-28 11.12.54.jpg — smoked fish counter
-    2026-08-28 11.14.03.jpg — sunflower seeds shelf
-    2026-08-28 11.13.23.jpg — sausages (Saltowski) deli case
-    2026-08-28 11.14.09.jpg — frozen seafood (shrimp / crab sticks)
-    2026-08-28 11.13.35.jpg — sausage close-up ("Лікарська")
-    2026-08-28 11.14.17.jpg — frozen dumplings / nuggets / ice cream
-    2026-08-28 11.13.45.jpg — deli counter, hams and sausages
-    2026-08-28 11.13.57.jpg — full fridge, wide shot (wide closing banner)
-    viber_image_2026-08-28_14-33-18-656.jpg — chips/snacks shelf (Nasze wnętrze section)
-    viber_image_2026-08-28_14-33-19-028.jpg — frozen seafood (shrimp / surimi sticks)
-    viber_image_2026-08-28_14-33-19-299.jpg — frozen dumplings / nuggets / ice cream
-    viber_image_2026-08-28_14-33-20-474.jpg — deli counter, fish pastes and caviar spreads
-    viber_image_2026-08-28_14-33-21-152.jpg — Sofia roladki cake box, fresh delivery
-    viber_image_2026-08-28_14-33-21-454.jpg — dried fish rack
-    viber_image_2026-08-28_14-33-21-931.jpg — smoked fish counter, close-up
-    viber_image_2026-08-28_14-33-22-786.jpg — Eskimos ice cream rolls in freezer
-    ⚠️ these 8 are a separate later batch from the 10 above (added same folder, different day/session), but as of the "merge galleries" edit both batches are used together inside `#gallery` — there is no separate `#interior` section anymore (it was tried, then folded back in per client request)
+  Asortyment/               — ⚠️ SOLE source of truth for the Assortment (#assortment) AND Gallery
+                               (#gallery) sections' photos, as of the "complete photo refresh" pass.
+                               Every image in these two sections comes from here (root) or Alkohol/
+                               below — nothing else. Before adding/removing a photo in either
+                               section, `ls` this folder (+ Alkohol/) first — don't trust a filename
+                               the client types in chat; check the real name/extension on disk (this
+                               has bitten us before: the client wrote "Alcohol2/3/4/5" but the actual
+                               files were inconsistently spelled, and separately once said "images/"
+                               when the real path was "images/Asortyment/").
+                               Two visual styles live side by side here, and the site deliberately
+                               displays them differently:
+                                 • "clean shot" style — a single/few products on a plain or blurred
+                                   shelf background, minimal/no text baked into the image. These go in
+                                   the ASSORTMENT masonry WITH a small caption overlay (site supplies
+                                   the label, translated via T.*.assort.brands / T.*.assort.alcohol).
+                                 • "promo poster" style — a full illustrated flyer with the Pannoczka
+                                   girl-mascot logo, a big bold headline, and marketing copy already
+                                   baked into the graphic. These go in the GALLERY masonry with NO
+                                   caption overlay (would be redundant — the poster speaks for itself).
+                               If a new photo arrives, look at it before deciding where it goes —
+                               don't assume by filename or folder alone.
+    Pannoczka19.jpg         — Torchin sauces — clean shot — Assortment (`pg-sauces`)
+    Pannozcka18.jpg         — Lovare tea (note: file has "Pannozcka" typo, not "Pannoczka") — clean shot — Assortment (`pg-tea`)
+    Pannoczka17.jpg         — kids' snacks selection — clean shot — Assortment (`pg-kids`)
+    Pannoczka16.jpg         — Natakhtari lemonade (single bottle) — clean shot — Assortment (`pg-lemonade1`)
+    Pannoczka15.jpg         — Natakhtari lemonade (6-flavor lineup) — clean shot — Assortment (`pg-lemonade2`)
+    Pannoczka14.jpg         — Roshen chocolate — clean shot — Assortment (`pg-chocolate`)
+    Pannozcka13.jpg         — Mivina instant noodles (note: "Pannozcka" typo) — clean shot — Assortment (`pg-noodles`)
+    Pannoczka12.jpg         — sunflower halva — clean shot — Assortment (`pg-halva`)
+    Pannoczka11.jpg         — Salut corn sticks (salami/bacon/mushroom) — clean shot — Assortment (`pg-cornsticks`)
+    ⚠️ the 9 above are sequential (11–19) but do NOT map to brands in that order — see index.html for the actual src per card if these ever need reordering
+    Baguette1.jpg           — Flint "baguette" croutons poster (4 flavors) — promo poster — Gallery
+    Flint1.jpg              — Flint Crisps "MEGA PACK" poster (5 flavors) — promo poster — Gallery
+    GoldenShips.jpg         — Golden Chips potato chips poster (4 flavors) — promo poster — Gallery
+    GotoshokVeres.jpg       — Veres canned peas + sweet corn poster — promo poster — Gallery
+    Grinky1.jpg             — "До бочкового" rye-wheat rusks poster (3 flavors) — promo poster — Gallery
+    Kontik.jpg              — Super Kontik sandwich cookies poster (3 flavors) — promo poster — Gallery
+    MASLO1.jpg              — Ферма chocolate butter (62.5% fat) poster — promo poster — Gallery
+    Oil1.jpg                — Olejarnia Kozak home sunflower oil poster — promo poster — Gallery
+    Pelmeni.jpg             — Ukrainian homemade pelmeni poster (kids/adults) — promo poster — Gallery
+    Salo.jpg                — smoked white salo + smoked pork belly poster — promo poster — Gallery
+    Soda.jpg                — vinegar (Zelta Saule) + baking soda (Deko) poster — promo poster — Gallery
+    TavernChips.jpg         — Flint Tavern potato chips poster (3 flavors) — promo poster — Gallery
+    Alkohol/                — alcohol & energy-drinks assortment photos (client-supplied), all
+                               square (1254–1280px). Same clean-shot/promo-poster split as above.
+      A1.jpg .. A6.jpg      — individual bottle "hero shot" product photos, clean-shot style — used
+                               in the Assortment masonry (captions in T.*.assort.alcohol.c1..c6): A1
+                               Morosha Wiśniówka, A2 Khortytsa Platinum, A3 Morosha Carpathian
+                               350ml, A4 Sinevir Morosha, A5 Morosha Carpathian 1L, A6 Khortytsa
+                               Premium.
+      A11.jpg               — "АЛКОГОЛЬ В ПРОДАЖІ" full promo poster (Martini, Mionetto, Morosha, Sinevir) — promo poster — Gallery
+      AA12.jpg              — "Wódka Morosha – czysty ukraiński charakter" promo poster — promo poster — Gallery
+      Alkohol13.jpg         — REVO Alco Energy cans poster (black/mango/cherry/silver, 8.5%) — promo poster — Gallery
+      Alkohol14.jpg         — Shake Cocktails poster (Bora Bora/Mojito/Sex on the Beach) — promo poster — Gallery
+      ⚠️ the original Alkohol1.jpg (single promo graphic) and the later Alcohol2/Alkohol3/4/5.jpg
+      (candid shelf photos) that both briefly lived in this folder are gone — client deleted them and
+      replaced with the 10 files above during the photo refresh. If you see either name mentioned in
+      old chat history or an old commit message, they no longer exist; don't re-add references.
+  Interior/                 — ⚠️ RETIRED from the site as of the "complete photo refresh" — every
+                               photo here (both batches, 18 files, store/product candids) has been
+                               removed from index.html's Gallery section per the client's instruction
+                               to source Assortment/Gallery photos ONLY from images/Asortyment/ (+
+                               Alkohol/). Files are left on disk untouched (client didn't ask to
+                               delete them, only to stop displaying them), unreferenced anywhere in
+                               index.html or test-video.html. Don't reintroduce them without asking —
+                               the client may have moved on to the new promo-poster photos for good.
 RAW/
   Favicon Pannochka_new.png — current logo (used in navbar + favicons)
   Favicon Pannochka.jpeg    — old logo (do not use)
-  viber_image_2026-08-16_16-58-06-361.jpg  — store exterior (hero background)
-  viber_image_2026-08-16_12.jpg            — opening promo poster (About section)
-  Gemini_Generated_Image_l0txpll0txpll0tx (1).jpeg  — illustrated menu (Assortment)
-  viber_image_2026-08-16_16-15-06-686.jpg  — interior photo 1 (Gallery)
-  viber_image_2026-08-16_16-15-11-515.jpg  — interior photo 2 (Gallery)
-  viber_image_2026-08-16_16-15-13-981.jpg  — salo & pickles closeup (Gallery)
+  viber_image_2026-08-16_16-58-06-361.jpg  — store exterior (hero background) — still in use (Hero)
+  viber_image_2026-08-16_12.jpg            — opening promo poster — no longer referenced (About section now shows the video instead; see index.html entry above)
+  Gemini_Generated_Image_l0txpll0txpll0tx (1).jpeg  — illustrated menu — ⚠️ RETIRED, same photo-refresh pass as Interior/ above (was in Assortment, not sourced from images/Asortyment/, so removed; category cards now stand alone without it)
+  viber_image_2026-08-16_16-15-06-686.jpg  — interior photo 1 — ⚠️ RETIRED (was in Gallery, same reason)
+  viber_image_2026-08-16_16-15-11-515.jpg  — interior photo 2 — ⚠️ RETIRED (was in Gallery, same reason)
+  viber_image_2026-08-16_16-15-13-981.jpg  — salo & pickles closeup — ⚠️ RETIRED (was in Gallery, same reason)
 ```
 
 ## index.html architecture
@@ -113,6 +130,7 @@ RAW/
 - Every text element that changes on language switch has a unique `id` (e.g. `ct-addr-l`, `a-title`, etc.)
 - To add new translatable text: add the string to both `T.pl` and `T.ua`, add the element with an `id`, call `setText('id', t.key)` inside `setLang()`
 - Scroll-reveal: any element with class `.reveal` fades/slides in via a vanilla-JS `IntersectionObserver` (adds `.is-visible`); respects `prefers-reduced-motion` and has a no-JS/no-IO fallback. Stagger multiple items in the same row with inline `style="transition-delay:Nms"`. Fonts: Playfair Display (headings, via one Google Fonts `<link>`) + the original Georgia stack (body).
+- Photo grids (Assortment + Gallery masonries): CSS multi-column masonry — `columns-2 sm:columns-3 lg:columns-4` on the container, each photo wrapped in a plain `break-inside-avoid mb-4` div, images at their natural aspect ratio (no forced `aspect-*`/fixed `height`). This is deliberate: the site's earlier fixed CSS-Grid galleries (`grid-cols-2 md:grid-cols-3` with hand-placed `row-span`/`col-span` items) needed the exact item count and order hand-calculated every time a photo was added or removed, and got it wrong more than once (see git history — several commits exist solely to fix a gap that appeared after a photo-count change). Masonry columns don't have that failure mode: items just flow, so adding/removing photos never needs any span/gap math. Prefer masonry over a fixed grid for any future photo section here unless there's a specific reason to pin exact positions (e.g. a tall "establishing" photo that must anchor a corner).
 
 ## Store details (never change without client confirmation)
 - **Address:** ul. Folwarecka 2, 44-240 Żory, Polska
@@ -134,8 +152,8 @@ RAW/
 1. **Header** — sticky, logo image (`RAW/Favicon Pannochka_new.png`), nav links, PL/UA toggle, mobile hamburger
 2. **Hero** — full-screen exterior photo, headline, two CTA buttons, hours + address chips
 3. **About** (`#about`) — store description mentioning "produkty z Ukrainy i Wschodu", grand-opening video (`#about-video`, `images/Videos/video.mp4`, autoplay/muted/loop/playsinline/controls, 0.9x playbackRate) in place of the old static poster image
-4. **Assortment** (`#assortment`) — 5 category cards (fish, meat, drinks, sweets, preserves) + illustrated menu image + 9-card brand/product gallery grid (`.prod-card`, lightbox-enabled via `openLb()`, captions translated via `T.*.assort.brands`). The drinks card (`c-drink-d` / `T.*.assort.drink.d`) mentions alcohol and energy drinks alongside water/juice/soda. Below the brand grid is a dedicated **alcohol & energy drinks slider** (`#alc-track`, 6 slides from `images/Asortyment/Alkohol/A1.jpg`..`A6.jpg`, `aspect-square` `.prod-card`s, no cropping needed since the source photos are already 1:1): a hand-rolled vanilla-JS carousel (no library) built on native `overflow-x:auto` + `scroll-snap-type:x mandatory` — real horizontal scroll gives free touch/trackpad swipe, with `.alc-nav-btn` prev/next buttons (`alcSliderMove()`, disabled at either end) and `.alc-dot` position dots layered on top, both driven by one `scroll` listener (rAF-throttled) that derives the active index from `scrollLeft / (slide width + gap)` — ⚠️ special-cased to snap to the *last* dot whenever `scrollLeft` has hit the scrollable max, because with ~3 slides visible at once the last 1-2 slides can't scroll fully flush-left (not enough remaining scroll room) and plain division under-counts there; don't "simplify" that check away. Heading + captions translated via `T.*.assort.alcohol` (`title`, `c1`..`c6`).
-5. **Gallery** (`#gallery`) — one unified masonry grid, `grid grid-cols-2 md:grid-cols-3`: original 4 curated photos (exterior/customers/closeup, `RAW/`) + a wide "shelf aisle" establishing banner + 20 real product/case-closeup photos (both `images/Interior/` batches + `images/Asortyment/Alkohol/Alcohol2.jpg`/`Alkohol3.jpg`/`Alkohol4.jpg`/`Alkohol5.jpg`, wide shelf photos of the alcohol/energy-drinks assortment) + a `col-span-2 md:col-span-1` "coming soon" teaser card (`.gal-teaser`, soft green→cream→gold gradient, clock icon, `id="g-teaser"`, translated via `T.*.gallery.teaser`) that exactly fills the trailing grid gap after the last photo + a wide "full fridge" closing banner (26 photos total). Everything but the teaser card uses `.gal-wrap`/`.gal-img`/`.gal-zoom-icon` hover + `.reveal` scroll-animation, lightbox-enabled via `openLb()`; the teaser card is deliberately not clickable (no `onclick`/lightbox — it's not a photo) and uses its own `.gal-teaser:hover` lift instead. ⚠️ If the photo count in this grid ever changes, recheck the teaser's span at BOTH breakpoints independently with real `getBoundingClientRect()` measurements, not by eyeballing it — they don't always want the same span (right now mobile needs `col-span-2` full-width since 20 photos divide evenly into 2-col rows with nothing left to fill, while desktop needs `col-span-1` since 20 mod 3 leaves a 1-cell gap; earlier, with 17 photos, both breakpoints happened to want `col-span-1`, which was a coincidence, not a rule). (A separate "Nasze wnętrze" section briefly existed for the second photo batch; client asked to merge it back into Gallery, so there is currently only one gallery section on the page.)
+4. **Assortment** (`#assortment`) — label/title header, then a standalone **category-card grid** (`sm:grid-cols-2 lg:grid-cols-3`, 5 cards: fish, meat, drinks, sweets, preserves — no image alongside them any more, see photo-refresh note below), then the **product showcase masonry** (`columns-2 sm:columns-3 lg:columns-4`, heading `as-brands-title` / `T.*.assort.brands.title`): 15 "clean shot" photos — the 9 `images/Asortyment/Pannoczka*.jpg` brand photos (captions via `T.*.assort.brands.*`, ids `pg-*`) interleaved with the 6 `images/Asortyment/Alkohol/A1-A6.jpg` bottle shots (captions via `T.*.assort.alcohol.c1..c6`, ids `as-alc-1..6`) — each a `.prod-card` (rounded, shadow, hover-lift, gradient caption overlay), lightbox-enabled via `openLb()`. The drinks card (`c-drink-d` / `T.*.assort.drink.d`) mentions alcohol and energy drinks alongside water/juice/soda. ⚠️ **Photo refresh** (see images/Asortyment/ note in File structure): the old illustrated-menu image, the separate 9-photo brand *grid*, and the separate alcohol-slider *carousel* (`#alc-track`/`alcSliderMove()`/`.alc-dot`) were all retired in one pass — the menu image because it wasn't sourced from images/Asortyment/, the grid and slider merged into this one masonry because keeping them as two visually-different components stopped making sense once both held the same kind of "clean shot" photo. If you're tempted to rebuild a slider, don't reach for `alc-*` classes/JS — they're gone; check git history only for reference.
+5. **Gallery** (`#gallery`) — label/title/description header (`T.*.gallery.desc` now reads "new arrivals, promotions, and the full assortment" rather than the old "peek inside our store" copy, to match the new content — see below) + one **promo-poster masonry** (`columns-2 sm:columns-3 lg:columns-4`): 16 "promo poster" photos — 12 from `images/Asortyment/*.jpg` (Baguette1, Flint1, GoldenShips, GotoshokVeres, Grinky1, Kontik, MASLO1, Oil1, Pelmeni, Salo, Soda, TavernChips) + 4 from `images/Asortyment/Alkohol/` (A11, AA12, Alkohol13, Alkohol14) — plus the `.gal-teaser` "coming soon" card (`id="g-teaser"`, translated via `T.*.gallery.teaser`), all as `break-inside-avoid` masonry items. Every photo item uses `.gal-wrap`/`.gal-img`/`.gal-zoom-icon` hover + `.reveal` scroll-animation, lightbox-enabled via `openLb()`, **no caption overlay** (unlike Assortment) since these posters already carry their own headline/branding baked in — adding a caption would be redundant clutter. The teaser card has no `onclick`/lightbox (not a photo) and uses its own `.gal-teaser:hover` lift. ⚠️ **Photo refresh**: this section previously held real store/product candid photos from `RAW/` + `images/Interior/` (22-26 photos) in a fixed `grid-cols-2 md:grid-cols-3` with hand-placed `row-span`/`col-span` items and a span-matched teaser card — ALL of that was retired per the client's instruction to source Gallery photos only from images/Asortyment/(+Alkohol/), and the fixed grid was replaced by the masonry described above specifically so a future photo-count change never again requires recalculating a teaser's `col-span` by hand (see the masonry note in "index.html architecture"). (A separate "Nasze wnętrze" section and a unified-but-fixed-grid Gallery both existed at earlier points in this project's history; neither exists any more — there is currently one gallery section, one masonry, sourced only from images/Asortyment/.)
 6. **Contact** (`#contact`) — address, email, social links (FB + IG), hours, Google Maps iframe, "Get Directions" CTA, and a "Leave a Review" glass card (gold `.btn-sheen` button + QR code, `images/qr-review.png`, `id="ct-review-*"`)
 7. **Footer** — copyright, email, FB + IG icon buttons
 

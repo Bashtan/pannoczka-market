@@ -260,36 +260,6 @@
       transform: scale(1.08);
     }
 
-    /* ── alcohol & energy drinks slider (Assortment) ── */
-    .alc-track {
-      display: flex;
-      gap: 1rem;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-    }
-    .alc-track::-webkit-scrollbar { display: none; }
-    .alc-slide { scroll-snap-align: start; }
-    .alc-nav-btn {
-      position: absolute; top: 50%; transform: translateY(-50%);
-      width: 42px; height: 42px; border-radius: 9999px;
-      display: flex; align-items: center; justify-content: center;
-      background: #fff; color: var(--green-dark);
-      box-shadow: 0 4px 16px rgba(0,0,0,.2);
-      transition: background .25s ease, color .25s ease, transform .25s ease, opacity .25s ease;
-      z-index: 10;
-    }
-    .alc-nav-btn:hover { background: var(--green-dark); color: #fff; transform: translateY(-50%) scale(1.08); }
-    .alc-nav-btn:disabled { opacity: .35; pointer-events: none; }
-    .alc-nav-prev { left: -6px; }
-    .alc-nav-next { right: -6px; }
-    @media (min-width: 768px) { .alc-nav-prev { left: -20px; } .alc-nav-next { right: -20px; } }
-    .alc-dot { width: 8px; height: 8px; border-radius: 9999px; background: rgba(196,147,74,.35); transition: all .25s ease; }
-    .alc-dot.is-active { width: 22px; background: var(--wood); }
-
     /* ── lang toggle active state ── */
     .lang-btn.active {
       background: #fff;
@@ -503,207 +473,188 @@
       </h2>
     </div>
 
-    <div class="grid md:grid-cols-2 gap-10 items-center">
-
-      <!-- Category cards -->
-      <div class="space-y-4">
-        <div class="cat-card flex items-start gap-4 p-5 reveal" style="transition-delay:0ms">
-          <span class="text-3xl cat-icon">🐟</span>
-          <div>
-            <h3 class="font-bold text-[#1a5c2a] mb-1" id="c-fish-t">Ryby i owoce morza</h3>
-            <p class="text-gray-500 text-sm" id="c-fish-d">Świeże i mrożone ryby, łosoś, śledź, owoce morza – prosto z Ukrainy i nie tylko.</p>
-          </div>
-        </div>
-        <div class="cat-card flex items-start gap-4 p-5 reveal" style="transition-delay:60ms">
-          <span class="text-3xl cat-icon">🥩</span>
-          <div>
-            <h3 class="font-bold text-[#1a5c2a] mb-1" id="c-meat-t">Mięso, wędliny i słonina</h3>
-            <p class="text-gray-500 text-sm" id="c-meat-d">Tradycyjne wędliny, sało (słonina wieprzowa), kiełbasy i inne wyroby mięsne.</p>
-          </div>
-        </div>
-        <div class="cat-card flex items-start gap-4 p-5 reveal" style="transition-delay:120ms">
-          <span class="text-3xl cat-icon">🥤</span>
-          <div>
-            <h3 class="font-bold text-[#1a5c2a] mb-1" id="c-drink-t">Napoje</h3>
-            <p class="text-gray-500 text-sm" id="c-drink-d">Szeroki wybór napojów: wody, soki, napoje gazowane, różne napoje energetyczne i alkohol.</p>
-          </div>
-        </div>
-        <div class="cat-card flex items-start gap-4 p-5 reveal" style="transition-delay:180ms">
-          <span class="text-3xl cat-icon">🍬</span>
-          <div>
-            <h3 class="font-bold text-[#1a5c2a] mb-1" id="c-sweet-t">Słodycze i mrożonki</h3>
-            <p class="text-gray-500 text-sm" id="c-sweet-d">Cukierki, czekolady, ptasie mleczko, lody i bogaty wybór mrożonek.</p>
-          </div>
-        </div>
-        <div class="cat-card flex items-start gap-4 p-5 reveal" style="transition-delay:240ms">
-          <span class="text-3xl cat-icon">🫙</span>
-          <div>
-            <h3 class="font-bold text-[#1a5c2a] mb-1" id="c-pres-t">Przetwory domowe</h3>
-            <p class="text-gray-500 text-sm" id="c-pres-d">Ogórki kiszone, konfitury, ikra bakłażanowa, kapusta kiszona i inne domowe przetwory.</p>
-          </div>
+    <!-- Category cards -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
+      <div class="cat-card flex items-start gap-4 p-5 reveal" style="transition-delay:0ms">
+        <span class="text-3xl cat-icon">🐟</span>
+        <div>
+          <h3 class="font-bold text-[#1a5c2a] mb-1" id="c-fish-t">Ryby i owoce morza</h3>
+          <p class="text-gray-500 text-sm" id="c-fish-d">Świeże i mrożone ryby, łosoś, śledź, owoce morza – prosto z Ukrainy i nie tylko.</p>
         </div>
       </div>
-
-      <!-- Illustrated menu -->
-      <div class="flex justify-center reveal" style="transition-delay:120ms">
-        <div class="relative max-w-sm w-full">
-          <div class="absolute -bottom-4 -right-4 w-full h-full bg-[#c4934a]/20 rounded-2xl"></div>
-          <img
-            src="RAW/Gemini_Generated_Image_l0txpll0txpll0tx (1).jpeg"
-            alt="Menu Pannoczka Market – ilustracja asortymentu"
-            class="relative z-10 rounded-2xl shadow-2xl w-full object-contain"
-          />
+      <div class="cat-card flex items-start gap-4 p-5 reveal" style="transition-delay:60ms">
+        <span class="text-3xl cat-icon">🥩</span>
+        <div>
+          <h3 class="font-bold text-[#1a5c2a] mb-1" id="c-meat-t">Mięso, wędliny i słonina</h3>
+          <p class="text-gray-500 text-sm" id="c-meat-d">Tradycyjne wędliny, sało (słonina wieprzowa), kiełbasy i inne wyroby mięsne.</p>
+        </div>
+      </div>
+      <div class="cat-card flex items-start gap-4 p-5 reveal" style="transition-delay:120ms">
+        <span class="text-3xl cat-icon">🥤</span>
+        <div>
+          <h3 class="font-bold text-[#1a5c2a] mb-1" id="c-drink-t">Napoje</h3>
+          <p class="text-gray-500 text-sm" id="c-drink-d">Szeroki wybór napojów: wody, soki, napoje gazowane, różne napoje energetyczne i alkohol.</p>
+        </div>
+      </div>
+      <div class="cat-card flex items-start gap-4 p-5 reveal" style="transition-delay:180ms">
+        <span class="text-3xl cat-icon">🍬</span>
+        <div>
+          <h3 class="font-bold text-[#1a5c2a] mb-1" id="c-sweet-t">Słodycze i mrożonki</h3>
+          <p class="text-gray-500 text-sm" id="c-sweet-d">Cukierki, czekolady, ptasie mleczko, lody i bogaty wybór mrożonek.</p>
+        </div>
+      </div>
+      <div class="cat-card flex items-start gap-4 p-5 reveal" style="transition-delay:240ms">
+        <span class="text-3xl cat-icon">🫙</span>
+        <div>
+          <h3 class="font-bold text-[#1a5c2a] mb-1" id="c-pres-t">Przetwory domowe</h3>
+          <p class="text-gray-500 text-sm" id="c-pres-d">Ogórki kiszone, konfitury, ikra bakłażanowa, kapusta kiszona i inne domowe przetwory.</p>
         </div>
       </div>
     </div>
 
-    <!-- Brand / product gallery -->
-    <div class="mt-16">
+    <!-- Product / brand showcase — masonry, sourced only from images/Asortyment/ (+ /Alkohol/) -->
+    <div>
       <div class="text-center mb-8 reveal">
         <h3 class="font-display text-xl md:text-2xl font-bold text-[#1a5c2a]" id="as-brands-title">Marki, które u nas znajdziesz</h3>
       </div>
 
-      <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-5">
+      <div class="columns-2 sm:columns-3 lg:columns-4 gap-4 md:gap-5">
 
-        <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg reveal" style="transition-delay:0ms" onclick="openLb(this.querySelector('img').src)">
-          <img src="images/Asortyment/Pannoczka19.jpg" alt="Sosy Torchin" class="w-full aspect-[4/3] object-cover" />
-          <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
-            <p class="text-white text-xs md:text-sm font-bold leading-tight" id="pg-sauces">Sosy Torchin</p>
-          </div>
-        </div>
-
-        <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg reveal" style="transition-delay:40ms" onclick="openLb(this.querySelector('img').src)">
-          <img src="images/Asortyment/Pannozcka18.jpg" alt="Herbaty Lovare" class="w-full aspect-[4/3] object-cover" />
-          <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
-            <p class="text-white text-xs md:text-sm font-bold leading-tight" id="pg-tea">Herbaty Lovare</p>
-          </div>
-        </div>
-
-        <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg reveal" style="transition-delay:80ms" onclick="openLb(this.querySelector('img').src)">
-          <img src="images/Asortyment/Pannoczka17.jpg" alt="Słodycze i przekąski dla dzieci" class="w-full aspect-[4/3] object-cover" />
-          <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
-            <p class="text-white text-xs md:text-sm font-bold leading-tight" id="pg-kids">Słodycze i przekąski dla dzieci</p>
-          </div>
-        </div>
-
-        <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg reveal" style="transition-delay:120ms" onclick="openLb(this.querySelector('img').src)">
-          <img src="images/Asortyment/Pannoczka16.jpg" alt="Lemoniada Natakhtari cytrynowo-limonkowa" class="w-full aspect-[4/3] object-cover" />
-          <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
-            <p class="text-white text-xs md:text-sm font-bold leading-tight" id="pg-lemonade1">Lemoniada Natakhtari – cytrynowo-limonkowa</p>
-          </div>
-        </div>
-
-        <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg reveal" style="transition-delay:160ms" onclick="openLb(this.querySelector('img').src)">
-          <img src="images/Asortyment/Pannoczka15.jpg" alt="Lemoniada Natakhtari – 6 smaków" class="w-full aspect-[4/3] object-cover" />
-          <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
-            <p class="text-white text-xs md:text-sm font-bold leading-tight" id="pg-lemonade2">Lemoniada Natakhtari – 6 smaków do wyboru</p>
-          </div>
-        </div>
-
-        <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg reveal" style="transition-delay:200ms" onclick="openLb(this.querySelector('img').src)">
-          <img src="images/Asortyment/Pannoczka14.jpg" alt="Czekolady Roshen" class="w-full aspect-[4/3] object-cover" />
-          <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
-            <p class="text-white text-xs md:text-sm font-bold leading-tight" id="pg-chocolate">Czekolady Roshen</p>
-          </div>
-        </div>
-
-        <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg reveal" style="transition-delay:240ms" onclick="openLb(this.querySelector('img').src)">
-          <img src="images/Asortyment/Pannozcka13.jpg" alt="Zupy błyskawiczne Mivina" class="w-full aspect-[4/3] object-cover" />
-          <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
-            <p class="text-white text-xs md:text-sm font-bold leading-tight" id="pg-noodles">Zupy błyskawiczne Mivina</p>
-          </div>
-        </div>
-
-        <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg reveal" style="transition-delay:280ms" onclick="openLb(this.querySelector('img').src)">
-          <img src="images/Asortyment/Pannoczka12.jpg" alt="Chałwa słonecznikowa Zolotoy Vek" class="w-full aspect-[4/3] object-cover" />
-          <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
-            <p class="text-white text-xs md:text-sm font-bold leading-tight" id="pg-halva">Chałwa słonecznikowa Zolotoy Vek</p>
-          </div>
-        </div>
-
-        <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg reveal" style="transition-delay:320ms" onclick="openLb(this.querySelector('img').src)">
-          <img src="images/Asortyment/Pannoczka11.jpg" alt="Chrupki kukurydziane Salut" class="w-full aspect-[4/3] object-cover" />
-          <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
-            <p class="text-white text-xs md:text-sm font-bold leading-tight" id="pg-cornsticks">Chrupki kukurydziane Salut – salami, bekon, grzyby</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- Alcohol & energy drinks slider -->
-    <div class="mt-16">
-      <div class="text-center mb-8 reveal">
-        <h3 class="font-display text-xl md:text-2xl font-bold text-[#1a5c2a]" id="as-alc-title">Wysokiej jakości wódka, różne wina i napoje energetyczne</h3>
-      </div>
-
-      <div class="relative reveal px-8 md:px-10">
-        <button type="button" class="alc-nav-btn alc-nav-prev" onclick="alcSliderMove(-1)" aria-label="Poprzedni produkt">
-          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-        </button>
-        <button type="button" class="alc-nav-btn alc-nav-next" onclick="alcSliderMove(1)" aria-label="Następny produkt">
-          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-        </button>
-
-        <div class="alc-track" id="alc-track">
-
-          <div class="alc-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
-            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
-              <img src="images/Asortyment/Alkohol/A1.jpg" alt="Nalewka Wiśniówka Morosha" class="w-full aspect-square object-cover" />
-              <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
-                <p class="text-white text-xs md:text-sm font-bold leading-tight" id="as-alc-1">Nalewka Wiśniówka Morosha</p>
-              </div>
+        <div class="break-inside-avoid mb-4 md:mb-5">
+          <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg reveal" style="transition-delay:0ms" onclick="openLb(this.querySelector('img').src)">
+            <img src="images/Asortyment/Pannoczka19.jpg" alt="Sosy Torchin" loading="lazy" class="w-full object-cover" />
+            <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
+              <p class="text-white text-xs md:text-sm font-bold leading-tight" id="pg-sauces">Sosy Torchin</p>
             </div>
           </div>
-
-          <div class="alc-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
-            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
-              <img src="images/Asortyment/Alkohol/A2.jpg" alt="Wódka Khortytsa Platinum" class="w-full aspect-square object-cover" />
-              <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
-                <p class="text-white text-xs md:text-sm font-bold leading-tight" id="as-alc-2">Wódka Khortytsa Platinum</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="alc-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
-            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
-              <img src="images/Asortyment/Alkohol/A3.jpg" alt="Wódka Morosha Carpathian" class="w-full aspect-square object-cover" />
-              <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
-                <p class="text-white text-xs md:text-sm font-bold leading-tight" id="as-alc-3">Wódka Morosha Carpathian</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="alc-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
-            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
-              <img src="images/Asortyment/Alkohol/A4.jpg" alt="Wódka Sinevir Morosha" class="w-full aspect-square object-cover" />
-              <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
-                <p class="text-white text-xs md:text-sm font-bold leading-tight" id="as-alc-4">Wódka Sinevir Morosha</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="alc-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
-            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
-              <img src="images/Asortyment/Alkohol/A5.jpg" alt="Wódka Morosha Carpathian 1L" class="w-full aspect-square object-cover" />
-              <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
-                <p class="text-white text-xs md:text-sm font-bold leading-tight" id="as-alc-5">Wódka Morosha Carpathian 1L</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="alc-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
-            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
-              <img src="images/Asortyment/Alkohol/A6.jpg" alt="Wódka Khortytsa Premium" class="w-full aspect-square object-cover" />
-              <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
-                <p class="text-white text-xs md:text-sm font-bold leading-tight" id="as-alc-6">Wódka Khortytsa Premium</p>
-              </div>
-            </div>
-          </div>
-
         </div>
 
-        <div class="flex justify-center gap-2 mt-6" id="alc-dots"></div>
+        <div class="break-inside-avoid mb-4 md:mb-5">
+          <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg reveal" style="transition-delay:60ms" onclick="openLb(this.querySelector('img').src)">
+            <img src="images/Asortyment/Alkohol/A1.jpg" alt="Nalewka Wiśniówka Morosha" loading="lazy" class="w-full object-cover" />
+            <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
+              <p class="text-white text-xs md:text-sm font-bold leading-tight" id="as-alc-1">Nalewka Wiśniówka Morosha</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="break-inside-avoid mb-4 md:mb-5">
+          <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg reveal" style="transition-delay:120ms" onclick="openLb(this.querySelector('img').src)">
+            <img src="images/Asortyment/Pannozcka18.jpg" alt="Herbaty Lovare" loading="lazy" class="w-full object-cover" />
+            <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
+              <p class="text-white text-xs md:text-sm font-bold leading-tight" id="pg-tea">Herbaty Lovare</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="break-inside-avoid mb-4 md:mb-5">
+          <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg reveal" style="transition-delay:180ms" onclick="openLb(this.querySelector('img').src)">
+            <img src="images/Asortyment/Alkohol/A2.jpg" alt="Wódka Khortytsa Platinum" loading="lazy" class="w-full object-cover" />
+            <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
+              <p class="text-white text-xs md:text-sm font-bold leading-tight" id="as-alc-2">Wódka Khortytsa Platinum</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="break-inside-avoid mb-4 md:mb-5">
+          <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg reveal" style="transition-delay:0ms" onclick="openLb(this.querySelector('img').src)">
+            <img src="images/Asortyment/Pannoczka17.jpg" alt="Słodycze i przekąski dla dzieci" loading="lazy" class="w-full object-cover" />
+            <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
+              <p class="text-white text-xs md:text-sm font-bold leading-tight" id="pg-kids">Słodycze i przekąski dla dzieci</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="break-inside-avoid mb-4 md:mb-5">
+          <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg reveal" style="transition-delay:60ms" onclick="openLb(this.querySelector('img').src)">
+            <img src="images/Asortyment/Alkohol/A3.jpg" alt="Wódka Morosha Carpathian" loading="lazy" class="w-full object-cover" />
+            <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
+              <p class="text-white text-xs md:text-sm font-bold leading-tight" id="as-alc-3">Wódka Morosha Carpathian</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="break-inside-avoid mb-4 md:mb-5">
+          <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg reveal" style="transition-delay:120ms" onclick="openLb(this.querySelector('img').src)">
+            <img src="images/Asortyment/Pannoczka16.jpg" alt="Lemoniada Natakhtari cytrynowo-limonkowa" loading="lazy" class="w-full object-cover" />
+            <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
+              <p class="text-white text-xs md:text-sm font-bold leading-tight" id="pg-lemonade1">Lemoniada Natakhtari – cytrynowo-limonkowa</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="break-inside-avoid mb-4 md:mb-5">
+          <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg reveal" style="transition-delay:180ms" onclick="openLb(this.querySelector('img').src)">
+            <img src="images/Asortyment/Alkohol/A4.jpg" alt="Wódka Sinevir Morosha" loading="lazy" class="w-full object-cover" />
+            <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
+              <p class="text-white text-xs md:text-sm font-bold leading-tight" id="as-alc-4">Wódka Sinevir Morosha</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="break-inside-avoid mb-4 md:mb-5">
+          <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg reveal" style="transition-delay:0ms" onclick="openLb(this.querySelector('img').src)">
+            <img src="images/Asortyment/Pannoczka15.jpg" alt="Lemoniada Natakhtari – 6 smaków" loading="lazy" class="w-full object-cover" />
+            <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
+              <p class="text-white text-xs md:text-sm font-bold leading-tight" id="pg-lemonade2">Lemoniada Natakhtari – 6 smaków do wyboru</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="break-inside-avoid mb-4 md:mb-5">
+          <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg reveal" style="transition-delay:60ms" onclick="openLb(this.querySelector('img').src)">
+            <img src="images/Asortyment/Alkohol/A5.jpg" alt="Wódka Morosha Carpathian 1L" loading="lazy" class="w-full object-cover" />
+            <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
+              <p class="text-white text-xs md:text-sm font-bold leading-tight" id="as-alc-5">Wódka Morosha Carpathian 1L</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="break-inside-avoid mb-4 md:mb-5">
+          <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg reveal" style="transition-delay:120ms" onclick="openLb(this.querySelector('img').src)">
+            <img src="images/Asortyment/Pannoczka14.jpg" alt="Czekolady Roshen" loading="lazy" class="w-full object-cover" />
+            <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
+              <p class="text-white text-xs md:text-sm font-bold leading-tight" id="pg-chocolate">Czekolady Roshen</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="break-inside-avoid mb-4 md:mb-5">
+          <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg reveal" style="transition-delay:180ms" onclick="openLb(this.querySelector('img').src)">
+            <img src="images/Asortyment/Alkohol/A6.jpg" alt="Wódka Khortytsa Premium" loading="lazy" class="w-full object-cover" />
+            <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
+              <p class="text-white text-xs md:text-sm font-bold leading-tight" id="as-alc-6">Wódka Khortytsa Premium</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="break-inside-avoid mb-4 md:mb-5">
+          <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg reveal" style="transition-delay:0ms" onclick="openLb(this.querySelector('img').src)">
+            <img src="images/Asortyment/Pannozcka13.jpg" alt="Zupy błyskawiczne Mivina" loading="lazy" class="w-full object-cover" />
+            <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
+              <p class="text-white text-xs md:text-sm font-bold leading-tight" id="pg-noodles">Zupy błyskawiczne Mivina</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="break-inside-avoid mb-4 md:mb-5">
+          <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg reveal" style="transition-delay:60ms" onclick="openLb(this.querySelector('img').src)">
+            <img src="images/Asortyment/Pannoczka12.jpg" alt="Chałwa słonecznikowa Zolotoy Vek" loading="lazy" class="w-full object-cover" />
+            <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
+              <p class="text-white text-xs md:text-sm font-bold leading-tight" id="pg-halva">Chałwa słonecznikowa Zolotoy Vek</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="break-inside-avoid mb-4 md:mb-5">
+          <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg reveal" style="transition-delay:120ms" onclick="openLb(this.querySelector('img').src)">
+            <img src="images/Asortyment/Pannoczka11.jpg" alt="Chrupki kukurydziane Salut" loading="lazy" class="w-full object-cover" />
+            <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
+              <p class="text-white text-xs md:text-sm font-bold leading-tight" id="pg-cornsticks">Chrupki kukurydziane Salut – salami, bekon, grzyby</p>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -721,333 +672,136 @@
       <p class="text-[#2d7a3e] text-xs font-bold tracking-widest uppercase mb-2" id="g-label">Galeria</p>
       <h2 class="font-display text-3xl md:text-4xl font-bold text-[#1a5c2a] title-rule" id="g-title">Przekonaj się sam</h2>
       <p class="text-gray-500 mt-6 max-w-md mx-auto text-sm" id="g-desc">
-        Nasza przestrzeń, nasi klienci, nasze produkty – zaglądnij do środka zanim odwiedzisz nas osobiście.
+        Nowości, promocje i pełen asortyment – zawsze coś nowego do odkrycia.
       </p>
     </div>
 
-    <!-- Masonry-style grid -->
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+    <!-- Promo showcase — masonry, sourced only from images/Asortyment/Alkohol/ -->
+    <div class="columns-2 sm:columns-3 lg:columns-4 gap-3 md:gap-4">
 
-      <!-- Exterior – tall left cell -->
-      <div class="row-span-2 col-span-1 gal-wrap rounded-xl reveal" style="transition-delay:0ms">
-        <img
-          src="RAW/viber_image_2026-08-16_16-58-06-361.jpg"
-          alt="Zewnątrz Pannoczka Market – otwarcie z balonami"
-          class="gal-img w-full h-full object-cover rounded-xl"
-          style="min-height:280px;"
-          onclick="openLb(this.src)"
-        />
-        <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
+      <div class="break-inside-avoid mb-3 md:mb-4">
+        <div class="gal-wrap rounded-xl reveal" style="transition-delay:0ms">
+          <img src="images/Asortyment/Alkohol/A11.jpg" alt="Plakat promocyjny – alkohol w sprzedaży (Martini, Morosha, Sinevir)" loading="lazy" class="gal-img w-full object-cover rounded-xl" onclick="openLb(this.src)" />
+          <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
+        </div>
       </div>
 
-      <!-- Interior 1 -->
-      <div class="col-span-1 gal-wrap rounded-xl reveal" style="transition-delay:60ms">
-        <img
-          src="RAW/viber_image_2026-08-16_16-15-06-686.jpg"
-          alt="Wnętrze – klienci przy ladzie"
-          class="gal-img w-full object-cover rounded-xl"
-          style="height:200px;"
-          onclick="openLb(this.src)"
-        />
-        <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
+      <div class="break-inside-avoid mb-3 md:mb-4">
+        <div class="gal-wrap rounded-xl reveal" style="transition-delay:60ms">
+          <img src="images/Asortyment/Baguette1.jpg" alt="Sucharki Flint Baguette – lobster, śmietana z cebulką, boczek pikantny, grzyby" loading="lazy" class="gal-img w-full object-cover rounded-xl" onclick="openLb(this.src)" />
+          <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
+        </div>
       </div>
 
-      <!-- Interior 2 -->
-      <div class="col-span-1 gal-wrap rounded-xl reveal" style="transition-delay:120ms">
-        <img
-          src="RAW/viber_image_2026-08-16_16-15-11-515.jpg"
-          alt="Wnętrze – pełny sklep podczas otwarcia"
-          class="gal-img w-full object-cover rounded-xl"
-          style="height:200px;"
-          onclick="openLb(this.src)"
-        />
-        <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
+      <div class="break-inside-avoid mb-3 md:mb-4">
+        <div class="gal-wrap rounded-xl reveal" style="transition-delay:120ms">
+          <img src="images/Asortyment/Kontik.jpg" alt="Ciastka przekładane Super Kontik – wanilia mleczna, mleko skondensowane, mleko" loading="lazy" class="gal-img w-full object-cover rounded-xl" onclick="openLb(this.src)" />
+          <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
+        </div>
       </div>
 
-      <!-- Food closeup – wide bottom cell -->
-      <div class="col-span-2 gal-wrap rounded-xl reveal" style="transition-delay:180ms">
-        <img
-          src="RAW/viber_image_2026-08-16_16-15-13-981.jpg"
-          alt="Sało i ogórki kiszone – ukraińskie specjały"
-          class="gal-img w-full object-cover rounded-xl"
-          style="height:220px;"
-          onclick="openLb(this.src)"
-        />
-        <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
+      <div class="break-inside-avoid mb-3 md:mb-4">
+        <div class="gal-wrap rounded-xl reveal" style="transition-delay:180ms">
+          <img src="images/Asortyment/GoldenShips.jpg" alt="Chipsy Golden Chips – krab, bekon, koperek ze śmietaną, ser" loading="lazy" class="gal-img w-full object-cover rounded-xl" onclick="openLb(this.src)" />
+          <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
+        </div>
       </div>
 
-      <!-- Aisle – wide establishing shot for the "what's in stock" set -->
-      <div class="col-span-2 md:col-span-3 gal-wrap rounded-xl reveal" style="transition-delay:0ms">
-        <img
-          src="images/Interior/2026-08-28 11.13.02.jpg"
-          alt="Wnętrze sklepu – regały z napojami, przetworami i przekąskami"
-          class="gal-img w-full object-cover rounded-xl"
-          style="height:300px;"
-          onclick="openLb(this.src)"
-        />
-        <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
+      <div class="break-inside-avoid mb-3 md:mb-4">
+        <div class="gal-wrap rounded-xl reveal" style="transition-delay:0ms">
+          <img src="images/Asortyment/Alkohol/Alkohol13.jpg" alt="Napoje energetyczne REVO Alco Energy – black, mango, cherry, silver" loading="lazy" class="gal-img w-full object-cover rounded-xl" onclick="openLb(this.src)" />
+          <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
+        </div>
       </div>
 
-      <!-- Cakes -->
-      <div class="col-span-1 gal-wrap rounded-xl reveal" style="transition-delay:0ms">
-        <img
-          src="images/Interior/2026-08-28 11.12.37.jpg"
-          alt="Lada z tortami i ciastkami"
-          class="gal-img w-full object-cover rounded-xl"
-          style="height:200px;"
-          onclick="openLb(this.src)"
-        />
-        <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
+      <div class="break-inside-avoid mb-3 md:mb-4">
+        <div class="gal-wrap rounded-xl reveal" style="transition-delay:60ms">
+          <img src="images/Asortyment/Grinky1.jpg" alt="Grzanki żytnio-pszenne Грінки – cielęcina z adżyką, pomidor spicy, czosnek" loading="lazy" class="gal-img w-full object-cover rounded-xl" onclick="openLb(this.src)" />
+          <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
+        </div>
       </div>
 
-      <!-- Fish counter -->
-      <div class="col-span-1 gal-wrap rounded-xl reveal" style="transition-delay:60ms">
-        <img
-          src="images/Interior/2026-08-28 11.12.54.jpg"
-          alt="Lada rybna – wędzone ryby"
-          class="gal-img w-full object-cover rounded-xl"
-          style="height:200px;"
-          onclick="openLb(this.src)"
-        />
-        <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
+      <div class="break-inside-avoid mb-3 md:mb-4">
+        <div class="gal-wrap rounded-xl reveal" style="transition-delay:120ms">
+          <img src="images/Asortyment/MASLO1.jpg" alt="Masło czekoladowe Ферма 62,5% tłuszczu" loading="lazy" class="gal-img w-full object-cover rounded-xl" onclick="openLb(this.src)" />
+          <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
+        </div>
       </div>
 
-      <!-- Sunflower seeds shelf -->
-      <div class="col-span-1 gal-wrap rounded-xl reveal" style="transition-delay:120ms">
-        <img
-          src="images/Interior/2026-08-28 11.14.03.jpg"
-          alt="Regał z pestkami słonecznika"
-          class="gal-img w-full object-cover rounded-xl"
-          style="height:200px;"
-          onclick="openLb(this.src)"
-        />
-        <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
+      <div class="break-inside-avoid mb-3 md:mb-4">
+        <div class="gal-wrap rounded-xl reveal" style="transition-delay:180ms">
+          <img src="images/Asortyment/Alkohol/AA12.jpg" alt="Wódka Morosha – czysty ukraiński charakter" loading="lazy" class="gal-img w-full object-cover rounded-xl" onclick="openLb(this.src)" />
+          <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
+        </div>
       </div>
 
-      <!-- Sausages – Saltowski -->
-      <div class="col-span-1 gal-wrap rounded-xl reveal" style="transition-delay:0ms">
-        <img
-          src="images/Interior/2026-08-28 11.13.23.jpg"
-          alt="Lada wędlin – kiełbasy Saltowski"
-          class="gal-img w-full object-cover rounded-xl"
-          style="height:200px;"
-          onclick="openLb(this.src)"
-        />
-        <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
+      <div class="break-inside-avoid mb-3 md:mb-4">
+        <div class="gal-wrap rounded-xl reveal" style="transition-delay:0ms">
+          <img src="images/Asortyment/TavernChips.jpg" alt="Chipsy Flint Tavern – śmietana z ziołami, francuski ser, bekon" loading="lazy" class="gal-img w-full object-cover rounded-xl" onclick="openLb(this.src)" />
+          <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
+        </div>
       </div>
 
-      <!-- Frozen seafood -->
-      <div class="col-span-1 gal-wrap rounded-xl reveal" style="transition-delay:60ms">
-        <img
-          src="images/Interior/2026-08-28 11.14.09.jpg"
-          alt="Mrożonki – krewetki i owoce morza"
-          class="gal-img w-full object-cover rounded-xl"
-          style="height:200px;"
-          onclick="openLb(this.src)"
-        />
-        <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
+      <div class="break-inside-avoid mb-3 md:mb-4">
+        <div class="gal-wrap rounded-xl reveal" style="transition-delay:60ms">
+          <img src="images/Asortyment/Pelmeni.jpg" alt="Ukraińskie domowe pielmieni – dla dzieci i dorosłych" loading="lazy" class="gal-img w-full object-cover rounded-xl" onclick="openLb(this.src)" />
+          <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
+        </div>
       </div>
 
-      <!-- Sausage closeup -->
-      <div class="col-span-1 gal-wrap rounded-xl reveal" style="transition-delay:120ms">
-        <img
-          src="images/Interior/2026-08-28 11.13.35.jpg"
-          alt="Wędliny w chłodni – kiełbasa lekarska"
-          class="gal-img w-full object-cover rounded-xl"
-          style="height:200px;"
-          onclick="openLb(this.src)"
-        />
-        <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
+      <div class="break-inside-avoid mb-3 md:mb-4">
+        <div class="gal-wrap rounded-xl reveal" style="transition-delay:120ms">
+          <img src="images/Asortyment/Alkohol/Alkohol14.jpg" alt="Koktajle Shake – Bora Bora, Mojito, Sex on the Beach" loading="lazy" class="gal-img w-full object-cover rounded-xl" onclick="openLb(this.src)" />
+          <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
+        </div>
       </div>
 
-      <!-- Frozen dumplings / ice cream -->
-      <div class="col-span-1 gal-wrap rounded-xl reveal" style="transition-delay:0ms">
-        <img
-          src="images/Interior/2026-08-28 11.14.17.jpg"
-          alt="Mrożonki – pierogi, nuggetsy i lody"
-          class="gal-img w-full object-cover rounded-xl"
-          style="height:200px;"
-          onclick="openLb(this.src)"
-        />
-        <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
+      <div class="break-inside-avoid mb-3 md:mb-4">
+        <div class="gal-wrap rounded-xl reveal" style="transition-delay:180ms">
+          <img src="images/Asortyment/Flint1.jpg" alt="Chrupki Flint Crisps – krab, ser, bekon, czerwony kawior, salami" loading="lazy" class="gal-img w-full object-cover rounded-xl" onclick="openLb(this.src)" />
+          <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
+        </div>
       </div>
 
-      <!-- Deli counter -->
-      <div class="col-span-1 gal-wrap rounded-xl reveal" style="transition-delay:60ms">
-        <img
-          src="images/Interior/2026-08-28 11.13.45.jpg"
-          alt="Lada wędlin – szynki i kiełbasy"
-          class="gal-img w-full object-cover rounded-xl"
-          style="height:200px;"
-          onclick="openLb(this.src)"
-        />
-        <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
+      <div class="break-inside-avoid mb-3 md:mb-4">
+        <div class="gal-wrap rounded-xl reveal" style="transition-delay:0ms">
+          <img src="images/Asortyment/Salo.jpg" alt="Wędzone białe sało i boczek wędzony" loading="lazy" class="gal-img w-full object-cover rounded-xl" onclick="openLb(this.src)" />
+          <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
+        </div>
       </div>
 
-      <!-- Chips shelf -->
-      <div class="col-span-1 gal-wrap rounded-xl reveal" style="transition-delay:120ms">
-        <img
-          src="images/Interior/viber_image_2026-08-28_14-33-18-656.jpg"
-          alt="Regał z chipsami i przekąskami"
-          class="gal-img w-full object-cover rounded-xl"
-          style="height:200px;"
-          onclick="openLb(this.src)"
-        />
-        <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
+      <div class="break-inside-avoid mb-3 md:mb-4">
+        <div class="gal-wrap rounded-xl reveal" style="transition-delay:60ms">
+          <img src="images/Asortyment/Oil1.jpg" alt="Domowa olej słonecznikowy Olejarnia Kozak" loading="lazy" class="gal-img w-full object-cover rounded-xl" onclick="openLb(this.src)" />
+          <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
+        </div>
       </div>
 
-      <!-- Frozen seafood / surimi -->
-      <div class="col-span-1 gal-wrap rounded-xl reveal" style="transition-delay:0ms">
-        <img
-          src="images/Interior/viber_image_2026-08-28_14-33-19-028.jpg"
-          alt="Mrożonki – krewetki i paluszki surimi"
-          class="gal-img w-full object-cover rounded-xl"
-          style="height:200px;"
-          onclick="openLb(this.src)"
-        />
-        <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
+      <div class="break-inside-avoid mb-3 md:mb-4">
+        <div class="gal-wrap rounded-xl reveal" style="transition-delay:120ms">
+          <img src="images/Asortyment/GotoshokVeres.jpg" alt="Konserwy Veres – groszek zielony i kukurydza cukrowa" loading="lazy" class="gal-img w-full object-cover rounded-xl" onclick="openLb(this.src)" />
+          <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
+        </div>
       </div>
 
-      <!-- Sofia roladki – fresh delivery -->
-      <div class="col-span-1 gal-wrap rounded-xl reveal" style="transition-delay:60ms">
-        <img
-          src="images/Interior/viber_image_2026-08-28_14-33-21-152.jpg"
-          alt="Świeża dostawa rolad Sofia"
-          class="gal-img w-full object-cover rounded-xl"
-          style="height:200px;"
-          onclick="openLb(this.src)"
-        />
-        <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
+      <div class="break-inside-avoid mb-3 md:mb-4">
+        <div class="gal-wrap rounded-xl reveal" style="transition-delay:180ms">
+          <img src="images/Asortyment/Soda.jpg" alt="Ocet spirytusowy i soda oczyszczona" loading="lazy" class="gal-img w-full object-cover rounded-xl" onclick="openLb(this.src)" />
+          <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
+        </div>
       </div>
 
-      <!-- Frozen dumplings / nuggets -->
-      <div class="col-span-1 gal-wrap rounded-xl reveal" style="transition-delay:120ms">
-        <img
-          src="images/Interior/viber_image_2026-08-28_14-33-19-299.jpg"
-          alt="Mrożonki – pierogi i nuggetsy"
-          class="gal-img w-full object-cover rounded-xl"
-          style="height:200px;"
-          onclick="openLb(this.src)"
-        />
-        <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
+      <!-- Coming soon teaser — flows naturally into the masonry, no gap-filling math needed -->
+      <div class="break-inside-avoid mb-3 md:mb-4">
+        <div class="gal-teaser rounded-xl reveal flex flex-col items-center justify-center text-center gap-3 px-6 py-12"
+             style="transition-delay:0ms; background:linear-gradient(135deg, var(--green-pale) 0%, var(--cream) 55%, var(--gold-light) 140%); border:1px solid rgba(196,147,74,.3);">
+          <svg class="h-7 w-7 text-[#c4934a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <p class="text-[#1a5c2a] font-semibold text-sm md:text-base leading-snug max-w-xs" id="g-teaser">Wkrótce nowe dostawy, bądźcie czujni!</p>
+        </div>
       </div>
 
-      <!-- Dried fish rack -->
-      <div class="col-span-1 gal-wrap rounded-xl reveal" style="transition-delay:0ms">
-        <img
-          src="images/Interior/viber_image_2026-08-28_14-33-21-454.jpg"
-          alt="Suszone ryby na regale"
-          class="gal-img w-full object-cover rounded-xl"
-          style="height:200px;"
-          onclick="openLb(this.src)"
-        />
-        <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
-      </div>
-
-      <!-- Eskimos ice cream -->
-      <div class="col-span-1 gal-wrap rounded-xl reveal" style="transition-delay:60ms">
-        <img
-          src="images/Interior/viber_image_2026-08-28_14-33-22-786.jpg"
-          alt="Mrożonki – lody Eskimos"
-          class="gal-img w-full object-cover rounded-xl"
-          style="height:200px;"
-          onclick="openLb(this.src)"
-        />
-        <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
-      </div>
-
-      <!-- Deli caviar / fish pastes counter -->
-      <div class="col-span-1 gal-wrap rounded-xl reveal" style="transition-delay:120ms">
-        <img
-          src="images/Interior/viber_image_2026-08-28_14-33-20-474.jpg"
-          alt="Lada z pastami rybnymi i ikrą"
-          class="gal-img w-full object-cover rounded-xl"
-          style="height:200px;"
-          onclick="openLb(this.src)"
-        />
-        <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
-      </div>
-
-      <!-- Smoked fish counter -->
-      <div class="col-span-1 gal-wrap rounded-xl reveal" style="transition-delay:0ms">
-        <img
-          src="images/Interior/viber_image_2026-08-28_14-33-21-931.jpg"
-          alt="Lada z wędzonymi rybami"
-          class="gal-img w-full object-cover rounded-xl"
-          style="height:200px;"
-          onclick="openLb(this.src)"
-        />
-        <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
-      </div>
-
-      <!-- Alcohol & energy drinks – soft drinks / beer / energy fridge -->
-      <div class="col-span-1 gal-wrap rounded-xl reveal" style="transition-delay:60ms">
-        <img
-          src="images/Asortyment/Alkohol/Alcohol2.jpg"
-          alt="Chłodnia z napojami, piwem i napojami energetycznymi REVO"
-          class="gal-img w-full object-cover rounded-xl"
-          style="height:200px;"
-          onclick="openLb(this.src)"
-        />
-        <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
-      </div>
-
-      <!-- Alcohol & energy drinks – wine & prosecco shelf -->
-      <div class="col-span-1 gal-wrap rounded-xl reveal" style="transition-delay:120ms">
-        <img
-          src="images/Asortyment/Alkohol/Alkohol3.jpg"
-          alt="Regał z winami i winem musującym"
-          class="gal-img w-full object-cover rounded-xl"
-          style="height:200px;"
-          onclick="openLb(this.src)"
-        />
-        <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
-      </div>
-
-      <!-- Alcohol & energy drinks – wine & prosecco shelf, continued -->
-      <div class="col-span-1 gal-wrap rounded-xl reveal" style="transition-delay:0ms">
-        <img
-          src="images/Asortyment/Alkohol/Alkohol4.jpg"
-          alt="Regał z winem musującym Fragolino i Lambrusco"
-          class="gal-img w-full object-cover rounded-xl"
-          style="height:200px;"
-          onclick="openLb(this.src)"
-        />
-        <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
-      </div>
-
-      <!-- Alcohol & energy drinks – vodka shelf -->
-      <div class="col-span-1 gal-wrap rounded-xl reveal" style="transition-delay:60ms">
-        <img
-          src="images/Asortyment/Alkohol/Alkohol5.jpg"
-          alt="Regał z wódką – Khortytsa, Morosha, Sinevir"
-          class="gal-img w-full object-cover rounded-xl"
-          style="height:200px;"
-          onclick="openLb(this.src)"
-        />
-        <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
-      </div>
-
-      <!-- Coming soon teaser – fills the trailing grid gap (⚠️ col-span-2 md:col-span-1, hand-calculated for 20 single-cell photos above it — recheck if the count changes again) -->
-      <div class="col-span-2 md:col-span-1 gal-teaser rounded-xl reveal flex flex-col items-center justify-center text-center gap-3 px-6"
-           style="height:200px; transition-delay:120ms; background:linear-gradient(135deg, var(--green-pale) 0%, var(--cream) 55%, var(--gold-light) 140%); border:1px solid rgba(196,147,74,.3);">
-        <svg class="h-7 w-7 text-[#c4934a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-        </svg>
-        <p class="text-[#1a5c2a] font-semibold text-sm md:text-base leading-snug max-w-xs" id="g-teaser">Wkrótce nowe dostawy, bądźcie czujni!</p>
-      </div>
-
-      <!-- Full fridge – wide closing shot -->
-      <div class="col-span-2 md:col-span-3 gal-wrap rounded-xl reveal" style="transition-delay:0ms">
-        <img
-          src="images/Interior/2026-08-28 11.13.57.jpg"
-          alt="Chłodnia z pełnym asortymentem wędlin"
-          class="gal-img w-full object-cover rounded-xl"
-          style="height:300px;"
-          onclick="openLb(this.src)"
-        />
-        <span class="gal-zoom-icon" aria-hidden="true">🔍</span>
-      </div>
     </div>
   </div>
 </section>
@@ -1283,7 +1037,6 @@ const T = {
         cornsticks:'Chrupki kukurydziane Salut – salami, bekon, grzyby',
       },
       alcohol: {
-        title: 'Wysokiej jakości wódka, różne wina i napoje energetyczne',
         c1: 'Nalewka Wiśniówka Morosha',
         c2: 'Wódka Khortytsa Platinum',
         c3: 'Wódka Morosha Carpathian',
@@ -1294,7 +1047,7 @@ const T = {
     },
     gallery: {
       label: 'Galeria', title: 'Przekonaj się sam',
-      desc: 'Nasza przestrzeń, nasi klienci, nasze produkty – zaglądnij do środka zanim odwiedzisz nas osobiście.',
+      desc: 'Nowości, promocje i pełen asortyment – zawsze coś nowego do odkrycia.',
       teaser: 'Wkrótce nowe dostawy, bądźcie czujni!',
     },
     contact: {
@@ -1347,7 +1100,6 @@ const T = {
         cornsticks:'Кукурудзяні палички Salut – салямі, бекон, гриби',
       },
       alcohol: {
-        title: 'Якісна горілка, різноманітне вино та енергетики',
         c1: 'Настоянка Вишнівка Морошка',
         c2: 'Горілка Khortytsa Platinum',
         c3: 'Горілка Morosha Carpathian',
@@ -1358,7 +1110,7 @@ const T = {
     },
     gallery: {
       label: 'Галерея', title: 'Переконайся сам',
-      desc: 'Наш простір, наші клієнти, наші продукти – зазирни всередину перед тим, як відвідати нас особисто.',
+      desc: 'Новинки, акції та повний асортимент – завжди є що відкрити для себе.',
       teaser: 'Скоро будуть нові надходження, чекайте!',
     },
     contact: {
@@ -1425,7 +1177,6 @@ function setLang(lang) {
   setText('pg-noodles',   t.assort.brands.noodles);
   setText('pg-halva',     t.assort.brands.halva);
   setText('pg-cornsticks',t.assort.brands.cornsticks);
-  setText('as-alc-title', t.assort.alcohol.title);
   setText('as-alc-1', t.assort.alcohol.c1);
   setText('as-alc-2', t.assort.alcohol.c2);
   setText('as-alc-3', t.assort.alcohol.c3);
@@ -1497,62 +1248,6 @@ function closeLb() {
   document.body.style.overflow = '';
 }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
-
-// ── Alcohol & energy drinks slider ────────────────────────────────────────────
-(function () {
-  const track = document.getElementById('alc-track');
-  if (!track) return;
-  const slides = [...track.querySelectorAll('.alc-slide')];
-  const dotsWrap = document.getElementById('alc-dots');
-  const prevBtn = document.querySelector('.alc-nav-prev');
-  const nextBtn = document.querySelector('.alc-nav-next');
-
-  const dots = slides.map((_, i) => {
-    const b = document.createElement('button');
-    b.type = 'button';
-    b.className = 'alc-dot';
-    b.setAttribute('aria-label', 'Zdjęcie ' + (i + 1));
-    b.addEventListener('click', () => {
-      track.scrollTo({ left: slides[i].offsetLeft - track.offsetLeft, behavior: 'smooth' });
-    });
-    dotsWrap.appendChild(b);
-    return b;
-  });
-
-  function step() {
-    const gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || 16);
-    return slides[0].getBoundingClientRect().width + gap;
-  }
-
-  function setActive(i) {
-    dots.forEach((d, j) => d.classList.toggle('is-active', j === i));
-  }
-
-  let ticking = false;
-  function onScroll() {
-    const max = track.scrollWidth - track.clientWidth;
-    // Near the right edge the last slide(s) often can't scroll fully flush
-    // (not enough remaining scroll room), so plain division under-counts —
-    // snap to the last dot whenever we've hit the scrollable end.
-    const i = track.scrollLeft >= max - 4
-      ? slides.length - 1
-      : Math.min(slides.length - 1, Math.max(0, Math.round(track.scrollLeft / step())));
-    setActive(i);
-    if (prevBtn) prevBtn.disabled = track.scrollLeft <= 4;
-    if (nextBtn) nextBtn.disabled = track.scrollLeft >= max - 4;
-    ticking = false;
-  }
-  track.addEventListener('scroll', () => {
-    if (!ticking) { requestAnimationFrame(onScroll); ticking = true; }
-  }, { passive: true });
-
-  setActive(0);
-  onScroll();
-
-  window.alcSliderMove = function (dir) {
-    track.scrollBy({ left: dir * step(), behavior: 'smooth' });
-  };
-})();
 
 // ── Scroll reveal (fade + slide-up) ────────────────────────────────────────
 // Runs once at load; setLang() only swaps textContent/innerHTML on the ids
