@@ -1,0 +1,256 @@
+/* ==========================================================================
+   test-style.css — "clean business card" design experiment
+   --------------------------------------------------------------------------
+   Loaded ONLY by test-video.html (the sandbox page), right after its inline
+   <style> block. index.html never loads it. This file is a pure override
+   layer: remove its <link> from test-video.html (and restore the Playfair
+   font link there) and the page reverts to the live design.
+
+   Specificity: the Tailwind Play CDN injects its utility styles at runtime,
+   after this file, so a bare `.foo` rule here loses any tie against a
+   Tailwind utility on the same element. Rules that have to beat a utility
+   are therefore scoped under a section id (#hero, #gallery, …).
+   ========================================================================== */
+
+:root {
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-head: 'Montserrat', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  --ink:       #1f2a22;
+  --hairline:  rgba(15, 61, 28, .10);
+  --shadow-sm: 0 1px 2px rgba(15, 61, 28, .05), 0 4px 14px -6px rgba(15, 61, 28, .12);
+  --shadow-md: 0 2px 4px rgba(15, 61, 28, .05), 0 18px 36px -14px rgba(15, 61, 28, .28);
+  --ease-soft: cubic-bezier(.2, .7, .2, 1);
+}
+
+
+/* ── 1. Typography: Inter for text, Montserrat for headings & UI ─────────── */
+
+body {
+  font-family: var(--font-sans);
+  color: var(--ink);
+  letter-spacing: -.003em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+h1, h2, h3, .font-display { font-family: var(--font-head); }
+.font-display { letter-spacing: -.02em; }
+
+#a-title, #as-title, #g-title, #ct-title { font-weight: 700; letter-spacing: -.025em; line-height: 1.15; }
+#as-alc-title, #ct-review-t             { font-weight: 700; letter-spacing: -.02em; }
+
+/* small uppercase eyebrow labels above each section title */
+#a-label, #as-label, #g-label, #ct-label, #ct-review-l, #h-tagline {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: .7rem;
+  letter-spacing: .22em;
+}
+
+/* calmer gold accents: static gradient instead of a constant shimmer */
+.gold-foil { animation: none; background-position: 50% center; }
+.title-rule::after {
+  width: 40px; height: 2px; margin-top: 18px;
+  background: var(--wood); box-shadow: none; animation: none; opacity: .85;
+}
+
+#a-p1, #a-p2, #g-desc, #ct-review-d, #assortment .cat-card p { line-height: 1.75; }
+
+
+/* ── 2. Whitespace & de-clutter ──────────────────────────────────────────── */
+
+/* decorative blobs and gem dividers go; generous spacing + the existing
+   white/cream background alternation separate the sections instead */
+body .blob, body .section-divider { display: none; }
+
+#about, #assortment, #gallery, #contact { padding-top: 5.5rem; padding-bottom: 5.5rem; }
+@media (min-width: 768px) {
+  #about, #assortment, #gallery, #contact { padding-top: 7.5rem; padding-bottom: 7.5rem; }
+}
+@media (max-width: 639px) {
+  #about > .max-w-6xl, #assortment > .max-w-6xl, #gallery > .max-w-6xl, #contact > .max-w-6xl {
+    padding-left: 1.25rem; padding-right: 1.25rem;
+  }
+}
+
+
+/* ── 3. Core focus: the "business card" — hours & location ───────────────── */
+
+/* Hero: this test page has no photo overlay (removed earlier at the client's
+   request), so the headline gets soft text shadows and the two info chips
+   become solid white cards that stay legible over the bright storefront. */
+#hero #h-title   { font-weight: 800; letter-spacing: -.035em; line-height: 1.02; }
+#hero #h-sub     { text-shadow: 0 1px 2px rgba(0, 0, 0, .55), 0 2px 16px rgba(0, 0, 0, .5); }
+#hero #h-tagline { color: var(--gold-light); text-shadow: 0 1px 10px rgba(0, 0, 0, .45); }
+
+#hero .mt-10 { gap: .75rem; margin-top: 2.5rem; }
+#hero .mt-10 > div {
+  background: rgba(255, 255, 255, .95);
+  color: var(--green-deep);
+  border: 1px solid rgba(255, 255, 255, .8);
+  border-radius: 14px;
+  padding: .8rem 1.2rem;
+  font-family: var(--font-head);
+  font-size: .92rem;
+  font-weight: 600;
+  line-height: 1.35;
+  box-shadow: 0 12px 32px -12px rgba(0, 0, 0, .55);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+#hero .mt-10 svg  { color: var(--green); width: 1.15rem; height: 1.15rem; }
+#hero .mt-10 span { font-variant-numeric: tabular-nums; text-wrap: balance; }
+@media (max-width: 639px) {
+  #hero .mt-10 {
+    flex-direction: column; align-items: stretch;
+    width: 100%; max-width: 22rem; margin-left: auto; margin-right: auto;
+  }
+  #hero .mt-10 > div { justify-content: center; text-align: center; font-size: .86rem; }
+}
+
+/* Contact: Address + Opening hours move to the top of the info column and get
+   a card treatment; e-mail and social follow as secondary info. This is a
+   visual reorder only — Hours contains no focusable elements, so keyboard tab
+   order (e-mail → Facebook → Instagram → directions) still matches what's seen. */
+#contact .grid > div:first-child     { display: flex; flex-direction: column; gap: 1.25rem; }
+#contact .grid > div:first-child > * { margin-top: 0; }
+#contact .grid > div:first-child > div:has(#ct-addr-l)  { order: -2; }
+#contact .grid > div:first-child > div:has(#ct-hours-l) { order: -1; }
+#contact .grid > div:first-child > div:has(#ct-addr-l),
+#contact .grid > div:first-child > div:has(#ct-hours-l) {
+  background: rgba(255, 255, 255, .07);
+  border: 1px solid rgba(255, 255, 255, .14);
+  border-radius: 18px;
+  padding: 1.25rem 1.35rem;
+}
+#ct-addr-l, #ct-email-l, #ct-social-l, #ct-hours-l {
+  font-family: var(--font-head); font-weight: 600; font-size: 1.05rem; letter-spacing: -.005em;
+}
+#ct-addr-l + p           { color: #fff; font-size: 1.05rem; }
+#ct-hours-l + div        { color: #e8f5e9; font-size: .98rem; }
+#ct-hours-l + div .font-mono {
+  font-family: var(--font-sans); font-variant-numeric: tabular-nums; font-weight: 600; color: #fff;
+}
+#ct-cta { align-self: flex-start; }
+#contact .grid > div:last-child { border-radius: 18px; box-shadow: 0 24px 48px -20px rgba(0, 0, 0, .55); }
+
+
+/* ── 4. Subtle interactions ──────────────────────────────────────────────── */
+
+/* buttons: smooth colour change plus a 2px lift with a soft, tinted shadow */
+#h-cta, #h-more, #ct-cta, #ct-review-cta {
+  font-family: var(--font-head);
+  font-weight: 600;
+  letter-spacing: .01em;
+  transition: background-color .35s var(--ease-soft), border-color .35s var(--ease-soft),
+              box-shadow .35s var(--ease-soft), transform .35s var(--ease-soft);
+}
+#h-cta:hover, #ct-cta:hover { transform: translateY(-2px); box-shadow: 0 14px 28px -12px rgba(155, 28, 28, .65); }
+#h-more:hover               { transform: translateY(-2px); box-shadow: 0 14px 28px -14px rgba(0, 0, 0, .5); }
+#ct-review-cta:hover        { transform: translateY(-2px); box-shadow: 0 14px 28px -12px rgba(196, 147, 74, .6); }
+.btn-sheen::before {
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, .2), transparent);
+  transition: left .9s var(--ease-soft);
+}
+
+/* header & nav */
+header nav, .lang-btn    { font-family: var(--font-head); }
+.nav-link                { font-weight: 500; letter-spacing: .01em; }
+header .nav-link:hover   { color: var(--gold-light); }
+.nav-link::after         { height: 1.5px; bottom: -6px; background: var(--gold-light); transition: width .35s var(--ease-soft); }
+header.site-header-bg    { box-shadow: 0 10px 30px -18px rgba(0, 0, 0, .55); }
+
+/* category cards aren't clickable, so they don't lift — just a quiet
+   border/shadow response. They're .reveal elements with an inline stagger
+   delay (0–240ms); the !important resets it only while hovered, so the
+   response is immediate without breaking the scroll-in stagger. */
+#assortment .grid { gap: 1.25rem; margin-bottom: 4.5rem; }
+#assortment .cat-card {
+  padding: 1.5rem;
+  border-radius: 18px;
+  border: 1px solid var(--hairline);
+  box-shadow: var(--shadow-sm);
+  transition: opacity .8s var(--ease-soft), transform .8s var(--ease-soft),
+              box-shadow .45s var(--ease-soft), border-color .45s var(--ease-soft);
+}
+#assortment .cat-card:hover {
+  transform: translateY(0);
+  background: #fff;
+  border-color: rgba(196, 147, 74, .35);
+  box-shadow: var(--shadow-md);
+  transition-delay: 0s !important;
+}
+#assortment .cat-icon {
+  width: 3rem; height: 3rem; flex: none;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 1.45rem; line-height: 1;
+  background: var(--green-pale);
+  border-radius: 14px;
+  transition: transform .45s var(--ease-soft), background-color .45s var(--ease-soft);
+}
+#assortment .cat-card:hover .cat-icon { transform: scale(1.05); background: #f6efe1; }
+#assortment .cat-card h3 { font-weight: 700; font-size: 1.02rem; letter-spacing: -.01em; margin-bottom: .35rem; }
+
+/* alcohol slider: the track scrolls on x, which forces overflow-y to clip too,
+   so it needs a little vertical room for the hover lift + shadow to show */
+#alc-track { padding-top: 8px; padding-bottom: 28px; }
+#alc-track .prod-card {
+  border-radius: 18px;
+  box-shadow: var(--shadow-sm);
+  transition: transform .45s var(--ease-soft), box-shadow .45s var(--ease-soft);
+}
+#alc-track .prod-card:hover       { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+#alc-track .prod-card img         { transition: transform .8s var(--ease-soft); }
+#alc-track .prod-card:hover img   { transform: scale(1.03); }
+#alc-track .prod-card p,
+#gallery .gal-wrap p              { font-family: var(--font-head); font-weight: 600; letter-spacing: .01em; }
+#assortment .alc-nav-btn          { border: 1px solid var(--hairline); box-shadow: 0 6px 18px -6px rgba(15, 61, 28, .35); }
+#assortment .alc-nav-btn:hover    { transform: translateY(-50%); }
+#assortment .alc-dot              { width: 6px; height: 6px; }
+#assortment .alc-dot.is-active    { width: 20px; }
+
+/* gallery masonry: roomier gutters, gentle zoom, soft lift */
+#gallery .columns-2 { column-gap: 1.25rem; }
+#gallery .break-inside-avoid {
+  margin-bottom: 1.25rem;
+  border-radius: .75rem;
+  transition: transform .45s var(--ease-soft), box-shadow .45s var(--ease-soft);
+}
+@media (min-width: 768px) {
+  #gallery .columns-2          { column-gap: 1.5rem; }
+  #gallery .break-inside-avoid { margin-bottom: 1.5rem; }
+}
+/* the lift lives on the plain masonry wrapper, not on .gal-wrap: .gal-wrap is
+   a .reveal element with an inline transition-delay that would lag the hover */
+#gallery .break-inside-avoid:has(.gal-img):hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+#gallery .gal-img       { transition: transform .8s var(--ease-soft); }
+#gallery .gal-img:hover { transform: scale(1.03); box-shadow: none; }
+#gallery .gal-wrap::after {
+  background: linear-gradient(180deg, rgba(15, 61, 28, 0) 55%, rgba(15, 61, 28, .22) 100%);
+  transition: opacity .45s var(--ease-soft);
+}
+/* the 🔍 emoji becomes a clean white disc with a line-art magnifier */
+#gallery .gal-zoom-icon {
+  font-size: 0;
+  transform: scale(.85);
+  transition: opacity .45s var(--ease-soft), transform .45s var(--ease-soft);
+}
+#gallery .gal-zoom-icon::before {
+  content: '';
+  width: 44px; height: 44px; border-radius: 9999px;
+  background: rgba(255, 255, 255, .94) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a5c2a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M21 21l-4.35-4.35M11 8v6M8 11h6'/%3E%3C/svg%3E") center / 19px 19px no-repeat;
+  box-shadow: 0 8px 20px -8px rgba(0, 0, 0, .45);
+}
+#gallery .gal-wrap:hover .gal-zoom-icon { transform: scale(1); }
+/* the "coming soon" card isn't a photo or a link, so it stays still */
+#gallery .gal-teaser:hover { transform: translateY(0); box-shadow: none; }
+#g-teaser { font-family: var(--font-head); }
+
+
+/* ── Reduced motion: keep the colour/shadow feedback, drop the movement ──── */
+@media (prefers-reduced-motion: reduce) {
+  #h-cta:hover, #h-more:hover, #ct-cta:hover, #ct-review-cta:hover,
+  #alc-track .prod-card:hover, #alc-track .prod-card:hover img,
+  #gallery .break-inside-avoid:hover, #gallery .gal-img:hover,
+  #assortment .cat-card:hover .cat-icon { transform: none !important; }
+}
