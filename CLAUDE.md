@@ -33,6 +33,12 @@ test-video.html             — ⚠️ SANDBOX, not linked from the live site. S
                                NOT carried over when the About-section video was promoted above —
                                don't blind-diff this file into index.html; check what's actually
                                being promoted first.
+                               ⚠️ A "clean business card" redesign (Inter/Montserrat instead of
+                               Georgia/Playfair, decorative blobs/dividers/gold-shimmer removed,
+                               emoji zoom icon swapped for a line-art one, via a separate
+                               test-style.css loaded only here) was tried and explicitly reverted —
+                               client felt it lost the brand's atmosphere. test-style.css has been
+                               deleted; don't recreate that direction without being asked again.
 CLAUDE.md                   — this file
 .gitignore                  — excludes .DS_Store, .wrangler/, .claude/
 images/
