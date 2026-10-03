@@ -27,12 +27,28 @@ index.html                  — entire site (single file) — the LIVE productio
                                slower. Hero is unchanged (still the original photo + .hero-overlay).
 test-video.html             — ⚠️ SANDBOX, not linked from the live site. Still reachable at
                                pannoczka.pl/test-video.html (clean URL /test-video too) for trying
-                               future video ideas. Only differs from index.html by the Hero's
-                               .hero-overlay div, which was removed here during an earlier,
-                               abandoned hero-background-video experiment and was deliberately
-                               NOT carried over when the About-section video was promoted above —
-                               don't blind-diff this file into index.html; check what's actually
-                               being promoted first.
+                               future video ideas. Differs from index.html ONLY in the Hero's
+                               background media — `diff index.html test-video.html` should show a
+                               single hunk (lines ~381-406). There the static banner <img> is swapped
+                               for a silent looping <video id="hero-video"> (autoplay loop muted
+                               playsinline, NO controls, no sound) of images/Videos/pannoczka-main.mp4,
+                               filling the hero exactly like the old image did (absolute inset-0,
+                               object-fit: cover; object-position 50% 20% instead of center because
+                               the clip is PORTRAIT and a centered crop drops the shop sign). The same
+                               .hero-overlay dark-green gradient as index.html sits on top — the white
+                               headline/subtitle were unreadable over the bright footage without it
+                               (an earlier revert had accidentally dropped it from this file). The old
+                               photo's Ken Burns zoom (.hero-bg-anim) is deliberately NOT applied to the
+                               video (the clip has its own motion; saves mobile GPU). A tiny inline
+                               script pauses it under prefers-reduced-motion (poster frame stays), and
+                               the section has a bg-[#0f3d1c] fallback so white text is never on the
+                               cream body colour while the media loads.
+                               Hero-video history: a full-screen background video was tried first and
+                               reverted (client moved the video into About instead); later the client
+                               re-requested it on THIS page only as a controls-free "living banner".
+                               To promote: port just that hero hunk into index.html — don't `cp` this
+                               file over index.html, and after any later index.html change re-sync by
+                               copying index.html over this file and re-applying the hero hunk.
                                ⚠️ A "clean business card" redesign (Inter/Montserrat instead of
                                Georgia/Playfair, decorative blobs/dividers/gold-shimmer removed,
                                emoji zoom icon swapped for a line-art one, via a separate
@@ -52,7 +68,23 @@ images/
   Videos/
     video.mp4               — client-supplied store tour clip (higher-quality re-export, replaced the
                                original store-video.mp4), h264/aac, 720×1280 (portrait), 18.7s, ~6.3MB.
-                               Used ONLY in test-video.html (see above) — not yet in the live index.html.
+                               Used by the About section (#about-video) in BOTH index.html (live) and
+                               test-video.html.
+    pannoczka-main.mp4      — silent hero-banner clip, used ONLY by test-video.html's hero (not in the
+                               live index.html yet). A web re-encode (ffmpeg: h264 High, yuv420p,
+                               1080×1440 portrait, no audio track, rotation baked in, +faststart, 14s,
+                               ~5.5MB, crf 27 / maxrate 3M) of the client's raw iPhone upload, which was
+                               HEVC 1440×1080 with a rotate=-90 flag, 12 Mbps, 24.5MB — too heavy for a
+                               hero and HEVC doesn't play in every browser, hence the re-encode. If the
+                               client sends a new cut, re-encode it the same way rather than dropping it
+                               in raw; keep it named without spaces.
+    pannoczka-main-poster.jpg — 720px-wide first frame of the clip, used as its `poster` (shown while the
+                               video loads, if autoplay is blocked, or under prefers-reduced-motion).
+    pannoczka-main-original.mp4 — the client's untouched upload (it arrived as "Pannoczka main.mp4";
+                               renamed to drop the space). UNREFERENCED source file kept so it can be
+                               re-encoded; deliberately NOT committed (24.5MB). ⚠️ `wrangler pages deploy .`
+                               uploads the whole folder, so it will be published too if it's still here
+                               at deploy time (fits Pages' 25 MiB per-file limit, but it's dead weight).
   Asortyment/               — ⚠️ SOLE source of truth for the Assortment (#assortment) AND Gallery
                                (#gallery) sections' photos. Before adding/removing a photo in either,
                                `ls` this folder (+ Alkohol/) first — don't trust a filename the client
@@ -139,7 +171,7 @@ images/
 RAW/
   Favicon Pannochka_new.png — current logo (used in navbar + favicons)
   Favicon Pannochka.jpeg    — old logo (do not use)
-  viber_image_2026-08-16_16-58-06-361.jpg  — store exterior (hero background) — still in use (Hero)
+  viber_image_2026-08-16_16-58-06-361.jpg  — store exterior (hero background of index.html — still in use there; test-video.html's hero now plays images/Videos/pannoczka-main.mp4 instead)
   viber_image_2026-08-16_12.jpg            — opening promo poster — no longer referenced (About section now shows the video instead; see index.html entry above)
   Gemini_Generated_Image_l0txpll0txpll0tx (1).jpeg  — illustrated menu — ⚠️ RETIRED, same photo-refresh pass as Interior/ above (was in Assortment, not sourced from images/Asortyment/, so removed; category cards now stand alone without it)
   viber_image_2026-08-16_16-15-06-686.jpg  — interior photo 1 — ⚠️ RETIRED (was in Gallery, same reason)
@@ -173,7 +205,7 @@ RAW/
 
 ## Site sections (in order)
 1. **Header** — sticky, logo image (`RAW/Favicon Pannochka_new.png`), nav links, PL/UA toggle, mobile hamburger
-2. **Hero** — full-screen exterior photo, headline, two CTA buttons, hours + address chips
+2. **Hero** — full-screen exterior photo, headline, two CTA buttons, hours + address chips (on the sandbox test-video.html the photo is replaced by a silent looping exterior video — see the test-video.html entry above)
 3. **About** (`#about`) — store description mentioning "produkty z Ukrainy i Wschodu", grand-opening video (`#about-video`, `images/Videos/video.mp4`, autoplay/muted/loop/playsinline/controls, 0.9x playbackRate) in place of the old static poster image
 4. **Assortment** (`#assortment`) — label/title header, then a standalone **category-card grid** (`sm:grid-cols-2 lg:grid-cols-3`, 5 cards: fish, meat, drinks, sweets, preserves — no image alongside them, see photo-refresh note below), then a dedicated **alcohol & energy drinks slider** (`#alc-track`, heading `as-alc-title` / `T.*.assort.alcohol.title`) containing ALL 10 photos from `images/Asortyment/Alkohol/` and nothing else — A1-A6 bottle shots (captioned, `T.*.assort.alcohol.c1..c6`, ids `as-alc-1..6`) + A11/AA12/Alkohol13/Alkohol14 promo posters (uncaptioned). Hand-rolled vanilla-JS carousel (no library), `overflow-x:auto` + `scroll-snap-type:x mandatory` for free touch/trackpad swipe, `.alc-nav-btn` prev/next (`alcSliderMove()`, disabled at either end) + `.alc-dot` position dots driven by one rAF-throttled `scroll` listener that derives the active index from `scrollLeft / (slide width + gap)`, special-cased to snap to the *last* dot once `scrollLeft` hits the scrollable max (with ~3 slides visible at once the last slide(s) can't scroll fully flush-left, so plain division under-counts there — don't simplify that check away). ⚠️ **`loading="lazy"` must NOT be added to the slider's `<img>` tags** — it was tried during the strict-folder-split rebuild and caused a real bug: as each lazy image loaded in, its slide's geometry changed, and because the track has `scroll-snap-type: x`, the browser re-snapped `scrollLeft` to maintain alignment, silently dragging the initial scroll position away from 0 (reproduced reliably, confirmed by removing `loading="lazy"` from just these 10 images and re-testing — the masonry sections below are unaffected since they don't use scroll-snap). The drinks category card (`c-drink-d` / `T.*.assort.drink.d`) mentions alcohol and energy drinks alongside water/juice/soda. ⚠️ **Folder-split history**: this section briefly held a unified "clean shot" masonry (9 Pannoczka photos + 6 Alkohol bottle shots together, no strict folder rule) instead of this slider — the client explicitly reverted that in favor of strict per-folder separation (Alkohol/ → slider here, root Asortyment/ → Gallery masonry only, zero mixing either direction). If you're tempted to merge the two again, don't — ask first, it's been tried and undone once already.
 5. **Gallery** (`#gallery`) — label/title/description header (`T.*.gallery.desc` reads "new arrivals, promotions, and the full assortment" rather than the old "peek inside our store" copy, to match the new content) + one **masonry** (`columns-2 sm:columns-3 lg:columns-4`) containing ALL 21 photos from the ROOT of `images/Asortyment/` (never `/Alkohol/`) and nothing else: 9 clean-shot brand photos (captioned via `T.*.assort.brands.*`, ids `pg-*`) + 12 promo posters (Baguette1, Flint1, GoldenShips, GotoshokVeres, Grinky1, Kontik, MASLO1, Oil1, Pelmeni, Salo, Soda, TavernChips — uncaptioned) — plus the `.gal-teaser` "coming soon" card (`id="g-teaser"`, translated via `T.*.gallery.teaser`), all as `break-inside-avoid` masonry items (`loading="lazy"` is fine here — no scroll-snap involved, see the Assortment slider warning above for why that combo is dangerous specifically). Every photo item uses `.gal-wrap`/`.gal-img`/`.gal-zoom-icon` hover + `.reveal` scroll-animation, lightbox-enabled via `openLb()`; the 9 captioned ones additionally carry a `.prod-card`-style gradient caption `<div>` with `pointer-events-none` (so a click on the caption text still reaches the underlying `<img>` and opens the lightbox — don't drop that attribute if touching this markup). The teaser card has no `onclick`/lightbox (not a photo) and uses its own `.gal-teaser:hover` lift. ⚠️ **Folder-split history**: before the current strict split, this section held real store/product candid photos from `RAW/` + `images/Interior/` (retired earlier) and, briefly, only the "promo poster"-style photos while clean-shot photos lived in Assortment instead — the client reverted THAT split too, so now it's simply "everything at the Asortyment/ root, no exceptions." (Two even older section structures — a separate "Nasze wnętrze" section, and a fixed `grid-cols-2 md:grid-cols-3` with hand-placed spans — are gone for good; don't resurrect either without being asked.)

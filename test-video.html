@@ -378,12 +378,33 @@
 
 
 <!-- ═══════════════════════════════ HERO ════════════════════════════════════ -->
-<section id="hero" class="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-  <img
-    src="RAW/viber_image_2026-08-16_16-58-06-361.jpg"
-    alt="Pannoczka Market – exterior, Żory"
-    class="hero-bg-anim absolute inset-0 w-full h-full object-cover object-center"
-  />
+<section id="hero" class="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-[#0f3d1c]">
+  <!-- Silent looping banner video: fills the section exactly like the old banner <img> did
+       (absolute inset-0, object-fit: cover). No controls, no audio. The clip is portrait, so
+       object-position is nudged toward the top to keep the shop sign / facade in frame in
+       the landscape crop. The poster is the clip's first frame (shown while the file loads,
+       or if the browser blocks autoplay). -->
+  <video
+    id="hero-video"
+    class="absolute inset-0 w-full h-full object-cover object-[50%_20%]"
+    autoplay loop muted playsinline
+    poster="images/Videos/pannoczka-main-poster.jpg"
+    role="img"
+    aria-label="Pannoczka Market – exterior, Żory"
+  >
+    <source src="images/Videos/pannoczka-main.mp4" type="video/mp4" />
+  </video>
+  <script>
+    // Honour "reduce motion": show the poster frame instead of looping the banner video.
+    (function () {
+      var v = document.getElementById('hero-video');
+      if (v && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        v.removeAttribute('autoplay');
+        v.pause();
+      }
+    })();
+  </script>
+  <div class="hero-overlay absolute inset-0"></div>
 
   <div class="relative z-10 text-center text-white px-4 max-w-3xl mx-auto">
 
