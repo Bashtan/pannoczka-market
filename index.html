@@ -260,8 +260,8 @@
       transform: scale(1.08);
     }
 
-    /* ── alcohol & energy drinks slider (Assortment) ── */
-    .alc-track {
+    /* ── photo sliders (Assortment: fresh products + alcohol & energy drinks) ── */
+    .slider-track {
       display: flex;
       gap: 1rem;
       overflow-x: auto;
@@ -271,9 +271,9 @@
       scrollbar-width: none;
       -ms-overflow-style: none;
     }
-    .alc-track::-webkit-scrollbar { display: none; }
-    .alc-slide { scroll-snap-align: start; }
-    .alc-nav-btn {
+    .slider-track::-webkit-scrollbar { display: none; }
+    .slider-slide { scroll-snap-align: start; }
+    .slider-nav-btn {
       position: absolute; top: 50%; transform: translateY(-50%);
       width: 42px; height: 42px; border-radius: 9999px;
       display: flex; align-items: center; justify-content: center;
@@ -282,13 +282,14 @@
       transition: background .25s ease, color .25s ease, transform .25s ease, opacity .25s ease;
       z-index: 10;
     }
-    .alc-nav-btn:hover { background: var(--green-dark); color: #fff; transform: translateY(-50%) scale(1.08); }
-    .alc-nav-btn:disabled { opacity: .35; pointer-events: none; }
-    .alc-nav-prev { left: -6px; }
-    .alc-nav-next { right: -6px; }
-    @media (min-width: 768px) { .alc-nav-prev { left: -20px; } .alc-nav-next { right: -20px; } }
-    .alc-dot { width: 8px; height: 8px; border-radius: 9999px; background: rgba(196,147,74,.35); transition: all .25s ease; }
-    .alc-dot.is-active { width: 22px; background: var(--wood); }
+    .slider-nav-btn:hover { background: var(--green-dark); color: #fff; transform: translateY(-50%) scale(1.08); }
+    .slider-nav-btn:disabled { opacity: .35; pointer-events: none; }
+    .slider-nav-prev { left: -6px; }
+    .slider-nav-next { right: -6px; }
+    /* 12px (not 20): the page gutter is only 16px, so -20 clipped the arrows at the screen edge on tablets */
+    @media (min-width: 768px) { .slider-nav-prev { left: -12px; } .slider-nav-next { right: -12px; } }
+    .slider-dot { width: 8px; height: 8px; border-radius: 9999px; background: rgba(196,147,74,.35); transition: all .25s ease; }
+    .slider-dot.is-active { width: 22px; background: var(--wood); }
 
     /* ── lang toggle active state ── */
     .lang-btn.active {
@@ -378,12 +379,32 @@
 
 
 <!-- ═══════════════════════════════ HERO ════════════════════════════════════ -->
-<section id="hero" class="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-  <img
-    src="RAW/viber_image_2026-08-16_16-58-06-361.jpg"
-    alt="Pannoczka Market – exterior, Żory"
-    class="hero-bg-anim absolute inset-0 w-full h-full object-cover object-center"
-  />
+<section id="hero" class="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-[#0f3d1c]">
+  <!-- Silent looping banner video: fills the section exactly like the old banner <img> did
+       (absolute inset-0, object-fit: cover). No controls, no audio. The clip is portrait, so
+       object-position is nudged toward the top to keep the shop sign / facade in frame in
+       the landscape crop. The poster is the clip's first frame (shown while the file loads,
+       or if the browser blocks autoplay). -->
+  <video
+    id="hero-video"
+    class="absolute inset-0 w-full h-full object-cover object-[50%_20%]"
+    autoplay loop muted playsinline
+    poster="images/Videos/pannoczka-main-poster.jpg"
+    role="img"
+    aria-label="Pannoczka Market – exterior, Żory"
+  >
+    <source src="images/Videos/pannoczka-main.mp4" type="video/mp4" />
+  </video>
+  <script>
+    // Honour "reduce motion": show the poster frame instead of looping the banner video.
+    (function () {
+      var v = document.getElementById('hero-video');
+      if (v && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        v.removeAttribute('autoplay');
+        v.pause();
+      }
+    })();
+  </script>
   <div class="hero-overlay absolute inset-0"></div>
 
   <div class="relative z-10 text-center text-white px-4 max-w-3xl mx-auto">
@@ -543,23 +564,129 @@
       </div>
     </div>
 
+    <!-- Fresh products slider — STRICTLY images/Interior/ only -->
+    <div class="mb-16">
+      <div class="text-center mb-8 reveal">
+        <h3 class="font-display text-xl md:text-2xl font-bold text-[#1a5c2a]" id="as-fresh-title">Różnorodne świeże produkty</h3>
+      </div>
+
+      <div class="relative reveal px-8 md:px-10" data-slider>
+        <button type="button" class="slider-nav-btn slider-nav-prev" onclick="sliderMove(this, -1)" aria-label="Poprzedni produkt">
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        </button>
+        <button type="button" class="slider-nav-btn slider-nav-next" onclick="sliderMove(this, 1)" aria-label="Następny produkt">
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </button>
+
+        <div class="slider-track" id="fresh-track">
+
+          <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
+            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+              <img src="images/Interior/2026-08-28%2011.12.37.jpg" alt="Torty i ciasta w pudełkach w lodówce cukierniczej" class="w-full aspect-square object-cover" />
+            </div>
+          </div>
+
+          <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
+            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+              <img src="images/Interior/2026-08-28%2011.12.54.jpg" alt="Wędzone ryby w ladzie chłodniczej" class="w-full aspect-square object-cover" />
+            </div>
+          </div>
+
+          <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
+            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+              <img src="images/Interior/2026-08-28%2011.13.23.jpg" alt="Kiełbasy i wędliny Saltowski w lodówce sklepowej" class="w-full aspect-square object-cover" />
+            </div>
+          </div>
+
+          <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
+            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+              <img src="images/Interior/2026-08-28%2011.13.35.jpg" alt="Kiełbasa lekarska Saltowski i inne wędliny" class="w-full aspect-square object-cover" />
+            </div>
+          </div>
+
+          <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
+            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+              <img src="images/Interior/2026-08-28%2011.13.45.jpg" alt="Wędliny plastrowane i kiełbasy gotowane" class="w-full aspect-square object-cover" />
+            </div>
+          </div>
+
+          <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
+            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+              <img src="images/Interior/2026-08-28%2011.13.57.jpg" alt="Lodówka z kiełbasami i wędlinami Saltowski" class="w-full aspect-square object-cover" />
+            </div>
+          </div>
+
+          <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
+            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+              <img src="images/Interior/2026-08-28%2011.14.09.jpg" alt="Mrożone owoce morza – krewetki i paluszki krabowe" class="w-full aspect-square object-cover" />
+            </div>
+          </div>
+
+          <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
+            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+              <img src="images/Interior/2026-08-28%2011.14.17.jpg" alt="Mrożonki – pielmieni, nuggetsy i lody w zamrażarce" class="w-full aspect-square object-cover" />
+            </div>
+          </div>
+
+          <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
+            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+              <img src="images/Interior/viber_image_2026-08-28_14-33-19-028.jpg" alt="Mrożone krewetki, ryby i paluszki krabowe" class="w-full aspect-square object-cover" />
+            </div>
+          </div>
+
+          <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
+            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+              <img src="images/Interior/viber_image_2026-08-28_14-33-19-299.jpg" alt="Mrożone pielmieni i nuggetsy w zamrażarce" class="w-full aspect-square object-cover" />
+            </div>
+          </div>
+
+          <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
+            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+              <img src="images/Interior/viber_image_2026-08-28_14-33-20-474.jpg" alt="Ikra, pasty rybne i sałatki w słoiczkach" class="w-full aspect-square object-cover" />
+            </div>
+          </div>
+
+          <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
+            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+              <img src="images/Interior/viber_image_2026-08-28_14-33-21-454.jpg" alt="Suszone ryby w ladzie chłodniczej" class="w-full aspect-square object-cover" />
+            </div>
+          </div>
+
+          <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
+            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+              <img src="images/Interior/viber_image_2026-08-28_14-33-21-931.jpg" alt="Wędzony łosoś i inne ryby w ladzie chłodniczej" class="w-full aspect-square object-cover" />
+            </div>
+          </div>
+
+          <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
+            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+              <img src="images/Interior/viber_image_2026-08-28_14-33-22-786.jpg" alt="Lody Eskimos w zamrażarce" class="w-full aspect-square object-cover" />
+            </div>
+          </div>
+
+        </div>
+
+        <div class="slider-dots flex justify-center gap-2 mt-6" id="fresh-dots"></div>
+      </div>
+    </div>
+
     <!-- Alcohol & energy drinks slider — STRICTLY images/Asortyment/Alkohol/ only -->
     <div>
       <div class="text-center mb-8 reveal">
         <h3 class="font-display text-xl md:text-2xl font-bold text-[#1a5c2a]" id="as-alc-title">Wysokiej jakości wódka, różne wina i napoje energetyczne</h3>
       </div>
 
-      <div class="relative reveal px-8 md:px-10">
-        <button type="button" class="alc-nav-btn alc-nav-prev" onclick="alcSliderMove(-1)" aria-label="Poprzedni produkt">
+      <div class="relative reveal px-8 md:px-10" data-slider>
+        <button type="button" class="slider-nav-btn slider-nav-prev" onclick="sliderMove(this, -1)" aria-label="Poprzedni produkt">
           <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
         </button>
-        <button type="button" class="alc-nav-btn alc-nav-next" onclick="alcSliderMove(1)" aria-label="Następny produkt">
+        <button type="button" class="slider-nav-btn slider-nav-next" onclick="sliderMove(this, 1)" aria-label="Następny produkt">
           <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
         </button>
 
-        <div class="alc-track" id="alc-track">
+        <div class="slider-track" id="alc-track">
 
-          <div class="alc-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
+          <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
             <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
               <img src="images/Asortyment/Alkohol/A1.jpg" alt="Nalewka Wiśniówka Morosha" class="w-full aspect-square object-cover" />
               <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
@@ -568,7 +695,7 @@
             </div>
           </div>
 
-          <div class="alc-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
+          <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
             <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
               <img src="images/Asortyment/Alkohol/A2.jpg" alt="Wódka Khortytsa Platinum" class="w-full aspect-square object-cover" />
               <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
@@ -577,7 +704,7 @@
             </div>
           </div>
 
-          <div class="alc-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
+          <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
             <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
               <img src="images/Asortyment/Alkohol/A3.jpg" alt="Wódka Morosha Carpathian" class="w-full aspect-square object-cover" />
               <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
@@ -586,7 +713,7 @@
             </div>
           </div>
 
-          <div class="alc-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
+          <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
             <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
               <img src="images/Asortyment/Alkohol/A4.jpg" alt="Wódka Sinevir Morosha" class="w-full aspect-square object-cover" />
               <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
@@ -595,7 +722,7 @@
             </div>
           </div>
 
-          <div class="alc-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
+          <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
             <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
               <img src="images/Asortyment/Alkohol/A5.jpg" alt="Wódka Morosha Carpathian 1L" class="w-full aspect-square object-cover" />
               <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
@@ -604,7 +731,7 @@
             </div>
           </div>
 
-          <div class="alc-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
+          <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
             <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
               <img src="images/Asortyment/Alkohol/A6.jpg" alt="Wódka Khortytsa Premium" class="w-full aspect-square object-cover" />
               <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
@@ -613,33 +740,39 @@
             </div>
           </div>
 
-          <div class="alc-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
+          <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
             <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
               <img src="images/Asortyment/Alkohol/A11.jpg" alt="Plakat promocyjny – alkohol w sprzedaży (Martini, Morosha, Sinevir)" class="w-full aspect-square object-cover" />
             </div>
           </div>
 
-          <div class="alc-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
+          <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
             <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
               <img src="images/Asortyment/Alkohol/AA12.jpg" alt="Wódka Morosha – czysty ukraiński charakter" class="w-full aspect-square object-cover" />
             </div>
           </div>
 
-          <div class="alc-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
+          <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
             <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
               <img src="images/Asortyment/Alkohol/Alkohol13.jpg" alt="Napoje energetyczne REVO Alco Energy – black, mango, cherry, silver" class="w-full aspect-square object-cover" />
             </div>
           </div>
 
-          <div class="alc-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
+          <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
             <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
               <img src="images/Asortyment/Alkohol/Alkohol14.jpg" alt="Koktajle Shake – Bora Bora, Mojito, Sex on the Beach" class="w-full aspect-square object-cover" />
             </div>
           </div>
 
+          <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
+            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+              <img src="images/Asortyment/Alkohol/Beer.jpg" alt="Piwa i napoje energetyczne w lodówce sklepowej" class="w-full aspect-square object-cover object-[50%_80%]" />
+            </div>
+          </div>
+
         </div>
 
-        <div class="flex justify-center gap-2 mt-6" id="alc-dots"></div>
+        <div class="slider-dots flex justify-center gap-2 mt-6" id="alc-dots"></div>
       </div>
     </div>
 
@@ -1082,6 +1215,9 @@ const T = {
         halva:     'Chałwa słonecznikowa Zolotoy Vek',
         cornsticks:'Chrupki kukurydziane Salut – salami, bekon, grzyby',
       },
+      fresh: {
+        title: 'Różnorodne świeże produkty',
+      },
       alcohol: {
         title: 'Wysokiej jakości wódka, różne wina i napoje energetyczne',
         c1: 'Nalewka Wiśniówka Morosha',
@@ -1144,6 +1280,9 @@ const T = {
         noodles:   'Локшина швидкого приготування Мівіна',
         halva:     'Соняшникова халва «Золотий Вік»',
         cornsticks:'Кукурудзяні палички Salut – салямі, бекон, гриби',
+      },
+      fresh: {
+        title: 'Різноманітні свіжі продукти',
       },
       alcohol: {
         title: 'Якісна горілка, різноманітне вино та енергетики',
@@ -1223,6 +1362,7 @@ function setLang(lang) {
   setText('pg-noodles',   t.assort.brands.noodles);
   setText('pg-halva',     t.assort.brands.halva);
   setText('pg-cornsticks',t.assort.brands.cornsticks);
+  setText('as-fresh-title', t.assort.fresh.title);
   setText('as-alc-title', t.assort.alcohol.title);
   setText('as-alc-1', t.assort.alcohol.c1);
   setText('as-alc-2', t.assort.alcohol.c2);
@@ -1296,19 +1436,33 @@ function closeLb() {
 }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
 
-// ── Alcohol & energy drinks slider ────────────────────────────────────────────
-(function () {
-  const track = document.getElementById('alc-track');
-  if (!track) return;
-  const slides = [...track.querySelectorAll('.alc-slide')];
-  const dotsWrap = document.getElementById('alc-dots');
-  const prevBtn = document.querySelector('.alc-nav-prev');
-  const nextBtn = document.querySelector('.alc-nav-next');
+// ── Photo sliders (Assortment: fresh products + alcohol & energy drinks) ─────
+// One implementation shared by every `[data-slider]` block: a scroll-snap
+// `.slider-track` (free touch/trackpad swipe), prev/next buttons, and one
+// position dot per slide generated into `.slider-dots`.
+function sliderStep(track) {
+  const cs = getComputedStyle(track);
+  const gap = parseFloat(cs.columnGap || cs.gap || 16);
+  return track.querySelector('.slider-slide').getBoundingClientRect().width + gap;
+}
+
+// onclick handler of the prev/next buttons
+function sliderMove(btn, dir) {
+  const track = btn.closest('[data-slider]').querySelector('.slider-track');
+  track.scrollBy({ left: dir * sliderStep(track), behavior: 'smooth' });
+}
+
+document.querySelectorAll('[data-slider]').forEach(function (root) {
+  const track = root.querySelector('.slider-track');
+  const slides = [...track.querySelectorAll('.slider-slide')];
+  const dotsWrap = root.querySelector('.slider-dots');
+  const prevBtn = root.querySelector('.slider-nav-prev');
+  const nextBtn = root.querySelector('.slider-nav-next');
 
   const dots = slides.map((_, i) => {
     const b = document.createElement('button');
     b.type = 'button';
-    b.className = 'alc-dot';
+    b.className = 'slider-dot';
     b.setAttribute('aria-label', 'Zdjęcie ' + (i + 1));
     b.addEventListener('click', () => {
       track.scrollTo({ left: slides[i].offsetLeft - track.offsetLeft, behavior: 'smooth' });
@@ -1316,11 +1470,6 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); }
     dotsWrap.appendChild(b);
     return b;
   });
-
-  function step() {
-    const gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || 16);
-    return slides[0].getBoundingClientRect().width + gap;
-  }
 
   function setActive(i) {
     dots.forEach((d, j) => d.classList.toggle('is-active', j === i));
@@ -1334,7 +1483,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); }
     // snap to the last dot whenever we've hit the scrollable end.
     const i = track.scrollLeft >= max - 4
       ? slides.length - 1
-      : Math.min(slides.length - 1, Math.max(0, Math.round(track.scrollLeft / step())));
+      : Math.min(slides.length - 1, Math.max(0, Math.round(track.scrollLeft / sliderStep(track))));
     setActive(i);
     if (prevBtn) prevBtn.disabled = track.scrollLeft <= 4;
     if (nextBtn) nextBtn.disabled = track.scrollLeft >= max - 4;
@@ -1346,11 +1495,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); }
 
   setActive(0);
   onScroll();
-
-  window.alcSliderMove = function (dir) {
-    track.scrollBy({ left: dir * step(), behavior: 'smooth' });
-  };
-})();
+});
 
 // ── Scroll reveal (fade + slide-up) ────────────────────────────────────────
 // Runs once at load; setLang() only swaps textContent/innerHTML on the ids
