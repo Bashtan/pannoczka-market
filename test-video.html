@@ -6,8 +6,10 @@
   <meta name="description" content="Pannoczka Market – sklep spożywczy z produktami ukraińskimi i lokalnymi. Żory, ul. Folwarecka 2. Pon–Pt 9–20, Sb–Nd 10–20." />
   <title>Pannoczka Market – Sklep Spożywczy | Żory</title>
 
-  <!-- Google Fonts — display serif for headings, luxury feel -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+  <!-- Google Fonts — Inter (body) + Montserrat (headings); latin-ext + cyrillic subsets are served automatically -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
 
   <!-- Favicons -->
   <link rel="icon" type="image/x-icon"       href="/images/favicon.ico" />
@@ -40,30 +42,51 @@
       --green-dark: #1a5c2a;
       --green:      #2d7a3e;
       --green-deep: #0f3d1c;
-      --green-pale: #e8f5e9;
+      --green-pale: #eef5ef;
       --red:        #9b1c1c;
       --red-deep:   #7f1414;
       --wood:       #c4934a;
       --gold-light: #f0d9a8;
       --gold-deep:  #8a6329;
-      --cream:      #fdf8f0;
+      --ink:        #18211b;   /* body text */
+      --muted:      #5c6860;   /* secondary text */
+      --line:       #e8e6df;   /* hairline borders */
+      --surface:    #f6f5f1;   /* alternate section tint */
       --header-h:   92px;
+      --ease:       cubic-bezier(.22,.61,.36,1);
+      --shadow-sm:  0 1px 2px rgba(16,24,18,.05), 0 6px 16px -8px rgba(16,24,18,.14);
+      --shadow-lg:  0 2px 6px rgba(16,24,18,.05), 0 24px 48px -22px rgba(16,24,18,.40);
     }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
-    body { font-family: Georgia, 'Times New Roman', serif; color: #1a1a1a; background: var(--cream); }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      color: var(--ink);
+      background: #fff;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
 
-    .font-display { font-family: 'Playfair Display', Georgia, 'Times New Roman', serif; }
+    .font-display {
+      font-family: 'Montserrat', 'Inter', system-ui, sans-serif;
+      letter-spacing: -0.02em;
+    }
+    .muted { color: var(--muted); }
 
     /* every section keeps clear of the sticky header on smooth-scroll jumps */
     section[id] { scroll-margin-top: var(--header-h); }
 
-    /* ── rich gradient section backgrounds ── */
-    .site-header-bg { background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-deep) 100%); }
-    .site-contact-bg { background: linear-gradient(160deg, var(--green-dark) 0%, var(--green-deep) 100%); }
+    /* ── flat brand surfaces ── */
+    .site-header-bg {
+      background: rgba(26,92,42,.97);
+      -webkit-backdrop-filter: saturate(140%) blur(10px);
+      backdrop-filter: saturate(140%) blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .site-contact-bg { background: var(--green-deep); }
 
-    /* ── hero overlay (deeper, higher-contrast) ── */
+    /* ── hero overlay: keeps the white headline readable over the bright video ── */
     .hero-overlay {
       background: linear-gradient(
         to bottom,
@@ -73,107 +96,32 @@
       );
     }
 
-    /* slow cinematic pan/zoom of the hero photo on load */
-    .hero-bg-anim {
-      animation: heroKenBurns 22s cubic-bezier(.22,.61,.36,1) forwards;
-      will-change: transform;
-    }
-    @keyframes heroKenBurns {
-      0%   { transform: scale(1) translate(0, 0); }
-      100% { transform: scale(1.12) translate(-1.5%, -1%); }
-    }
-
-    /* ── gold-foil shimmer text (used sparingly, only on dark backgrounds for contrast) ── */
-    .gold-foil {
-      background: linear-gradient(100deg, var(--gold-deep) 0%, var(--wood) 25%, var(--gold-light) 50%, var(--wood) 75%, var(--gold-deep) 100%);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      animation: goldShift 6s ease-in-out infinite;
-    }
-    @keyframes goldShift {
-      0%   { background-position: 0% center; }
-      50%  { background-position: 100% center; }
-      100% { background-position: 0% center; }
-    }
-
-    .tagline-line { background: linear-gradient(90deg, transparent, var(--gold-light), transparent); }
-
-    /* ── section title underline, upgraded to a shimmering gold bar ── */
+    /* ── section title: one calm, static accent line ── */
     .title-rule::after {
       content: '';
       display: block;
-      width: 64px;
-      height: 3px;
-      background: linear-gradient(90deg, var(--gold-deep), var(--gold-light), var(--gold-deep));
-      background-size: 200% auto;
-      margin: 14px auto 0;
+      width: 40px;
+      height: 2px;
+      background: var(--wood);
+      margin: 18px auto 0;
       border-radius: 2px;
-      box-shadow: 0 1px 6px rgba(196,147,74,.5);
-      animation: goldShift 5s ease-in-out infinite;
-    }
-
-    /* ── elegant divider motif between sections ── */
-    .section-divider {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      max-width: 280px;
-      margin: 0 auto;
-      padding: 26px 0;
-      position: relative;
-      z-index: 1;
-    }
-    .sd-line { flex: 1 1 auto; height: 1px; background: linear-gradient(90deg, transparent, var(--wood), transparent); }
-    .sd-gem {
-      width: 9px; height: 9px; flex: none;
-      background: linear-gradient(135deg, var(--gold-light), var(--wood));
-      transform: rotate(45deg);
-      border-radius: 2px;
-      box-shadow: 0 0 8px rgba(196,147,74,.6);
-    }
-
-    /* ── organic blob decoration (background texture only) ── */
-    .blob {
-      position: absolute;
-      border-radius: 60% 40% 55% 45% / 45% 55% 40% 60%;
-      filter: blur(60px);
-      opacity: .3;
-      pointer-events: none;
-      z-index: 0;
-      animation: blobMorph 20s ease-in-out infinite;
-    }
-    .blob-green { background: radial-gradient(circle at 30% 30%, var(--green), transparent 70%); }
-    .blob-gold  { background: radial-gradient(circle at 70% 70%, var(--wood), transparent 70%); }
-    .blob-light-green { background: radial-gradient(circle at 40% 40%, var(--green), transparent 70%); }
-    @keyframes blobMorph {
-      0%, 100% { border-radius: 60% 40% 55% 45% / 45% 55% 40% 60%; transform: rotate(0deg) scale(1); }
-      50%      { border-radius: 45% 55% 40% 60% / 55% 45% 60% 40%; transform: rotate(8deg) scale(1.06); }
     }
 
     /* ── scroll reveal (fade + slide-up) ── */
     .reveal {
       opacity: 0;
-      transform: translateY(28px);
-      transition: opacity .8s cubic-bezier(.22,.61,.36,1), transform .8s cubic-bezier(.22,.61,.36,1);
+      transform: translateY(24px);
+      transition: opacity .7s var(--ease), transform .7s var(--ease);
     }
-    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    .reveal.is-visible { opacity: 1; transform: none; }
 
-    /* ── premium button sheen sweep ── */
-    .btn-sheen { position: relative; overflow: hidden; }
-    .btn-sheen::before {
-      content: '';
-      position: absolute;
-      top: 0; left: -75%;
-      width: 50%; height: 100%;
-      background: linear-gradient(120deg, transparent, rgba(255,255,255,.55), transparent);
-      transform: skewX(-20deg);
-      transition: left .7s ease;
-      pointer-events: none;
+    /* ── buttons: gentle lift + soft shadow ── */
+    .btn-lift {
+      transition: transform .25s var(--ease), box-shadow .25s var(--ease), background-color .25s ease, border-color .25s ease, color .25s ease;
+      box-shadow: 0 6px 16px -10px rgba(0,0,0,.45);
     }
-    .btn-sheen:hover::before { left: 125%; }
+    .btn-lift:active { transform: translateY(0); }
+    .btn-lift:focus-visible { outline: 2px solid var(--wood); outline-offset: 3px; }
 
     /* ── nav link underline ── */
     .nav-link { position: relative; padding-bottom: 2px; }
@@ -182,82 +130,112 @@
       position: absolute;
       left: 0; bottom: -4px;
       width: 0; height: 2px;
-      background: linear-gradient(90deg, var(--wood), var(--gold-light));
-      transition: width .3s ease;
+      background: var(--gold-light);
+      transition: width .3s var(--ease);
       border-radius: 2px;
     }
     .nav-link:hover::after { width: 100%; }
 
-    /* ── social icon lift ── */
-    .social-btn { transition: transform .3s ease, box-shadow .3s ease, background .3s ease; }
-    .social-btn:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 8px 20px rgba(0,0,0,.25); }
+    /* ── social buttons ── */
+    .social-btn { transition: transform .25s var(--ease), box-shadow .25s var(--ease), background .25s ease; }
+
+    /* ── info cards (address / hours / contact) ── */
+    .info-card {
+      background: #fff;
+      color: var(--ink);
+      border-radius: 20px;
+      border: 1px solid rgba(16,24,18,.06);
+      box-shadow: var(--shadow-lg);
+      transition: opacity .7s var(--ease), transform .35s var(--ease), box-shadow .35s var(--ease);
+    }
+    .info-icon {
+      width: 44px; height: 44px; flex: none;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--green-pale);
+      color: var(--green-dark);
+    }
+    .info-label {
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .info-link { display: inline-flex; align-items: center; gap: .35rem; color: var(--green-dark); font-weight: 600; font-size: .875rem; transition: color .25s ease; }
+    .info-link:hover { color: var(--red); }
+    .info-link .arrow { transition: transform .25s var(--ease); }
+    .info-link:hover .arrow { transform: translateX(3px); }
+    .hours-rows > * + * { border-top: 1px solid var(--line); }
 
     /* ── category card ── */
     .cat-card {
       background: #fff;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-sm);
+      transition: opacity .7s var(--ease), transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s ease;
+    }
+    .cat-icon {
+      width: 52px; height: 52px; flex: none;
       border-radius: 14px;
-      box-shadow: 0 3px 14px rgba(0,0,0,.08);
-      border: 1px solid transparent;
-      transition: transform .3s ease, box-shadow .3s ease, background .3s ease, border-color .3s ease;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--surface);
+      transition: background .35s ease, transform .35s var(--ease);
     }
-    .cat-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 14px 32px rgba(0,0,0,.16);
-      border-color: rgba(196,147,74,.35);
-      background: linear-gradient(180deg, #fff, #fbf6ec);
-    }
-    .cat-icon { display: inline-block; transition: transform .35s ease; }
-    .cat-card:hover .cat-icon { transform: scale(1.15) rotate(-4deg); }
 
-    /* ── gallery ── */
-    .gal-img {
-      transition: transform .4s ease, box-shadow .4s ease;
-      cursor: pointer;
+    /* ── gallery (masonry) ── */
+    .gal-wrap {
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: opacity .7s var(--ease), transform .35s var(--ease), box-shadow .35s var(--ease);
     }
-    .gal-img:hover {
-      transform: scale(1.05);
-      box-shadow: 0 12px 28px rgba(0,0,0,.25);
-    }
-    .gal-wrap { position: relative; overflow: hidden; }
+    .gal-img { display: block; cursor: pointer; transition: transform .6s var(--ease); }
     .gal-wrap::after {
       content: '';
       position: absolute; inset: 0;
-      background: linear-gradient(180deg, rgba(15,61,28,0) 45%, rgba(15,61,28,.55) 100%);
+      background: linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(0,0,0,.28) 100%);
       opacity: 0;
       transition: opacity .35s ease;
       pointer-events: none;
     }
-    .gal-wrap:hover::after { opacity: 1; }
     .gal-zoom-icon {
-      position: absolute; inset: 0;
+      position: absolute; top: 10px; right: 10px; z-index: 2;
+      width: 36px; height: 36px; border-radius: 9999px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.5rem;
+      font-size: .95rem;
+      background: rgba(255,255,255,.92);
+      box-shadow: 0 4px 12px rgba(0,0,0,.15);
       opacity: 0;
-      transform: scale(.7);
-      transition: opacity .35s ease, transform .35s ease;
+      transform: translateY(-4px);
+      transition: opacity .3s ease, transform .3s var(--ease);
       pointer-events: none;
     }
-    .gal-wrap:hover .gal-zoom-icon { opacity: 1; transform: scale(1); }
+    .gal-teaser { transition: opacity .7s var(--ease), transform .35s var(--ease), box-shadow .35s var(--ease); }
 
-    /* ── gallery "coming soon" teaser card (fills the trailing grid gap) ── */
-    .gal-teaser { transition: transform .3s ease, box-shadow .3s ease; }
-    .gal-teaser:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0,0,0,.15); }
-
-    /* ── product/brand gallery (Assortment) ── */
+    /* ── product cards inside the sliders ── */
     .prod-card {
-      box-shadow: 0 3px 14px rgba(0,0,0,.10);
-      transition: transform .35s ease, box-shadow .35s ease;
+      box-shadow: var(--shadow-sm);
+      transition: transform .35s var(--ease), box-shadow .35s var(--ease);
       cursor: pointer;
     }
-    .prod-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 16px 36px rgba(0,0,0,.24), 0 0 0 2px rgba(196,147,74,.55) inset;
-    }
-    .prod-card img {
-      transition: transform .5s ease;
-    }
-    .prod-card:hover img {
-      transform: scale(1.08);
+    .prod-card img { transition: transform .6s var(--ease); }
+
+    /* hover effects only where a real pointer can hover (no "stuck" lifts after a tap on phones) */
+    @media (hover: hover) {
+      .btn-lift:hover   { transform: translateY(-2px); box-shadow: 0 14px 26px -12px rgba(0,0,0,.5); }
+      .social-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px -10px rgba(0,0,0,.5); }
+      .info-card:hover  { transform: translateY(-3px); box-shadow: 0 2px 6px rgba(16,24,18,.05), 0 30px 56px -24px rgba(16,24,18,.45); }
+      .cat-card:hover   { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: transparent; }
+      .cat-card:hover .cat-icon { background: var(--green-pale); transform: scale(1.05); }
+      .gal-wrap:hover   { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+      .gal-wrap:hover .gal-img { transform: scale(1.03); }
+      .gal-wrap:hover::after { opacity: 1; }
+      .gal-wrap:hover .gal-zoom-icon { opacity: 1; transform: none; }
+      .gal-teaser:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+      .prod-card:hover  { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+      .prod-card:hover img { transform: scale(1.03); }
     }
 
     /* ── photo sliders (Assortment: fresh products + alcohol & energy drinks) ── */
@@ -270,6 +248,10 @@
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
       -ms-overflow-style: none;
+      /* room for the hover lift + shadow (overflow-x:auto also clips vertically),
+         cancelled out by the negative margin so the layout doesn't move */
+      padding-block: 10px 26px;
+      margin-block: -10px -26px;
     }
     .slider-track::-webkit-scrollbar { display: none; }
     .slider-slide { scroll-snap-align: start; }
@@ -278,18 +260,19 @@
       width: 42px; height: 42px; border-radius: 9999px;
       display: flex; align-items: center; justify-content: center;
       background: #fff; color: var(--green-dark);
-      box-shadow: 0 4px 16px rgba(0,0,0,.2);
-      transition: background .25s ease, color .25s ease, transform .25s ease, opacity .25s ease;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-sm);
+      transition: background .25s ease, color .25s ease, transform .25s var(--ease), opacity .25s ease, box-shadow .25s ease;
       z-index: 10;
     }
-    .slider-nav-btn:hover { background: var(--green-dark); color: #fff; transform: translateY(-50%) scale(1.08); }
+    .slider-nav-btn:hover { background: var(--green-dark); color: #fff; border-color: var(--green-dark); box-shadow: var(--shadow-lg); }
     .slider-nav-btn:disabled { opacity: .35; pointer-events: none; }
     .slider-nav-prev { left: -6px; }
     .slider-nav-next { right: -6px; }
     /* 12px (not 20): the page gutter is only 16px, so -20 clipped the arrows at the screen edge on tablets */
     @media (min-width: 768px) { .slider-nav-prev { left: -12px; } .slider-nav-next { right: -12px; } }
-    .slider-dot { width: 8px; height: 8px; border-radius: 9999px; background: rgba(196,147,74,.35); transition: all .25s ease; }
-    .slider-dot.is-active { width: 22px; background: var(--wood); }
+    .slider-dot { width: 8px; height: 8px; border-radius: 9999px; background: rgba(26,92,42,.18); transition: all .25s ease; }
+    .slider-dot.is-active { width: 22px; background: var(--green-dark); }
 
     /* ── lang toggle active state ── */
     .lang-btn.active {
@@ -317,18 +300,14 @@
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
-      .hero-bg-anim { animation: none !important; transform: none !important; }
-      .blob { animation: none !important; }
-      .gold-foil, .title-rule::after { animation: none !important; }
-      .btn-sheen::before { transition: none !important; }
       * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
     }
   </style>
 </head>
-<body class="bg-[#fdf8f0]">
+<body class="bg-white">
 
 <!-- ═══════════════════════════════ HEADER ══════════════════════════════════ -->
-<header class="site-header-bg text-white sticky top-0 z-50 shadow-lg">
+<header class="site-header-bg text-white sticky top-0 z-50 shadow-sm">
   <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
 
     <!-- Logo -->
@@ -341,11 +320,11 @@
     </a>
 
     <!-- Desktop nav -->
-    <nav class="hidden md:flex items-center gap-6 text-sm font-semibold">
-      <a href="#about"      class="nav-link hover:text-yellow-300 transition-colors" id="n-about">O nas</a>
-      <a href="#assortment" class="nav-link hover:text-yellow-300 transition-colors" id="n-assort">Asortyment</a>
-      <a href="#gallery"    class="nav-link hover:text-yellow-300 transition-colors" id="n-gallery">Galeria</a>
-      <a href="#contact"    class="nav-link hover:text-yellow-300 transition-colors" id="n-contact">Kontakt</a>
+    <nav class="hidden md:flex items-center gap-7 text-sm font-medium">
+      <a href="#about"      class="nav-link hover:text-[#f0d9a8] transition-colors" id="n-about">O nas</a>
+      <a href="#assortment" class="nav-link hover:text-[#f0d9a8] transition-colors" id="n-assort">Asortyment</a>
+      <a href="#gallery"    class="nav-link hover:text-[#f0d9a8] transition-colors" id="n-gallery">Galeria</a>
+      <a href="#contact"    class="nav-link hover:text-[#f0d9a8] transition-colors" id="n-contact">Kontakt</a>
       <div class="flex bg-[#0f3d1c] rounded-full p-0.5 ml-1">
         <button onclick="setLang('pl')" id="btn-pl" class="lang-btn active px-3 py-1 rounded-full text-xs transition-all">PL</button>
         <button onclick="setLang('ua')" id="btn-ua" class="lang-btn       px-3 py-1 rounded-full text-xs transition-all">UA</button>
@@ -368,7 +347,7 @@
 
   <!-- Mobile dropdown -->
   <div id="mob-nav" class="md:hidden bg-[#0f3d1c]">
-    <nav class="flex flex-col px-5 py-4 gap-4 text-sm font-semibold">
+    <nav class="flex flex-col px-5 py-4 gap-4 text-sm font-medium">
       <a href="#about"      onclick="closeMobMenu()" id="mn-about" class="mob-link">O nas</a>
       <a href="#assortment" onclick="closeMobMenu()" id="mn-assort" class="mob-link">Asortyment</a>
       <a href="#gallery"    onclick="closeMobMenu()" id="mn-gallery" class="mob-link">Galeria</a>
@@ -407,93 +386,108 @@
   </script>
   <div class="hero-overlay absolute inset-0"></div>
 
-  <div class="relative z-10 text-center text-white px-4 max-w-3xl mx-auto">
+  <div class="relative z-10 text-center text-white px-4 pt-16 pb-36 md:pt-20 md:pb-44 max-w-3xl mx-auto">
 
-    <div class="flex items-center justify-center gap-3 mb-4">
-      <div class="h-px w-14 tagline-line"></div>
-      <span class="text-yellow-300 text-xs tracking-widest uppercase" id="h-tagline">Sklep Spożywczy</span>
-      <div class="h-px w-14 tagline-line"></div>
-    </div>
+    <p class="text-[#f0d9a8] text-xs md:text-sm font-semibold tracking-[.28em] uppercase mb-5" id="h-tagline">Sklep Spożywczy</p>
 
-    <h1 class="font-display text-5xl md:text-7xl font-bold mb-4 leading-tight drop-shadow-lg" id="h-title">
-      Pannoczka<br/><span class="gold-foil">market</span>
+    <h1 class="font-display text-5xl sm:text-6xl md:text-7xl font-extrabold leading-[1.05] mb-6 drop-shadow-lg" id="h-title">
+      Pannoczka<br/><span class="text-[#f0d9a8]">market</span>
     </h1>
-    <p class="text-lg md:text-xl text-green-100 mb-8 leading-relaxed" id="h-sub">
+    <p class="text-lg md:text-xl text-white/85 mb-10 leading-relaxed" id="h-sub">
       Twój sklep z najlepszymi produktami z Ukrainy i nie tylko!<br/>
       Świeże, smaczne, dostępne każdego dnia.
     </p>
 
-    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
       <a href="https://maps.app.goo.gl/mvTXyahW8R6XbUsF8"
          target="_blank" rel="noopener"
-         class="btn-sheen inline-flex items-center justify-center gap-2 bg-[#9b1c1c] hover:bg-[#7f1414] font-bold px-7 py-3.5 rounded-full shadow-lg transition-all text-sm"
+         class="btn-lift inline-flex items-center justify-center gap-2 bg-[#9b1c1c] hover:bg-[#7f1414] font-semibold px-7 py-3.5 rounded-full text-sm"
          id="h-cta">
         <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
         Sprawdź dojazd
       </a>
       <a href="#about"
-         class="btn-sheen inline-flex items-center justify-center gap-2 bg-white/15 hover:bg-white/25 backdrop-blur font-bold px-7 py-3.5 rounded-full border border-white/40 transition-all text-sm"
+         class="btn-lift inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur font-semibold px-7 py-3.5 rounded-full border border-white/35 text-sm"
          id="h-more">
         Dowiedz się więcej
       </a>
-    </div>
-
-    <!-- Info chips -->
-    <div class="flex flex-wrap justify-center gap-3 mt-10">
-      <div class="flex items-center gap-2 bg-black/25 backdrop-blur rounded-full px-4 py-2 text-xs">
-        <svg class="h-4 w-4 text-yellow-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-        </svg>
-        <span id="h-hours">Pn–Pt: 9:00–20:00 &nbsp;|&nbsp; Sb–Nd: 10:00–20:00</span>
-      </div>
-      <div class="flex items-center gap-2 bg-black/25 backdrop-blur rounded-full px-4 py-2 text-xs">
-        <svg class="h-4 w-4 text-yellow-300 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z"/>
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-        </svg>
-        <span>ul. Folwarecka 2, Żory</span>
-      </div>
     </div>
   </div>
 </section>
 
 
+<!-- ═══════════════ KEY INFO CARDS — hours + address, overlapping the hero ═══════════════ -->
+<div class="relative z-20 px-4 -mt-24 md:-mt-28">
+  <div class="max-w-4xl mx-auto grid sm:grid-cols-2 gap-4 md:gap-5">
+
+    <div class="info-card flex items-start gap-4 p-5 md:p-6">
+      <div class="info-icon">
+        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      </div>
+      <div class="flex-1 min-w-0">
+        <p class="info-label" id="hc-hours-l">Godziny otwarcia</p>
+        <div class="mt-2 space-y-1 text-[15px]">
+          <div class="flex justify-between gap-4">
+            <span class="muted" id="hc-wdays">Pn–Pt</span>
+            <span class="font-semibold tabular-nums whitespace-nowrap">9:00 – 20:00</span>
+          </div>
+          <div class="flex justify-between gap-4">
+            <span class="muted" id="hc-wend">Sb–Nd</span>
+            <span class="font-semibold tabular-nums whitespace-nowrap">10:00 – 20:00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-card flex items-start gap-4 p-5 md:p-6">
+      <div class="info-icon">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+      </div>
+      <div class="flex-1 min-w-0">
+        <p class="info-label" id="hc-addr-l">Adres</p>
+        <p class="mt-2 font-semibold text-[15px] leading-snug">ul. Folwarecka 2, 44-240 Żory</p>
+        <a href="https://maps.app.goo.gl/mvTXyahW8R6XbUsF8" target="_blank" rel="noopener" class="info-link mt-2">
+          <span id="hc-dir">Sprawdź dojazd</span><span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
 <!-- ═══════════════════════════════ ABOUT ═══════════════════════════════════ -->
-<section id="about" class="py-20 bg-white relative overflow-hidden">
-  <div class="blob blob-green hidden md:block" style="width:340px;height:340px;top:-90px;right:-110px;" aria-hidden="true"></div>
-  <div class="blob blob-gold hidden md:block" style="width:260px;height:260px;bottom:-70px;left:-90px;opacity:.22;animation-delay:-6s;" aria-hidden="true"></div>
-  <div class="section-divider" aria-hidden="true"><span class="sd-line"></span><span class="sd-gem"></span><span class="sd-line"></span></div>
+<section id="about" class="pt-20 md:pt-28 pb-24 md:pb-32 bg-white relative overflow-hidden">
   <div class="max-w-6xl mx-auto px-4 relative z-10">
-    <div class="grid md:grid-cols-2 gap-12 items-center">
+    <div class="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
 
       <div class="reveal">
-        <p class="text-[#2d7a3e] text-xs font-bold tracking-widest uppercase mb-2" id="a-label">O nas</p>
-        <h2 class="font-display text-3xl md:text-4xl font-bold text-[#1a5c2a] mb-5 leading-tight" id="a-title">
+        <p class="text-[#2d7a3e] text-xs font-semibold tracking-[.2em] uppercase mb-3" id="a-label">O nas</p>
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-[#1a5c2a] mb-6 leading-tight" id="a-title">
           Smaki Ukrainy blisko Ciebie
         </h2>
-        <p class="text-gray-600 leading-relaxed mb-4" id="a-p1">
+        <p class="muted leading-relaxed mb-4" id="a-p1">
           Pannoczka market to wyjątkowe miejsce w Żorach, gdzie spotkasz autentyczne produkty
           z Ukrainy i Wschodu – tradycyjne wędliny, świeże ryby, domowe przetwory i wiele więcej.
         </p>
-        <p class="text-gray-600 leading-relaxed mb-7" id="a-p2">
+        <p class="muted leading-relaxed mb-8" id="a-p2">
           Nasz asortyment stale się rozszerza o produkty z Ukrainy, krajów wschodnich i lokalnych
           dostawców, bo chcemy, żebyś zawsze znalazł coś wyjątkowego dla siebie i swojej rodziny.
           Zapraszamy wszystkich, którzy cenią jakość i autentyczność.
         </p>
         <div class="flex flex-wrap gap-2.5">
-          <span class="inline-flex items-center gap-1.5 bg-[#f0f9f2] text-[#1a5c2a] text-xs font-semibold px-3 py-1.5 rounded-full border border-[#c3e6cb]" id="b-qual">✓ Jakość i świeżość</span>
-          <span class="inline-flex items-center gap-1.5 bg-[#f0f9f2] text-[#1a5c2a] text-xs font-semibold px-3 py-1.5 rounded-full border border-[#c3e6cb]" id="b-range">✓ Szeroki asortyment</span>
-          <span class="inline-flex items-center gap-1.5 bg-[#f0f9f2] text-[#1a5c2a] text-xs font-semibold px-3 py-1.5 rounded-full border border-[#c3e6cb]" id="b-price">✓ Dostępne ceny</span>
-          <span class="inline-flex items-center gap-1.5 bg-[#f0f9f2] text-[#1a5c2a] text-xs font-semibold px-3 py-1.5 rounded-full border border-[#c3e6cb]" id="b-atm">✓ Przyjazna atmosfera</span>
+          <span class="inline-flex items-center gap-1.5 bg-[#eef5ef] text-[#1a5c2a] text-xs font-medium px-3.5 py-2 rounded-full border border-[#dbe9dd]" id="b-qual">✓ Jakość i świeżość</span>
+          <span class="inline-flex items-center gap-1.5 bg-[#eef5ef] text-[#1a5c2a] text-xs font-medium px-3.5 py-2 rounded-full border border-[#dbe9dd]" id="b-range">✓ Szeroki asortyment</span>
+          <span class="inline-flex items-center gap-1.5 bg-[#eef5ef] text-[#1a5c2a] text-xs font-medium px-3.5 py-2 rounded-full border border-[#dbe9dd]" id="b-price">✓ Dostępne ceny</span>
+          <span class="inline-flex items-center gap-1.5 bg-[#eef5ef] text-[#1a5c2a] text-xs font-medium px-3.5 py-2 rounded-full border border-[#dbe9dd]" id="b-atm">✓ Przyjazna atmosfera</span>
         </div>
       </div>
 
       <div class="relative reveal" style="transition-delay:150ms">
-        <div class="absolute -top-4 -left-4 w-full h-full bg-[#e8f5e9] rounded-2xl -z-0"></div>
         <video
           id="about-video"
           controls autoplay muted loop playsinline
-          class="relative z-10 rounded-2xl shadow-2xl w-full aspect-[3/2] object-cover bg-black"
+          class="relative z-10 rounded-[20px] w-full aspect-[3/2] object-cover bg-black shadow-[0_30px_60px_-30px_rgba(16,24,18,.55)]"
         >
           <source src="images/Videos/video.mp4" type="video/mp4" />
         </video>
@@ -513,59 +507,57 @@
 
 
 <!-- ═══════════════════════════════ ASSORTMENT ══════════════════════════════ -->
-<section id="assortment" class="py-20 bg-[#fdf8f0] relative overflow-hidden">
-  <div class="blob blob-gold hidden md:block" style="width:300px;height:300px;top:35%;right:-120px;opacity:.22;animation-delay:-3s;" aria-hidden="true"></div>
-  <div class="section-divider" aria-hidden="true"><span class="sd-line"></span><span class="sd-gem"></span><span class="sd-line"></span></div>
+<section id="assortment" class="py-24 md:py-32 bg-[#f6f5f1] relative overflow-hidden">
   <div class="max-w-6xl mx-auto px-4 relative z-10">
 
-    <div class="text-center mb-14 reveal">
-      <p class="text-[#2d7a3e] text-xs font-bold tracking-widest uppercase mb-2" id="as-label">Asortyment</p>
+    <div class="text-center mb-14 md:mb-16 reveal">
+      <p class="text-[#2d7a3e] text-xs font-semibold tracking-[.2em] uppercase mb-3" id="as-label">Asortyment</p>
       <h2 class="font-display text-3xl md:text-4xl font-bold text-[#1a5c2a] title-rule" id="as-title">
         Co znajdziesz w naszym sklepie?
       </h2>
     </div>
 
     <!-- Category cards -->
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
-      <div class="cat-card flex items-start gap-4 p-5 reveal" style="transition-delay:0ms">
-        <span class="text-3xl cat-icon">🐟</span>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-20">
+      <div class="cat-card flex items-start gap-4 p-6 reveal" style="transition-delay:0ms">
+        <span class="text-2xl cat-icon" aria-hidden="true">🐟</span>
         <div>
-          <h3 class="font-bold text-[#1a5c2a] mb-1" id="c-fish-t">Ryby i owoce morza</h3>
-          <p class="text-gray-500 text-sm" id="c-fish-d">Świeże i mrożone ryby, łosoś, śledź, owoce morza – prosto z Ukrainy i nie tylko.</p>
+          <h3 class="font-semibold text-[#1a5c2a] mb-1.5" id="c-fish-t">Ryby i owoce morza</h3>
+          <p class="muted text-sm leading-relaxed" id="c-fish-d">Świeże i mrożone ryby, łosoś, śledź, owoce morza – prosto z Ukrainy i nie tylko.</p>
         </div>
       </div>
-      <div class="cat-card flex items-start gap-4 p-5 reveal" style="transition-delay:60ms">
-        <span class="text-3xl cat-icon">🥩</span>
+      <div class="cat-card flex items-start gap-4 p-6 reveal" style="transition-delay:60ms">
+        <span class="text-2xl cat-icon" aria-hidden="true">🥩</span>
         <div>
-          <h3 class="font-bold text-[#1a5c2a] mb-1" id="c-meat-t">Mięso, wędliny i słonina</h3>
-          <p class="text-gray-500 text-sm" id="c-meat-d">Tradycyjne wędliny, sało (słonina wieprzowa), kiełbasy i inne wyroby mięsne.</p>
+          <h3 class="font-semibold text-[#1a5c2a] mb-1.5" id="c-meat-t">Mięso, wędliny i słonina</h3>
+          <p class="muted text-sm leading-relaxed" id="c-meat-d">Tradycyjne wędliny, sało (słonina wieprzowa), kiełbasy i inne wyroby mięsne.</p>
         </div>
       </div>
-      <div class="cat-card flex items-start gap-4 p-5 reveal" style="transition-delay:120ms">
-        <span class="text-3xl cat-icon">🥤</span>
+      <div class="cat-card flex items-start gap-4 p-6 reveal" style="transition-delay:120ms">
+        <span class="text-2xl cat-icon" aria-hidden="true">🥤</span>
         <div>
-          <h3 class="font-bold text-[#1a5c2a] mb-1" id="c-drink-t">Napoje</h3>
-          <p class="text-gray-500 text-sm" id="c-drink-d">Szeroki wybór napojów: wody, soki, napoje gazowane, różne napoje energetyczne i alkohol.</p>
+          <h3 class="font-semibold text-[#1a5c2a] mb-1.5" id="c-drink-t">Napoje</h3>
+          <p class="muted text-sm leading-relaxed" id="c-drink-d">Szeroki wybór napojów: wody, soki, napoje gazowane, różne napoje energetyczne i alkohol.</p>
         </div>
       </div>
-      <div class="cat-card flex items-start gap-4 p-5 reveal" style="transition-delay:180ms">
-        <span class="text-3xl cat-icon">🍬</span>
+      <div class="cat-card flex items-start gap-4 p-6 reveal" style="transition-delay:180ms">
+        <span class="text-2xl cat-icon" aria-hidden="true">🍬</span>
         <div>
-          <h3 class="font-bold text-[#1a5c2a] mb-1" id="c-sweet-t">Słodycze i mrożonki</h3>
-          <p class="text-gray-500 text-sm" id="c-sweet-d">Cukierki, czekolady, ptasie mleczko, lody i bogaty wybór mrożonek.</p>
+          <h3 class="font-semibold text-[#1a5c2a] mb-1.5" id="c-sweet-t">Słodycze i mrożonki</h3>
+          <p class="muted text-sm leading-relaxed" id="c-sweet-d">Cukierki, czekolady, ptasie mleczko, lody i bogaty wybór mrożonek.</p>
         </div>
       </div>
-      <div class="cat-card flex items-start gap-4 p-5 reveal" style="transition-delay:240ms">
-        <span class="text-3xl cat-icon">🫙</span>
+      <div class="cat-card flex items-start gap-4 p-6 reveal" style="transition-delay:240ms">
+        <span class="text-2xl cat-icon" aria-hidden="true">🫙</span>
         <div>
-          <h3 class="font-bold text-[#1a5c2a] mb-1" id="c-pres-t">Przetwory domowe</h3>
-          <p class="text-gray-500 text-sm" id="c-pres-d">Ogórki kiszone, konfitury, ikra bakłażanowa, kapusta kiszona i inne domowe przetwory.</p>
+          <h3 class="font-semibold text-[#1a5c2a] mb-1.5" id="c-pres-t">Przetwory domowe</h3>
+          <p class="muted text-sm leading-relaxed" id="c-pres-d">Ogórki kiszone, konfitury, ikra bakłażanowa, kapusta kiszona i inne domowe przetwory.</p>
         </div>
       </div>
     </div>
 
     <!-- Fresh products slider — STRICTLY images/Interior/ only -->
-    <div class="mb-16">
+    <div class="mb-20">
       <div class="text-center mb-8 reveal">
         <h3 class="font-display text-xl md:text-2xl font-bold text-[#1a5c2a]" id="as-fresh-title">Różnorodne świeże produkty</h3>
       </div>
@@ -581,85 +573,85 @@
         <div class="slider-track" id="fresh-track">
 
           <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
-            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+            <div class="prod-card group relative rounded-2xl overflow-hidden" onclick="openLb(this.querySelector('img').src)">
               <img src="images/Interior/2026-08-28%2011.12.37.jpg" alt="Torty i ciasta w pudełkach w lodówce cukierniczej" class="w-full aspect-square object-cover" />
             </div>
           </div>
 
           <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
-            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+            <div class="prod-card group relative rounded-2xl overflow-hidden" onclick="openLb(this.querySelector('img').src)">
               <img src="images/Interior/2026-08-28%2011.12.54.jpg" alt="Wędzone ryby w ladzie chłodniczej" class="w-full aspect-square object-cover" />
             </div>
           </div>
 
           <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
-            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+            <div class="prod-card group relative rounded-2xl overflow-hidden" onclick="openLb(this.querySelector('img').src)">
               <img src="images/Interior/2026-08-28%2011.13.23.jpg" alt="Kiełbasy i wędliny Saltowski w lodówce sklepowej" class="w-full aspect-square object-cover" />
             </div>
           </div>
 
           <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
-            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+            <div class="prod-card group relative rounded-2xl overflow-hidden" onclick="openLb(this.querySelector('img').src)">
               <img src="images/Interior/2026-08-28%2011.13.35.jpg" alt="Kiełbasa lekarska Saltowski i inne wędliny" class="w-full aspect-square object-cover" />
             </div>
           </div>
 
           <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
-            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+            <div class="prod-card group relative rounded-2xl overflow-hidden" onclick="openLb(this.querySelector('img').src)">
               <img src="images/Interior/2026-08-28%2011.13.45.jpg" alt="Wędliny plastrowane i kiełbasy gotowane" class="w-full aspect-square object-cover" />
             </div>
           </div>
 
           <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
-            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+            <div class="prod-card group relative rounded-2xl overflow-hidden" onclick="openLb(this.querySelector('img').src)">
               <img src="images/Interior/2026-08-28%2011.13.57.jpg" alt="Lodówka z kiełbasami i wędlinami Saltowski" class="w-full aspect-square object-cover" />
             </div>
           </div>
 
           <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
-            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+            <div class="prod-card group relative rounded-2xl overflow-hidden" onclick="openLb(this.querySelector('img').src)">
               <img src="images/Interior/2026-08-28%2011.14.09.jpg" alt="Mrożone owoce morza – krewetki i paluszki krabowe" class="w-full aspect-square object-cover" />
             </div>
           </div>
 
           <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
-            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+            <div class="prod-card group relative rounded-2xl overflow-hidden" onclick="openLb(this.querySelector('img').src)">
               <img src="images/Interior/2026-08-28%2011.14.17.jpg" alt="Mrożonki – pielmieni, nuggetsy i lody w zamrażarce" class="w-full aspect-square object-cover" />
             </div>
           </div>
 
           <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
-            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+            <div class="prod-card group relative rounded-2xl overflow-hidden" onclick="openLb(this.querySelector('img').src)">
               <img src="images/Interior/viber_image_2026-08-28_14-33-19-028.jpg" alt="Mrożone krewetki, ryby i paluszki krabowe" class="w-full aspect-square object-cover" />
             </div>
           </div>
 
           <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
-            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+            <div class="prod-card group relative rounded-2xl overflow-hidden" onclick="openLb(this.querySelector('img').src)">
               <img src="images/Interior/viber_image_2026-08-28_14-33-19-299.jpg" alt="Mrożone pielmieni i nuggetsy w zamrażarce" class="w-full aspect-square object-cover" />
             </div>
           </div>
 
           <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
-            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+            <div class="prod-card group relative rounded-2xl overflow-hidden" onclick="openLb(this.querySelector('img').src)">
               <img src="images/Interior/viber_image_2026-08-28_14-33-20-474.jpg" alt="Ikra, pasty rybne i sałatki w słoiczkach" class="w-full aspect-square object-cover" />
             </div>
           </div>
 
           <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
-            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+            <div class="prod-card group relative rounded-2xl overflow-hidden" onclick="openLb(this.querySelector('img').src)">
               <img src="images/Interior/viber_image_2026-08-28_14-33-21-454.jpg" alt="Suszone ryby w ladzie chłodniczej" class="w-full aspect-square object-cover" />
             </div>
           </div>
 
           <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
-            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+            <div class="prod-card group relative rounded-2xl overflow-hidden" onclick="openLb(this.querySelector('img').src)">
               <img src="images/Interior/viber_image_2026-08-28_14-33-21-931.jpg" alt="Wędzony łosoś i inne ryby w ladzie chłodniczej" class="w-full aspect-square object-cover" />
             </div>
           </div>
 
           <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
-            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+            <div class="prod-card group relative rounded-2xl overflow-hidden" onclick="openLb(this.querySelector('img').src)">
               <img src="images/Interior/viber_image_2026-08-28_14-33-22-786.jpg" alt="Lody Eskimos w zamrażarce" class="w-full aspect-square object-cover" />
             </div>
           </div>
@@ -687,7 +679,7 @@
         <div class="slider-track" id="alc-track">
 
           <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
-            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+            <div class="prod-card group relative rounded-2xl overflow-hidden" onclick="openLb(this.querySelector('img').src)">
               <img src="images/Asortyment/Alkohol/A1.jpg" alt="Nalewka Wiśniówka Morosha" class="w-full aspect-square object-cover" />
               <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
                 <p class="text-white text-xs md:text-sm font-bold leading-tight" id="as-alc-1">Nalewka Wiśniówka Morosha</p>
@@ -696,7 +688,7 @@
           </div>
 
           <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
-            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+            <div class="prod-card group relative rounded-2xl overflow-hidden" onclick="openLb(this.querySelector('img').src)">
               <img src="images/Asortyment/Alkohol/A2.jpg" alt="Wódka Khortytsa Platinum" class="w-full aspect-square object-cover" />
               <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
                 <p class="text-white text-xs md:text-sm font-bold leading-tight" id="as-alc-2">Wódka Khortytsa Platinum</p>
@@ -705,7 +697,7 @@
           </div>
 
           <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
-            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+            <div class="prod-card group relative rounded-2xl overflow-hidden" onclick="openLb(this.querySelector('img').src)">
               <img src="images/Asortyment/Alkohol/A3.jpg" alt="Wódka Morosha Carpathian" class="w-full aspect-square object-cover" />
               <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
                 <p class="text-white text-xs md:text-sm font-bold leading-tight" id="as-alc-3">Wódka Morosha Carpathian</p>
@@ -714,7 +706,7 @@
           </div>
 
           <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
-            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+            <div class="prod-card group relative rounded-2xl overflow-hidden" onclick="openLb(this.querySelector('img').src)">
               <img src="images/Asortyment/Alkohol/A4.jpg" alt="Wódka Sinevir Morosha" class="w-full aspect-square object-cover" />
               <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
                 <p class="text-white text-xs md:text-sm font-bold leading-tight" id="as-alc-4">Wódka Sinevir Morosha</p>
@@ -723,7 +715,7 @@
           </div>
 
           <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
-            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+            <div class="prod-card group relative rounded-2xl overflow-hidden" onclick="openLb(this.querySelector('img').src)">
               <img src="images/Asortyment/Alkohol/A5.jpg" alt="Wódka Morosha Carpathian 1L" class="w-full aspect-square object-cover" />
               <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
                 <p class="text-white text-xs md:text-sm font-bold leading-tight" id="as-alc-5">Wódka Morosha Carpathian 1L</p>
@@ -732,7 +724,7 @@
           </div>
 
           <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
-            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+            <div class="prod-card group relative rounded-2xl overflow-hidden" onclick="openLb(this.querySelector('img').src)">
               <img src="images/Asortyment/Alkohol/A6.jpg" alt="Wódka Khortytsa Premium" class="w-full aspect-square object-cover" />
               <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent px-3 pt-8 pb-3">
                 <p class="text-white text-xs md:text-sm font-bold leading-tight" id="as-alc-6">Wódka Khortytsa Premium</p>
@@ -741,31 +733,31 @@
           </div>
 
           <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
-            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+            <div class="prod-card group relative rounded-2xl overflow-hidden" onclick="openLb(this.querySelector('img').src)">
               <img src="images/Asortyment/Alkohol/A11.jpg" alt="Plakat promocyjny – alkohol w sprzedaży (Martini, Morosha, Sinevir)" class="w-full aspect-square object-cover" />
             </div>
           </div>
 
           <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
-            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+            <div class="prod-card group relative rounded-2xl overflow-hidden" onclick="openLb(this.querySelector('img').src)">
               <img src="images/Asortyment/Alkohol/AA12.jpg" alt="Wódka Morosha – czysty ukraiński charakter" class="w-full aspect-square object-cover" />
             </div>
           </div>
 
           <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
-            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+            <div class="prod-card group relative rounded-2xl overflow-hidden" onclick="openLb(this.querySelector('img').src)">
               <img src="images/Asortyment/Alkohol/Alkohol13.jpg" alt="Napoje energetyczne REVO Alco Energy – black, mango, cherry, silver" class="w-full aspect-square object-cover" />
             </div>
           </div>
 
           <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
-            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+            <div class="prod-card group relative rounded-2xl overflow-hidden" onclick="openLb(this.querySelector('img').src)">
               <img src="images/Asortyment/Alkohol/Alkohol14.jpg" alt="Koktajle Shake – Bora Bora, Mojito, Sex on the Beach" class="w-full aspect-square object-cover" />
             </div>
           </div>
 
           <div class="slider-slide flex-none w-[82%] sm:w-[46%] lg:w-[31%]">
-            <div class="prod-card group relative rounded-2xl overflow-hidden shadow-lg" onclick="openLb(this.querySelector('img').src)">
+            <div class="prod-card group relative rounded-2xl overflow-hidden" onclick="openLb(this.querySelector('img').src)">
               <img src="images/Asortyment/Alkohol/Beer.jpg" alt="Piwa i napoje energetyczne w lodówce sklepowej" class="w-full aspect-square object-cover object-[50%_80%]" />
             </div>
           </div>
@@ -781,15 +773,13 @@
 
 
 <!-- ═══════════════════════════════ GALLERY ═════════════════════════════════ -->
-<section id="gallery" class="py-20 bg-white relative overflow-hidden">
-  <div class="blob blob-green hidden md:block" style="width:280px;height:280px;bottom:-90px;right:-90px;opacity:.2;animation-delay:-9s;" aria-hidden="true"></div>
-  <div class="section-divider" aria-hidden="true"><span class="sd-line"></span><span class="sd-gem"></span><span class="sd-line"></span></div>
+<section id="gallery" class="py-24 md:py-32 bg-white relative overflow-hidden">
   <div class="max-w-6xl mx-auto px-4 relative z-10">
 
-    <div class="text-center mb-12 reveal">
-      <p class="text-[#2d7a3e] text-xs font-bold tracking-widest uppercase mb-2" id="g-label">Galeria</p>
+    <div class="text-center mb-14 md:mb-16 reveal">
+      <p class="text-[#2d7a3e] text-xs font-semibold tracking-[.2em] uppercase mb-3" id="g-label">Galeria</p>
       <h2 class="font-display text-3xl md:text-4xl font-bold text-[#1a5c2a] title-rule" id="g-title">Przekonaj się sam</h2>
-      <p class="text-gray-500 mt-6 max-w-md mx-auto text-sm" id="g-desc">
+      <p class="muted mt-6 max-w-lg mx-auto" id="g-desc">
         Nowości, promocje i pełen asortyment – zawsze coś nowego do odkrycia.
       </p>
     </div>
@@ -974,7 +964,7 @@
       <!-- Coming soon teaser — flows naturally into the masonry, no gap-filling math needed -->
       <div class="break-inside-avoid mb-3 md:mb-4">
         <div class="gal-teaser rounded-xl reveal flex flex-col items-center justify-center text-center gap-3 px-6 py-12"
-             style="transition-delay:60ms; background:linear-gradient(135deg, var(--green-pale) 0%, var(--cream) 55%, var(--gold-light) 140%); border:1px solid rgba(196,147,74,.3);">
+             style="transition-delay:60ms; background:var(--surface); border:1px solid var(--line);">
           <svg class="h-7 w-7 text-[#c4934a]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
           </svg>
@@ -988,117 +978,85 @@
 
 
 <!-- ═══════════════════════════════ CONTACT ═════════════════════════════════ -->
-<section id="contact" class="site-contact-bg text-white py-20 relative overflow-hidden">
-  <div class="blob blob-gold hidden md:block" style="width:320px;height:320px;top:-100px;left:-100px;opacity:.18;" aria-hidden="true"></div>
-  <div class="blob blob-light-green hidden md:block" style="width:280px;height:280px;bottom:-80px;right:-80px;opacity:.22;animation-delay:-5s;" aria-hidden="true"></div>
-  <div class="section-divider" aria-hidden="true"><span class="sd-line"></span><span class="sd-gem"></span><span class="sd-line"></span></div>
+<section id="contact" class="site-contact-bg text-white py-24 md:py-32 relative overflow-hidden">
   <div class="max-w-6xl mx-auto px-4 relative z-10">
 
-    <div class="text-center mb-12 reveal">
-      <p class="text-green-300 text-xs font-bold tracking-widest uppercase mb-2" id="ct-label">Kontakt</p>
-      <h2 class="font-display text-3xl md:text-4xl font-bold gold-foil" id="ct-title">Znajdź nas</h2>
+    <div class="text-center mb-14 md:mb-16 reveal">
+      <p class="text-[#9fd3ad] text-xs font-semibold tracking-[.2em] uppercase mb-3" id="ct-label">Kontakt</p>
+      <h2 class="font-display text-3xl md:text-4xl font-bold text-white" id="ct-title">Znajdź nas</h2>
     </div>
 
-    <div class="grid md:grid-cols-2 gap-10 items-start">
+    <!-- Info cards: address · hours · e-mail + social -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
 
-      <!-- Info -->
-      <div class="space-y-8 reveal">
-
-        <div class="flex items-start gap-4">
-          <div class="bg-white/10 rounded-full p-3 flex-shrink-0">
-            <svg class="h-5 w-5 text-yellow-300" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-            </svg>
-          </div>
-          <div>
-            <p class="font-bold text-lg" id="ct-addr-l">Adres</p>
-            <p class="text-green-200 mt-1 leading-relaxed">ul. Folwarecka 2<br/>44-240 Żory, Polska</p>
-          </div>
+      <div class="info-card p-6 md:p-7 flex flex-col reveal">
+        <div class="info-icon mb-5">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
         </div>
-
-        <div class="flex items-start gap-4">
-          <div class="bg-white/10 rounded-full p-3 flex-shrink-0">
-            <svg class="h-5 w-5 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-            </svg>
-          </div>
-          <div>
-            <p class="font-bold text-lg" id="ct-email-l">E-mail</p>
-            <a href="mailto:pannoczkamarket@gmail.com"
-               class="text-green-200 hover:text-yellow-300 transition-colors mt-1 block break-all">
-              pannoczkamarket@gmail.com
-            </a>
-          </div>
+        <p class="info-label" id="ct-addr-l">Adres</p>
+        <p class="mt-2 text-lg font-semibold leading-snug">ul. Folwarecka 2<br/>44-240 Żory, Polska</p>
+        <div class="mt-auto pt-6">
+          <a href="https://maps.app.goo.gl/mvTXyahW8R6XbUsF8"
+             target="_blank" rel="noopener"
+             class="btn-lift inline-flex items-center gap-2 bg-[#9b1c1c] hover:bg-[#7f1414] text-white font-semibold px-5 py-3 rounded-full text-sm"
+             id="ct-cta">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            Sprawdź dojazd w Google Maps
+          </a>
         </div>
-
-        <div class="flex items-start gap-4">
-          <div class="bg-white/10 rounded-full p-3 flex-shrink-0">
-            <svg class="h-5 w-5 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/>
-            </svg>
-          </div>
-          <div>
-            <p class="font-bold text-lg" id="ct-social-l">Obserwuj nas</p>
-            <div class="flex flex-wrap items-center gap-3 mt-3">
-              <a href="https://www.facebook.com/people/Pannoczka-Market/61593312664059/"
-                 target="_blank" rel="noopener" aria-label="Facebook"
-                 class="social-btn inline-flex items-center gap-2 bg-[#1877F2] hover:bg-[#0d65d9] text-white text-xs font-bold px-4 py-2 rounded-full shadow transition-all">
-                <svg class="h-4 w-4 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                </svg>
-                Facebook
-              </a>
-              <a href="https://www.instagram.com/pannoczkamarket/"
-                 target="_blank" rel="noopener" aria-label="Instagram"
-                 class="social-btn inline-flex items-center gap-2 text-white text-xs font-bold px-4 py-2 rounded-full shadow transition-all"
-                 style="background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);">
-                <svg class="h-4 w-4 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
-                </svg>
-                Instagram
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div class="flex items-start gap-4">
-          <div class="bg-white/10 rounded-full p-3 flex-shrink-0">
-            <svg class="h-5 w-5 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-          </div>
-          <div>
-            <p class="font-bold text-lg" id="ct-hours-l">Godziny otwarcia</p>
-            <div class="text-green-200 mt-2 space-y-1.5 text-sm">
-              <div class="flex justify-between gap-6">
-                <span id="ct-wdays">Poniedziałek – Piątek</span>
-                <span class="font-mono font-bold">9:00 – 20:00</span>
-              </div>
-              <div class="flex justify-between gap-6">
-                <span id="ct-wend">Sobota – Niedziela</span>
-                <span class="font-mono font-bold">10:00 – 20:00</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <a href="https://maps.app.goo.gl/mvTXyahW8R6XbUsF8"
-           target="_blank" rel="noopener"
-           class="btn-sheen inline-flex items-center gap-2 bg-[#9b1c1c] hover:bg-[#7f1414] text-white font-bold px-6 py-3 rounded-full shadow-lg transition-all text-sm"
-           id="ct-cta">
-          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-          </svg>
-          Sprawdź dojazd w Google Maps
-        </a>
       </div>
 
-      <!-- Map embed -->
-      <div class="rounded-2xl overflow-hidden shadow-2xl h-72 md:h-80 reveal" style="transition-delay:150ms">
+      <div class="info-card p-6 md:p-7 flex flex-col reveal" style="transition-delay:80ms">
+        <div class="info-icon mb-5">
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <p class="info-label" id="ct-hours-l">Godziny otwarcia</p>
+        <div class="hours-rows mt-3 text-[15px]">
+          <div class="flex justify-between gap-6 py-2.5">
+            <span class="muted" id="ct-wdays">Poniedziałek – Piątek</span>
+            <span class="font-semibold tabular-nums whitespace-nowrap">9:00 – 20:00</span>
+          </div>
+          <div class="flex justify-between gap-6 py-2.5">
+            <span class="muted" id="ct-wend">Sobota – Niedziela</span>
+            <span class="font-semibold tabular-nums whitespace-nowrap">10:00 – 20:00</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card p-6 md:p-7 flex flex-col sm:col-span-2 lg:col-span-1 reveal" style="transition-delay:160ms">
+        <div class="info-icon mb-5">
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        </div>
+        <p class="info-label" id="ct-email-l">E-mail</p>
+        <a href="mailto:pannoczkamarket@gmail.com"
+           class="mt-2 text-lg font-semibold text-[#1a5c2a] hover:text-[#9b1c1c] transition-colors break-all">
+          pannoczkamarket@gmail.com
+        </a>
+        <p class="info-label mt-6" id="ct-social-l">Obserwuj nas</p>
+        <div class="flex flex-wrap items-center gap-3 mt-3">
+          <a href="https://www.facebook.com/people/Pannoczka-Market/61593312664059/"
+             target="_blank" rel="noopener" aria-label="Facebook"
+             class="social-btn inline-flex items-center gap-2 bg-[#1877F2] hover:bg-[#0d65d9] text-white text-xs font-semibold px-4 py-2 rounded-full">
+            <svg class="h-4 w-4 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            Facebook
+          </a>
+          <a href="https://www.instagram.com/pannoczkamarket/"
+             target="_blank" rel="noopener" aria-label="Instagram"
+             class="social-btn inline-flex items-center gap-2 text-white text-xs font-semibold px-4 py-2 rounded-full"
+             style="background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);">
+            <svg class="h-4 w-4 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            Instagram
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Map + review -->
+    <div class="grid lg:grid-cols-5 gap-5 mt-5">
+      <div class="lg:col-span-3 relative rounded-[20px] overflow-hidden h-72 md:h-96 lg:h-auto lg:min-h-[22rem] shadow-[0_24px_48px_-22px_rgba(0,0,0,.6)] reveal" style="transition-delay:120ms">
         <iframe
           src="https://www.google.com/maps?q=50.0433809,18.6890681&output=embed"
-          width="100%"
-          height="100%"
+          class="absolute inset-0 w-full h-full"
           style="border:0;"
           allowfullscreen
           loading="lazy"
@@ -1106,30 +1064,27 @@
           title="Pannoczka Market – mapa"
         ></iframe>
       </div>
-    </div>
 
-    <!-- Leave a Review -->
-    <div class="mt-10 reveal" style="transition-delay:200ms">
-      <div class="bg-white/10 backdrop-blur rounded-2xl border border-[#c4934a]/30 p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
-        <div>
-          <p class="text-yellow-300 text-xs font-bold tracking-widest uppercase mb-2" id="ct-review-l">Twoja opinia się liczy</p>
-          <h3 class="font-display text-2xl md:text-3xl font-bold gold-foil mb-3" id="ct-review-t">Podobało Ci się u nas?</h3>
-          <p class="text-green-200 text-sm max-w-sm mb-5" id="ct-review-d">
+      <div class="lg:col-span-2 info-card p-6 md:p-8 flex flex-col sm:flex-row lg:flex-col items-center sm:items-start gap-6 text-center sm:text-left reveal" style="transition-delay:200ms">
+        <div class="flex-1">
+          <p class="info-label text-[#8a6329]" id="ct-review-l">Twoja opinia się liczy</p>
+          <h3 class="font-display text-2xl font-bold text-[#1a5c2a] mt-2 mb-3" id="ct-review-t">Podobało Ci się u nas?</h3>
+          <p class="muted text-sm leading-relaxed mb-6" id="ct-review-d">
             Zostaw nam opinię w Google – zajmie to tylko chwilę i naprawdę nam pomaga.
           </p>
           <a href="https://g.page/r/CZn7h-8vIObLEBM/review"
              target="_blank" rel="noopener"
-             class="btn-sheen inline-flex items-center gap-2 bg-[#c4934a] hover:bg-[#b17f3a] text-[#1a5c2a] font-bold px-6 py-3 rounded-full shadow-lg transition-all text-sm"
+             class="btn-lift inline-flex items-center gap-2 bg-[#1a5c2a] hover:bg-[#14481f] text-white font-semibold px-5 py-3 rounded-full text-sm"
              id="ct-review-cta">
             <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 19.771l-7.416 3.642 1.48-8.279L0 9.306l8.332-1.151z"/></svg>
             Zostaw opinię
           </a>
         </div>
         <div class="flex flex-col items-center gap-2 flex-shrink-0">
-          <div class="bg-white p-2.5 rounded-2xl shadow-xl">
-            <img src="images/qr-review.png" alt="Kod QR – zostaw opinię w Google" class="w-28 h-28 md:w-32 md:h-32 object-contain rounded" />
+          <div class="bg-white p-2.5 rounded-2xl border border-[#e8e6df]">
+            <img src="images/qr-review.png" alt="Kod QR – zostaw opinię w Google" class="w-28 h-28 object-contain rounded" />
           </div>
-          <p class="text-green-200/80 text-xs" id="ct-review-qr">Zeskanuj telefonem</p>
+          <p class="muted text-xs" id="ct-review-qr">Zeskanuj telefonem</p>
         </div>
       </div>
     </div>
@@ -1138,11 +1093,11 @@
 
 
 <!-- ═══════════════════════════════ FOOTER ══════════════════════════════════ -->
-<footer class="bg-[#0f3d1c] text-green-400 text-center text-xs py-5 px-4 space-y-2">
+<footer class="bg-[#0b2f15] border-t border-white/10 text-white/60 text-center text-xs py-10 px-4 space-y-3">
   <p id="ft-copy">© 2026 Pannoczka Market – Sklep Spożywczy. Żory, ul. Folwarecka 2.</p>
   <p>
     <a href="mailto:pannoczkamarket@gmail.com"
-       class="hover:text-yellow-300 transition-colors">
+       class="hover:text-[#f0d9a8] transition-colors">
       pannoczkamarket@gmail.com
     </a>
   </p>
@@ -1187,7 +1142,7 @@ const T = {
       sub:     'Twój sklep z najlepszymi produktami z Ukrainy i nie tylko!<br/>Świeże, smaczne, dostępne każdego dnia.',
       cta:     'Sprawdź dojazd',
       more:    'Dowiedz się więcej',
-      hours:   'Pn–Pt: 9:00–20:00 &nbsp;|&nbsp; Sb–Nd: 10:00–20:00',
+      wdays:   'Pn–Pt', wend: 'Sb–Nd',   // short day names for the hero hours card
     },
     about: {
       label: 'O nas',
@@ -1253,7 +1208,7 @@ const T = {
       sub:     'Твій магазин найкращих продуктів з України та не тільки!<br/>Свіже, смачне, доступне щодня.',
       cta:     'Прокласти маршрут',
       more:    'Дізнатися більше',
-      hours:   'Пн–Пт: 9:00–20:00 &nbsp;|&nbsp; Сб–Нд: 10:00–20:00',
+      wdays:   'Пн–Пт', wend: 'Сб–Нд',
     },
     about: {
       label: 'Про нас',
@@ -1331,9 +1286,14 @@ function setLang(lang) {
   // Hero
   setText('h-tagline', t.hero.tagline);
   setHTML('h-sub',     t.hero.sub);
-  setHTML('h-hours',   t.hero.hours);
   setBtn('h-cta', pinIcon() + ' ' + t.hero.cta);
   setText('h-more', t.hero.more);
+  // Key info cards under the hero (reuse the Contact strings)
+  setText('hc-hours-l', t.contact.hoursL);
+  setText('hc-wdays',   t.hero.wdays);
+  setText('hc-wend',    t.hero.wend);
+  setText('hc-addr-l',  t.contact.addrL);
+  setText('hc-dir',     t.hero.cta);
 
   // About
   setText('a-label', t.about.label);
