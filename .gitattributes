@@ -1,0 +1,5 @@
+# Left out of `git archive`, which builds the folder deployed to pannoczka.pl.
+# These files stay in the GitHub repository but must never be served publicly.
+CLAUDE.md export-ignore
+.gitignore export-ignore
+.gitattributes export-ignore

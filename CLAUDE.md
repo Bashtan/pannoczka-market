@@ -11,7 +11,7 @@ Single-page landing website for **Pannoczka market** — a Ukrainian grocery sto
 - Pure **HTML5 + CSS3** — no framework, no build step
 - **Tailwind CSS** via CDN (no npm needed)
 - Vanilla JavaScript for language toggle and mobile menu
-- Deployed via `npx wrangler pages deploy . --project-name pannoczka-market --branch main`
+- Deployed from a clean `git archive` export that leaves out CLAUDE.md, never with `deploy .` (see "Cloudflare deployment" below)
 
 ## File structure
 ```
@@ -54,7 +54,9 @@ test-video.html             — ⚠️ SANDBOX, not linked from the live site. R
                                production; that is now live (see "Design system" below). It deliberately
                                keeps what the client missed the first time: the green/burgundy/gold
                                palette, the emoji category icons and the 🔍 gallery zoom emoji.
-CLAUDE.md                   — this file
+404.html                    — real 404 page for unknown paths (bilingual, noindex, root-relative links)
+CLAUDE.md                   — this file (in GitHub, never deployed: see "Cloudflare deployment")
+.gitattributes              — marks CLAUDE.md and the git dotfiles export-ignore, so `git archive` leaves them out
 .gitignore                  — excludes .DS_Store, .wrangler/, .claude/
 images/
   favicon.ico               — 16+32px, generated from RAW/Favicon Pannochka_new.png
@@ -247,11 +249,11 @@ RAW/
 
 ## Cloudflare deployment
 - Account ID: e8eeb644ca96a2d4cb2a9674ea599e79
-- Deploy command: `npx wrangler pages deploy . --project-name pannoczka-market --branch main`
-  ⚠️ `deploy .` uploads EVERYTHING in the folder, tracked or not — an untracked scratch file (e.g. a raw 24MB video once sat in images/Videos/) would go public. Prefer deploying a clean export of the pushed commit: `git archive HEAD | tar -x -C "$TMP/deploy"`, then `npx wrangler pages deploy "$TMP/deploy" --project-name pannoczka-market --branch main` (the last deploys did this). Commit every new asset first, or it won't ship.
+- Deploy command, from a clean export of the commit: `git archive HEAD | tar -x -C "$TMP/deploy"`, then `npx wrangler pages deploy "$TMP/deploy" --project-name pannoczka-market --branch main`. Commit every new asset first, or it won't ship.
+  ⚠️ Never run `wrangler pages deploy .`: it uploads EVERYTHING in the folder, tracked or not, including this file (account ID, owner e-mail, internal notes) and any untracked scratch file (e.g. a raw 24MB video once sat in images/Videos/). `.gitattributes` marks this file `export-ignore`, so `git archive` leaves it out while it stays in GitHub; don't remove that rule. This file was publicly readable at /CLAUDE.md until 2026-11-08. Older deployments keep their own copy on their `<hash>.pannoczka-market.pages.dev` URLs unless those deployments are deleted. After every deploy, check that /CLAUDE.md returns 404.
 - Custom domains bound via Cloudflare API (both pannoczka.pl and www.pannoczka.pl are active). A deploy appears on its `*.pages.dev` URL first; the custom domains can lag ~15–20s.
 - Auth: the wrangler OAuth login in `~/.wrangler/config/default.toml` has expired, so deploys need `CLOUDFLARE_API_TOKEN` (+ `CLOUDFLARE_ACCOUNT_ID` above), which the client supplies per deploy. Set them inline for that one command (the Bash tool doesn't keep env vars between calls); never write a token to a file or commit it.
-- Pages quirks worth knowing when verifying: `/page.html` 308-redirects to `/page` (use `curl -L`); unknown paths fall back to index.html with HTTP 200 (SPA mode), so check the content-type, not just the status, when probing a file that should NOT exist; byte-range requests return 206 on the custom domains (Safari needs that for video) but not on the `*.pages.dev` URL.
+- Pages quirks worth knowing when verifying: `/page.html` 308-redirects to `/page` (use `curl -L`); unknown paths get 404.html with a real HTTP 404 (don't delete that file: without a root 404.html, Pages falls back to index.html with HTTP 200, which is why missing paths looked like the homepage until 2026-11-08); byte-range requests return 206 on the custom domains (Safari needs that for video) but not on the `*.pages.dev` URL.
 
 ## Favicon/image generation
 Assets are generated with Pillow (Python). Source is `RAW/Favicon Pannochka_new.png` (2048×... px, white bg).
