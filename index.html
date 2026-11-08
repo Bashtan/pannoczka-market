@@ -36,6 +36,52 @@
   <meta name="twitter:description" content="Świeże produkty z Ukrainy i nie tylko. Żory, ul. Folwarecka 2." />
   <meta name="twitter:image"       content="https://pannoczka.pl/images/og-image.jpg" />
 
+  <!-- Local business structured data (schema.org) — keep in sync with the store details on the page -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "GroceryStore",
+    "@id": "https://pannoczka.pl/#store",
+    "name": "Pannoczka Market",
+    "description": "Sklep spożywczy z produktami z Ukrainy i Wschodu oraz produktami lokalnymi w Żorach.",
+    "url": "https://pannoczka.pl/",
+    "image": "https://pannoczka.pl/images/og-image.jpg",
+    "logo": "https://pannoczka.pl/RAW/Favicon%20Pannochka_new.png",
+    "email": "pannoczkamarket@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "ul. Folwarecka 2",
+      "addressLocality": "Żory",
+      "postalCode": "44-240",
+      "addressCountry": "PL"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 50.0433809,
+      "longitude": 18.6890681
+    },
+    "hasMap": "https://maps.app.goo.gl/mvTXyahW8R6XbUsF8",
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "09:00",
+        "closes": "20:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Saturday", "Sunday"],
+        "opens": "10:00",
+        "closes": "20:00"
+      }
+    ],
+    "sameAs": [
+      "https://www.facebook.com/people/Pannoczka-Market/61593312664059/",
+      "https://www.instagram.com/pannoczkamarket/"
+    ]
+  }
+  </script>
+
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     :root {
@@ -48,11 +94,15 @@
       --wood:       #c4934a;
       --gold-light: #f0d9a8;
       --gold-deep:  #8a6329;
+      --fresh:      #4cc764;   /* bright accent: main hero CTA, mobile bar */
+      --fresh-deep: #3db355;
+      --on-fresh:   #0b2f15;   /* text on --fresh */
       --ink:        #18211b;   /* body text */
       --muted:      #5c6860;   /* secondary text */
       --line:       #e8e6df;   /* hairline borders */
       --surface:    #f6f5f1;   /* alternate section tint */
       --header-h:   92px;
+      --mob-bar-h:  64px;
       --ease:       cubic-bezier(.22,.61,.36,1);
       --shadow-sm:  0 1px 2px rgba(16,24,18,.05), 0 6px 16px -8px rgba(16,24,18,.14);
       --shadow-lg:  0 2px 6px rgba(16,24,18,.05), 0 24px 48px -22px rgba(16,24,18,.40);
@@ -95,6 +145,38 @@
         rgba(15,61,28,.88) 100%
       );
     }
+
+    /* ── hero trust strip: badges that wrap cleanly on phones, one dotted line from sm up ── */
+    .trust-strip {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem;
+      font-size: .8125rem; font-weight: 500; color: #fff;
+    }
+    .trust-strip li {
+      padding: .25rem .7rem;
+      border-radius: 9999px;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.22);
+    }
+    @media (min-width: 640px) {
+      .trust-strip { gap: 0; font-size: .9375rem; text-shadow: 0 1px 8px rgba(0,0,0,.45); }
+      .trust-strip li { padding: 0; background: none; border: 0; }
+      .trust-strip li + li::before { content: '•'; margin: 0 .7em; color: var(--gold-light); }
+    }
+
+    /* ── "open now" badge: stays hidden until the script has set its state ── */
+    .open-badge {
+      display: none;
+      align-items: center; gap: .5rem;
+      padding: .4rem .85rem;
+      border-radius: 9999px;
+      background: #fff;
+      color: var(--ink);
+      font-size: .8125rem; font-weight: 600; white-space: nowrap;
+      box-shadow: var(--shadow-sm);
+    }
+    .open-badge.is-open, .open-badge.is-closed { display: inline-flex; }
+    .open-dot { width: 8px; height: 8px; flex: none; border-radius: 9999px; background: var(--red); }
+    .is-open .open-dot { background: #22a24a; box-shadow: 0 0 0 3px rgba(34,162,74,.22); }
 
     /* ── section title: one calm, static accent line ── */
     .title-rule::after {
@@ -296,6 +378,29 @@
     .mob-link { transition: color .25s ease, padding-left .25s ease; }
     .mob-link:hover { color: var(--gold-light); padding-left: 8px; }
 
+    /* ── mobile action bar (phones only): native-style bottom tab bar ── */
+    .mob-bar {
+      height: var(--mob-bar-h);
+      background: rgba(255,255,255,.96);
+      -webkit-backdrop-filter: saturate(140%) blur(10px);
+      backdrop-filter: saturate(140%) blur(10px);
+      border-top: 1px solid var(--line);
+      box-shadow: 0 -8px 24px -16px rgba(16,24,18,.35);
+    }
+    .mob-bar-item {
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+      font-size: .6875rem; font-weight: 600;
+      color: var(--green-dark);
+      -webkit-tap-highlight-color: transparent;
+      transition: background-color .2s ease;
+    }
+    .mob-bar-item:active { background: var(--green-pale); }
+    .mob-bar-item:focus-visible { outline: 2px solid var(--wood); outline-offset: -3px; }
+    .mob-bar-icon { width: 52px; height: 28px; border-radius: 9999px; display: flex; align-items: center; justify-content: center; }
+    .mob-bar-primary .mob-bar-icon { background: var(--fresh); color: var(--on-fresh); }
+    /* keeps the end of the page clear of the bar */
+    @media (max-width: 767px) { body { padding-bottom: var(--mob-bar-h); } }
+
     /* ── accessibility: respect reduced-motion preference ── */
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -386,30 +491,36 @@
   </script>
   <div class="hero-overlay absolute inset-0"></div>
 
-  <div class="relative z-10 text-center text-white px-4 pt-16 pb-36 md:pt-20 md:pb-44 max-w-3xl mx-auto">
+  <div class="relative z-10 text-center text-white px-4 pt-16 pb-44 md:pt-20 md:pb-48 max-w-3xl mx-auto">
 
     <p class="text-[#f0d9a8] text-xs md:text-sm font-semibold tracking-[.28em] uppercase mb-5" id="h-tagline">Sklep Spożywczy</p>
 
     <h1 class="font-display text-5xl sm:text-6xl md:text-7xl font-extrabold leading-[1.05] mb-6 drop-shadow-lg" id="h-title">
       Pannoczka<br/><span class="text-[#f0d9a8]">market</span>
     </h1>
-    <p class="text-lg md:text-xl text-white/85 mb-10 leading-relaxed" id="h-sub">
+    <p class="text-lg md:text-xl text-white/85 mb-5 leading-relaxed" id="h-sub">
       Twój sklep z najlepszymi produktami z Ukrainy i nie tylko!<br/>
       Świeże, smaczne, dostępne każdego dnia.
     </p>
 
+    <ul class="trust-strip mb-9">
+      <li id="h-trust-1">Ukraińskie produkty</li>
+      <li id="h-trust-2">Świeże ryby</li>
+      <li id="h-trust-3">Domowe przetwory</li>
+    </ul>
+
     <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
       <a href="https://maps.app.goo.gl/mvTXyahW8R6XbUsF8"
          target="_blank" rel="noopener"
-         class="btn-lift inline-flex items-center justify-center gap-2 bg-[#9b1c1c] hover:bg-[#7f1414] font-semibold px-7 py-3.5 rounded-full text-sm"
+         class="btn-lift inline-flex items-center justify-center gap-2 bg-[var(--fresh)] hover:bg-[var(--fresh-deep)] text-[var(--on-fresh)] font-bold px-7 py-3.5 rounded-full text-sm"
          id="h-cta">
         <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
         Sprawdź dojazd
       </a>
-      <a href="#about"
+      <a href="#assortment"
          class="btn-lift inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur font-semibold px-7 py-3.5 rounded-full border border-white/35 text-sm"
          id="h-more">
-        Dowiedz się więcej
+        Zobacz asortyment
       </a>
     </div>
   </div>
@@ -418,7 +529,12 @@
 
 <!-- ═══════════════ KEY INFO CARDS — hours + address, overlapping the hero ═══════════════ -->
 <div class="relative z-20 px-4 -mt-24 md:-mt-28">
-  <div class="max-w-4xl mx-auto grid sm:grid-cols-2 gap-4 md:gap-5">
+  <div class="relative max-w-4xl mx-auto grid sm:grid-cols-2 gap-4 md:gap-5">
+
+    <!-- Open/closed status: sits on the video just above the address card (centred above the stack on phones) -->
+    <div class="absolute bottom-full inset-x-0 mb-3 flex justify-center sm:justify-end">
+      <p class="open-badge" id="open-badge"><span class="open-dot" aria-hidden="true"></span><span id="open-text"></span></p>
+    </div>
 
     <div class="info-card flex items-start gap-4 p-5 md:p-6">
       <div class="info-icon">
@@ -1121,6 +1237,29 @@
 </footer>
 
 
+<!-- ═══════════════ MOBILE ACTION BAR — phones only, same breakpoint as the hamburger ═══════════════ -->
+<nav class="mob-bar md:hidden grid grid-cols-3 fixed inset-x-0 bottom-0 z-40" aria-label="Szybkie akcje">
+  <a href="https://maps.app.goo.gl/mvTXyahW8R6XbUsF8" target="_blank" rel="noopener" class="mob-bar-item mob-bar-primary">
+    <span class="mob-bar-icon">
+      <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+    </span>
+    <span id="mb-route">Dojazd</span>
+  </a>
+  <a href="https://www.instagram.com/pannoczkamarket/" target="_blank" rel="noopener" class="mob-bar-item">
+    <span class="mob-bar-icon">
+      <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+    </span>
+    <span>Instagram</span>
+  </a>
+  <a href="https://www.facebook.com/people/Pannoczka-Market/61593312664059/" target="_blank" rel="noopener" class="mob-bar-item">
+    <span class="mob-bar-icon">
+      <svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+    </span>
+    <span>Facebook</span>
+  </a>
+</nav>
+
+
 <!-- ════════════════════════ LIGHTBOX ══════════════════════════════════════ -->
 <div id="lightbox"
      class="fixed inset-0 bg-black/90 z-[100] hidden items-center justify-center p-4"
@@ -1140,10 +1279,13 @@ const T = {
     hero:  {
       tagline: 'Sklep Spożywczy',
       sub:     'Twój sklep z najlepszymi produktami z Ukrainy i nie tylko!<br/>Świeże, smaczne, dostępne każdego dnia.',
+      trust1:  'Ukraińskie produkty', trust2: 'Świeże ryby', trust3: 'Domowe przetwory',
       cta:     'Sprawdź dojazd',
-      more:    'Dowiedz się więcej',
+      more:    'Zobacz asortyment',
       wdays:   'Pn–Pt', wend: 'Sb–Nd',   // short day names for the hero hours card
+      openUntil: 'Otwarte teraz – do', closed: 'Zamknięte',
     },
+    bar:   { route:'Dojazd' },
     about: {
       label: 'O nas',
       title: 'Smaki Ukrainy blisko Ciebie',
@@ -1206,10 +1348,13 @@ const T = {
     hero:  {
       tagline: 'Продуктовий магазин',
       sub:     'Твій магазин найкращих продуктів з України та не тільки!<br/>Свіже, смачне, доступне щодня.',
+      trust1:  'Українські продукти', trust2: 'Свіжа риба', trust3: 'Домашні консерви',
       cta:     'Прокласти маршрут',
-      more:    'Дізнатися більше',
+      more:    'Дивитися асортимент',
       wdays:   'Пн–Пт', wend: 'Сб–Нд',
+      openUntil: 'Відкрито зараз – до', closed: 'Закрито',
     },
+    bar:   { route:'Маршрут' },
     about: {
       label: 'Про нас',
       title: 'Смаки України поруч',
@@ -1272,6 +1417,7 @@ const T = {
 // ── Apply translations ──────────────────────────────────────────────────────
 function setLang(lang) {
   const t = T[lang];
+  curLang = lang;
 
   // Nav
   setText('n-about',   t.nav.about);
@@ -1286,8 +1432,12 @@ function setLang(lang) {
   // Hero
   setText('h-tagline', t.hero.tagline);
   setHTML('h-sub',     t.hero.sub);
+  setText('h-trust-1', t.hero.trust1);
+  setText('h-trust-2', t.hero.trust2);
+  setText('h-trust-3', t.hero.trust3);
   setBtn('h-cta', pinIcon() + ' ' + t.hero.cta);
   setText('h-more', t.hero.more);
+  updateOpenBadge();
   // Key info cards under the hero (reuse the Contact strings)
   setText('hc-hours-l', t.contact.hoursL);
   setText('hc-wdays',   t.hero.wdays);
@@ -1353,8 +1503,9 @@ function setLang(lang) {
   setBtn('ct-review-cta', starIcon() + ' ' + t.contact.reviewCta);
   setText('ct-review-qr', t.contact.reviewQr);
 
-  // Footer
+  // Footer + mobile action bar
   setText('ft-copy', t.footer);
+  setText('mb-route', t.bar.route);
 
   // Lang button highlight
   ['pl','ua'].forEach(l => {
@@ -1483,6 +1634,33 @@ document.querySelectorAll('[data-slider]').forEach(function (root) {
 
   revealEls.forEach(function (el) { io.observe(el); });
 })();
+
+// ── "Open now" badge ────────────────────────────────────────────────────────
+// Always judged on Polish time, whatever the visitor's own timezone is. The hours
+// are whole numbers, so comparing the hour alone is exact (19:59 open, 20:00 closed).
+// Re-checked every minute so a tab left open flips at opening/closing time.
+const STORE_HOURS = { weekday: { open: 9, close: 20 }, weekend: { open: 10, close: 20 } };
+const warsawClock = new Intl.DateTimeFormat('en-GB', {
+  timeZone: 'Europe/Warsaw', weekday: 'short', hour: 'numeric', hourCycle: 'h23',
+});
+var curLang = 'pl';
+
+function storeStatus(date) {
+  const parts = Object.fromEntries(warsawClock.formatToParts(date).map(p => [p.type, p.value]));
+  const hours = /Sat|Sun/.test(parts.weekday) ? STORE_HOURS.weekend : STORE_HOURS.weekday;
+  const hour = Number(parts.hour);
+  return { open: hour >= hours.open && hour < hours.close, close: hours.close };
+}
+
+function updateOpenBadge() {
+  const { open, close } = storeStatus(new Date());
+  const t = T[curLang].hero;
+  document.getElementById('open-badge').className = 'open-badge ' + (open ? 'is-open' : 'is-closed');
+  setText('open-text', open ? t.openUntil + ' ' + close + ':00' : t.closed);
+}
+
+updateOpenBadge();
+setInterval(updateOpenBadge, 60000);
 </script>
 
 </body>
